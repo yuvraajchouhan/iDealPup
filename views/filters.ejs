@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>iDealpup - Find Your Ideal Dog Breed</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- Custom CSS -->
+        <style>
+    /* Background color */
+    body {
+      background-color: #C8E6C9;
+    }
+    /* Header style */
+    .header {
+      background-color: #2E7D32;
+      color: white;
+      padding: 10px;
+    }
+    /* Container style */
+    .container {
+      background-color: #FFFFFF;
+      padding: 20px;
+    }
+    /* Form style */
+    form {
+      margin-bottom: 20px;
+    }
+  </style>
+    </head>
+    <body>
+        <%- include('templates/header') %> 
+
+        <div class="header">
+            <h1>Filters - Find Your Ideal Dog Breed!</h1>
+        </div>
+
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Size:</h3>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="size"
+                                    value="small">Small</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="size"
+                                    value="medium">Medium</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="size"
+                                    value="large">Large</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Activity Level:</h3>
+                        <div class="radio">
+                            <label><input type="radio" name="activity"
+                                    value="high">High</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="activity"
+                                    value="moderate">Moderate</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="activity"
+                                    value="low">Low</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Coat Type:</h3>
+                        <div class="radio">
+                            <label><input type="radio" name="coat"
+                                    value="short">Short</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="coat"
+                                    value="medium">Medium</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="coat" value="long">Long</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="coat"
+                                    value="curly">Curly</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="coat"
+                                    value="straight">Straight</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Shedding Level:</h3>
+                        <div class="radio">
+                            <label><input type="radio" name="shedding"
+                                    value="non-shedding">Non-Shedding</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="shedding"
+                                    value="low-shedding">Low-Shedding</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="shedding"
+                                    value="high-shedding">High-Shedding</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Temperament:</h3>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="temperament"
+                                    value="outgoing">Outgoing</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="temperament"
+                                    value="friendly">Friendly</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="temperament"
+                                    value="docile">Docile</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="temperament"
+                                    value="protective">Protective</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="temperament"
+                                    value="independent">Independent</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Trainability:</h3>
+                        <div class="radio">
+                            <label><input type="radio" name="trainability"
+                                    value="easy">Easy</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="trainability"
+                                    value="moderate">Moderate</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="trainability"
+                                    value="difficult">Difficult</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Purpose:</h3>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="purpose"
+                                    value="companion">Companion</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="purpose"
+                                    value="working">Working</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="purpose"
+                                    value="service">Service</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="purpose"
+                                    value="hunting">Hunting</label>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/filterconfirmation"><button type="submit" class="btn btn-success">Search With These Filters</button></a>
+            </form>
+        </div>
+        
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
