@@ -61,7 +61,6 @@ app.get('/', (req, res) => {
     }
 });
 
-
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
@@ -134,11 +133,19 @@ app.get('/profile' , (req, res) => {
     }
 });
 
-app.get('/home', (req,res) => {
-    res.render("home");
+app.get('/bookmark' , (req, res) => {
+    res.render('bookmark', {name: req.session.name});
+});
+
+app.get('/dogsGood' , (req, res) => {
+    res.render('dogsGood');
 });
 
 app.get('*', (req, res) => {
     res.status(404);
     res.render('404Page');
 });
+
+app.listen(port, () => {
+	console.log("Node application listening on port "+port);
+}); 
