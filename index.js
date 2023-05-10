@@ -134,6 +134,17 @@ app.get('/profile' , (req, res) => {
     }
 });
 
+app.get('/filters' , (req, res) => {
+    res.render('filters', {name: req.session.name});
+
+    if (req.session.loggedIn) {
+            res.render('filters', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
+
+
 app.get('*', (req, res) => {
     res.status(404);
     res.render('404Page');
