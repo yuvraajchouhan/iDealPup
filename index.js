@@ -53,7 +53,90 @@ app.use(session({
     cookie: { maxAge: 60 * 60 * 1000 }
 }));
 
+app.get('/', (req, res) => {
+    if (req.session.loggedIn) {
+        res.render('home', {name: req.session.name});
+    } else {
+        res.render('landingPage');
+    }
+});
 
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+app.post('/signup', async (req, res) => {
+    const schema = Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+        const message = error.details[0].message;
+        return res.send(`<h1>Error</h1><p>${message}</p><a href="/signup">Try again</a>`);
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword
+        });
+        await user.save();
+        req.session.loggedIn = true;
+        req.session.name = req.body.name;
+        res.redirect('/members');
+    } catch (err) {
+        console.log(err);
+        res.send('<h1>Error</h1><p>Sorry, an error occurred while processing your request.</p>');
+    }
+});
+
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.post('/login', async (req, res) => {
+    const schema = Joi.object({
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+    })
+    const { error } = schema.validate(req.body);
+
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.send(`<h1>Error</h1><p>User not found.</p><a href="/login">Try again</a>`);
+        }
+        const match = await bcrypt.compare(req.body.password, user.password);
+        if (!match) {
+            return res.send(`<h1>Error</h1><p>Invalid password.</p><a href="/login">Try again</a>`);
+        }
+        req.session.loggedIn = true;
+        req.session.name = user.name;
+        req.session.user_type = user.user_type;
+        res.redirect('/members');
+    } catch (err) {
+        console.log(err);
+        res.send('<h1>Error</h1><p>Sorry, an error occurred while processing your request.</p>');
+    }
+});    
+
+app.get('/profile' , (req, res) => {
+    if (req.session.loggedIn) {
+        res.render('profile', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('*', (req, res) => {
+    res.status(404);
+    res.render('404Page');
+});
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
