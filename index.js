@@ -54,11 +54,7 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    if (req.session.loggedIn) {
-        res.render('home', {name: req.session.name});
-    } else {
-        res.render('landingPage');
-    }
+    res.render('home', {name: req.session.name});    
 });
 
 app.get('/signup', (req, res) => {
