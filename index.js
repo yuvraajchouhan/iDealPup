@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
     if (req.session.loggedIn) {
         res.render('home', {name: req.session.name});
     } else {
-        res.render('landingPage');
+        res.render('tempLandingPage');   // changed to templanding page **
     }
 });
 
@@ -66,6 +66,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
+    
     const schema = Joi.object({
         name: Joi.string().required(),
         email: Joi.string().email().required(),
@@ -77,22 +78,59 @@ app.post('/signup', async (req, res) => {
         const message = error.details[0].message;
         return res.send(`<h1>Error</h1><p>${message}</p><a href="/signup">Try again</a>`);
     }
-
+    
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const user = new User({
+            const user = new User({  
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword
-        });
+        });                 // add route foe submit user 
         await user.save();
         req.session.loggedIn = true;
         req.session.name = req.body.name;
-        res.redirect('/members');
+        res.redirect('/members');  
+
     } catch (err) {
         console.log(err);
         res.send('<h1>Error</h1><p>Sorry, an error occurred while processing your request.</p>');
     }
+    
+    res.redirect('/tempLandingPage')
+});
+
+//get request fo 
+app.get('/submitUser', (req, res) => {
+    res.render('subtmitUser');
+});
+
+// ** re-purposed from Patricks example to add user to collection after user enters signup info **
+app.post('/submitUser', async (req,res) => {
+    var email = req.body.email;
+    var password = req.body.password;
+
+	const schema = Joi.object(
+		{   
+            name: Joi.string().required(), // added name to schema
+			email: Joi.string().email().required(),
+			password: Joi.string().max(20).required()
+		});
+	
+	const validationResult = schema.validate({email, password});
+	if (validationResult.error != null) {
+	   console.log(validationResult.error);
+	   res.redirect("/signup");
+	   return;
+   }
+
+    var hashedPassword = await bcrypt.hash(password, saltRounds);
+	
+	await userCollection.insertOne({email: email, password: hashedPassword});
+	console.log("Inserted user");
+
+    var html = "successfully created user";
+    // res.send(html); 
+    res.render('submitUser')
 });
 
 app.get('/login', (req, res) => {
