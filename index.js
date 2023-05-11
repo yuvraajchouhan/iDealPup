@@ -135,8 +135,6 @@ app.get('/profile' , (req, res) => {
 });
 
 app.get('/filters' , (req, res) => {
-    res.render('filters', {name: req.session.name});
-
     if (req.session.loggedIn) {
             res.render('filters', {name: req.session.name});
     } else {
@@ -145,8 +143,6 @@ app.get('/filters' , (req, res) => {
 });
 
 app.get('/search', (req,res) => {
-    res.render('search', {name: req.session.name});
-
     if(req.session.loggedIn) {
         res.render('/search', {name: req.session.name});
     } else {
