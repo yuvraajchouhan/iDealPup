@@ -29,6 +29,9 @@ var {database} = include('databaseConnection');
 // referencing to users collection in database
 const userCollection = database.db(mongodb_database).collection('users');
 
+// referencing the Breeds collection in database
+const breedsCollection = database.db(mongodb_database).collection('Breeds');
+
 // linking to mongoDb database
 var mongoStore = MongoDBStore.create({
     mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_cluster}/`,
@@ -135,8 +138,6 @@ app.get('/profile' , (req, res) => {
 });
 
 app.get('/filters' , (req, res) => {
-    res.render('filters', {name: req.session.name});
-
     if (req.session.loggedIn) {
             res.render('filters', {name: req.session.name});
     } else {
@@ -145,18 +146,33 @@ app.get('/filters' , (req, res) => {
 });
 
 app.get('/search', (req,res) => {
-    res.render('search', {name: req.session.name});
-
-    if(req.session.loggedIn) {
-        res.render('/search', {name: req.session.name});
-    } else {
-        res.redirect('/login');
-    }
+        if(req.session.loggedIn) {
+            res.render('/search', {name: req.session.name});
+        } else {
+            res.redirect('/login');
+        }
 });
 
 app.get('/filterconfirmation' , (req, res) => {
     res.render('filterconfirmation', {name: req.session.name});
 });
+
+app.get('/description', async(req,res) => {
+    const itemName = req.query.item;
+    const breed = await getBreedByName(itemName);
+    res.render('description', { name: req.session.name, dog: breed });
+});
+
+async function getBreedByName(itemName) {
+    try{
+        const query = {Breed: itemName};
+
+        const dog = await breedsCollection.findOne(query);
+        return dog;
+    } catch(error){
+        console.log(error);
+    }
+}
 
 app.get('*', (req, res) => {
     res.status(404);
