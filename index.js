@@ -144,6 +144,15 @@ app.get('/filters' , (req, res) => {
     }
 });
 
+app.get('/search', (req,res) => {
+    res.render('search', {name: req.session.name});
+
+    if(req.session.loggedIn) {
+        res.render('/search', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
 
 app.get('*', (req, res) => {
     res.status(404);
