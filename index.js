@@ -144,7 +144,6 @@ app.get('/filters' , (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 app.get('/search', (req,res) => {
     res.render('search', {name: req.session.name});
 
@@ -153,10 +152,10 @@ app.get('/search', (req,res) => {
     } else {
         res.redirect('/login');
     }
-=======
+});
+
 app.get('/filterconfirmation' , (req, res) => {
     res.render('filterconfirmation', {name: req.session.name});
->>>>>>> dev
 });
 
 app.get('*', (req, res) => {
