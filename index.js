@@ -144,6 +144,9 @@ app.get('/filters' , (req, res) => {
     }
 });
 
+app.get('/filterconfirmation' , (req, res) => {
+    res.render('filterconfirmation', {name: req.session.name});
+});
 
 app.get('*', (req, res) => {
     res.status(404);
