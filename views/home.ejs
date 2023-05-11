@@ -1,19 +1,20 @@
 <%- include("templates/header") %> 
 
-<div class="px-4 pt-5 my-5 text-center border-bottom">
-    <h1 class="display-4 fw-bold text-body-emphasis"> Hey, <%= name %>! </h1>
+<div class="px-5 pt-5 text-center border-bottom" style="font-size:30px">
+    <h1 class="display-4 fw-bold text-body-emphasis mb-5"> Hey, <%= name %>! </h1>
     <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4"> How is your search for your ideal puppy going?
+        <p class="mb-5"> How is your search for your ideal puppy going? <br>
             Or rather, how are you and your puppy doing? <br>
-            We hope the best for you all! </p>
-        <p class="lead mb-4"> Here are some well-known and liked dog breeds of today: </p>
+            We hope the best for you all! <br>
+            <br>
+            Here are some well-known and liked dog breeds of today!
+        </p>
     </div>
-    <div class="overflow-hidden" style="max-height: 30vh;">
-      <div class="container px-5">
-        <img src="/landingPageHappyDog.webp" class="img-fluid border 
-        rounded-3 shadow-lg mb-4" alt="Example image" width="700" 
-        height="500" loading="lazy">
-      </div>
+    <div class="overflow-hidden" style="text-align:left">
+        <% let i=0; %>
+        <% for(i=0; i < todaysDogs.length; i++) { %>
+        <%- include('templates/dogCard', {todaysDog: todaysDogs[i]}) %>
+        <% } %>
     </div>
 </div>
 

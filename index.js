@@ -54,7 +54,12 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    res.render('home', {name: req.session.name});    
+    const dogNames = [
+        "Corgi", 
+        "Husky", 
+        "Chihuahua hua hua hua"
+    ]
+    res.render('home', {name: req.session.name, todaysDogs: dogNames});    
 });
 
 app.get('/signup', (req, res) => {
