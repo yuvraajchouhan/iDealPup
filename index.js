@@ -243,10 +243,11 @@ async function removeBookmark(req, res) {
     }
 };
 
-function configureBookmark(req, res) {
+app.get('/configureBookmark', (req, res) => {
+    console.log("Clicked");
     const buttonText = document.querySelector(".btn1");
 
-    if (innerHTML = "Bookmarked") {
+    if (buttonText = "Bookmarked") {
         buttonText.innerHTML = "Click to bookmark";
         res.render('bookmark', {name: req.session.name});
         removeBookmark();
@@ -255,7 +256,7 @@ function configureBookmark(req, res) {
         res.render('bookmark', {name: req.session.name});
         addBookmark();
     }
-}
+});
 
 app.get('/dogsGood' , (req, res) => {
     res.render('dogsGood');
