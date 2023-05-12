@@ -71,7 +71,56 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-// // repurposed demo 2 code 
+// action that happens when new user is create
+// app.post('/submitUser', async(req,res) => {
+//     // parse whats taken in from form field
+//     var name = req.body.name;
+//     var email = req.body.email;
+//     var password = req.body.password;
+
+//     //validate that the following fields are completed correctly
+// 	const schema = Joi.object(
+// 		{
+// 			name: Joi.string().alphanum().max(20).required(),
+//             email: Joi.string().email().required(),
+// 			password: Joi.string().max(20).required()
+// 		});
+
+// 	 const validationResult = schema.validate({name, email, password});
+
+//     // if validation throws an error then redirect user to signup page
+// 	 if (validationResult.error != null) {
+// 	   var error = validationResult.error;
+//        return res.send(`<a href='/signup' class="btn btn-link rounded-pill px-3">Try Again</a>`);
+//    } 
+//        // check if email already exists in the user collection
+//        var existingUser = await userCollection.findOne({ email: email });
+
+//    if (existingUser) {
+//     return res.send(`<a href='/signup' class="btn btn-link rounded-pill px-3">Try Again</a>`);
+//     } 
+
+//    // hash the inserted password
+//    var hashedPassword = await bcrypt.hash(password, saltRounds);
+
+// // if(username == 'gursidh' ){
+// //         // gursidh is the only user that has admin access
+// //         await userCollection.insertOne({username: username, email: email, password: hashedPassword, user_type: "admin"});
+// //         req.session.user_type = 'admin';
+// // } else {
+//         // every other user is just a normal user
+// 	await userCollection.insertOne({name: name, email: email, password: hashedPassword, user_type: "user"});
+// //     req.session.user_type = 'user';
+// // }
+
+//     // if passes validation code, begin session and redirect to members page
+//     req.session.authenticated = true;
+//     req.session.name = name;
+//     res.render('profile', {name: req.session.name});
+   
+// });
+
+// // // repurposed demo 2 code 
 app.post('/submitUser', async (req,res) => {
     var name = req.body.name;
     var password = req.body.password;
@@ -88,7 +137,7 @@ app.post('/submitUser', async (req,res) => {
 	const validationResult = schema.validate({email, name, password});
 	if (validationResult.error != null) {
 	   console.log(validationResult.error);
-	   res.redirect("/signUp");
+	   res.redirect("/signup");
 	   return;
    }
 
@@ -108,33 +157,42 @@ app.post('/submitUser', async (req,res) => {
 app.get('/login', (req, res) => {
     res.render('login');
 });
+ 
+app.post('/loginSubmit', async (req, res) => {
+    var email = req.body.email;
+    var password = req.body.password;
 
-app.post('/loginsubmit', async (req, res) => {
-    const schema = Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().required()
-    })
-    const { error } = schema.validate(req.body);
+    const schema = Joi.object(
+        {
+            email: Joi.string().email().required(),
+            password: Joi.string().max(20).required()
+        });
 
-    try {
-
-        const user = await userCollection.findOne({ email: req.body.email });
-        if (!user) {
-            return res.send(`<h1>Error</h1><p>User not found.</p><a href="/login">Try again</a>`);
-        }
-        const match = await bcrypt.compare(req.body.password, user.password);
-        if (!match) {
-            return res.send(`<h1>Error</h1><p>Invalid password.</p><a href="/login">Try again</a>`);
-        }
-        req.session.loggedIn = true;
-        req.session.name = user.name;
-        // req.session.user_type = user.user_type;
-        res.redirect('/profile'); // changed from members to profile
-    } catch (err) {
-        console.log(err);
-        res.send('<h1>Error</h1><p>Sorry, an error occurred while processing your request.</p>');
+    const validationResult = schema.validate({email, password});
+    if (validationResult.error != null) {
+       console.log(validationResult.error);
+       res.redirect("/login");
+       return;
     }
-});    
+
+    const user = await userCollection.findOne({ email: email });
+    if (user === null) {
+        console.log("User not found");
+        res.redirect("/login");
+        return;
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+        console.log("Invalid password");
+        res.redirect("/login");
+        return;
+    }
+
+    req.session.loggedIn = true;
+    req.session.name = user.name;
+    res.redirect("/profile");
+});
 
 app.get('/logout', (req, res) => {
     req.session.destroy()
