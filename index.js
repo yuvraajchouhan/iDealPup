@@ -205,66 +205,54 @@ async function getBreedByName(itemName) {
     }
 }
 
-app.get('/bookmark' , async (req, res) => {
-    var username = req.session.name; 
-    const user = await userCollection.findOne({name: username});
-
-    const bookmarkList = [];
-    let bookmarkIndex = 1;
-    while (user[`bookmark${bookmarkIndex}`]) {
-        bookmarkList.push(user[`bookmark${bookmarkIndex}`]);
-        bookmarkIndex++;
+app.get('/bookmark', async (req, res) => {
+    if (req.session.authenticated) {
+        const user = await userCollection.findOne({name: req.session.name});
+        res.render('bookmark', {name: req.session.name, user: user});
+    } else {
+        res.redirect('/login');
     }
-    res.render('bookmark', {name: username, bookmarkedDogs: bookmarkList});
 });
 
-async function addBookmark(req, res) {
-    var username = req.session.username; 
-    const user = await userCollection.findOne({name: username});
-
-    let bookmarkIndex = 1;
-    while (user[`bookmark${bookmarkIndex}`]) {
-        bookmarkIndex++;
-    }
-
-    var bookmarkValue = req.params.details;
-    await userCollection.updateOne(findUser, 
-        {$set: {[`bookmark${bookmarkIndex}`]: bookmarkValue}}
+async function addBookmark(dogBreed, index) {
+    await userCollection.updateOne({name: req.session.name}, 
+        {$set: {[`bookmark${index}`]: dogBreed}}
     );
 };
 
-async function removeBookmark(req, res) {
-    var username = req.session.username; 
-    const user = await userCollection.findOne({name: username});
-
-    var bookmarkValue = req.params.details;
-    let bookmarkIndex = 1;
-    while (user['bookmark${bookmarkIndex}']) {
-        if (user['bookmark${bookmarkIndex}'] != bookmarkValue) {
-            bookmarkIndex++;
-        } else {
-            await userCollection.updateOne(findUser, 
-                {$unset: {['bookmark${bookmarkIndex}']: null}}
-            );
-        }
-    }
+async function removeBookmark(index) {
+    await userCollection.updateOne({name: req.session.name}, 
+        {$unset: {[`bookmark${index}`]: null}}
+    );
 };
 
-app.get('/configureBookmark', (req, res) => {
-    console.log("Clicked");
-    const buttonText = req.params.status;
-    console.log(buttonText);
+app.get('/addOrRemoveBookmark', async (req, res) => {
+    console.log("Clicked on bookmark button");
+    const dogBreed = req.query.item;
+    console.log(dogBreed);
 
-    if (buttonText = "Bookmarked") {
-        buttonText = "Click to bookmark";
-        res.render('bookmark', {button: buttonText});
-        removeBookmark();
+    const user = await userCollection.findOne({name: req.session.name});
+    const result = bookmarkStatusAndIndex(user, dogBreed);
+
+    if (result.found) {
+        removeBookmark(result.index);
     } else {
-        buttonText = "Bookmarked";
-        res.render('bookmark', {button: buttonText});
-        addBookmark();
+        addBookmark(dogBreed, result.index);
     }
+    res.render(history.back());
 });
+
+async function bookmarkStatusAndIndex(user, dogBreed) {
+    let i = 1;
+    while (user[`bookmark${i}`]) {
+        if (user[`bookmark${i}`] != dogBreed) {
+            i++;
+        } else {
+            return {index: i, found: true};
+        }
+    }
+    return {index: i, found: false};
+};
 
 app.get('/dogsGood' , (req, res) => {
     res.render('dogsGood');

@@ -8,7 +8,7 @@
           <h1 class="display-4 fw-bold mb-5"> Bookmarks </h1>
           <p class="text-body-secondary"> <%= name %>'s bookmarks. <br>
             Click on the card to view the dog breed. <br>
-            Click on the icon for shortcut un-bookmark and re-bookmark! </p>
+            Click on 'Unbookmark' to remove the dog breed! </p>
         </div>
       </div>
     </section>
@@ -17,9 +17,8 @@
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            <% let i=0; %>
-            <% for(i=0; i < bookmarkedDogs.length; i++) { %>
-            <%- include('templates/bookmarkCard', {bookmarkedDog: bookmarkedDogs[i]}) %>
+            <% for(let i = 1; user[`bookmark${i}`]; i++) { %>
+                <%- include('templates/bookmarkCard', {bookmarkedDog: user[`bookmark${i}`]}); %>
             <% } %>
             
           </div>
