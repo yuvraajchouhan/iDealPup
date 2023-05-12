@@ -5,6 +5,7 @@ const Joi = require('joi');                     // include the joi module
 const MongoDBStore = require('connect-mongo');  // include the connect-mongo module
 const session = require('express-session');     // include the express-session module
 const express = require('express');             // include the express module
+const saltRounds = 12;
 
 const app = express();                          // create an express app
 app.set('view engine', 'ejs');                  // set the view engine to ejs
@@ -50,7 +51,7 @@ app.use(session({
     saveUninitialized: false,
     resave: true,
     store: mongoStore,
-    cookie: { maxAge: 60 * 60 * 1000 }
+    cookie: { maxAge: 60 * 60 * 1000 }  
 }));
 
 app.get('/', (req, res) => {
@@ -66,34 +67,35 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-app.post('/signup', async (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string().required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().required()
-    });
+// repurposed demo 2 code 
+app.post('/submitUser', async (req,res) => {
+    var name = req.body.name;
+    var password = req.body.password;
+    var email = req.body.email;
 
-    const { error } = schema.validate(req.body);
-    if (error) {
-        const message = error.details[0].message;
-        return res.send(`<h1>Error</h1><p>${message}</p><a href="/signup">Try again</a>`);
-    }
 
-    try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword
-        });
-        await user.save();
-        req.session.loggedIn = true;
-        req.session.name = req.body.name;
-        res.redirect('/members');
-    } catch (err) {
-        console.log(err);
-        res.send('<h1>Error</h1><p>Sorry, an error occurred while processing your request.</p>');
-    }
+	const schema = Joi.object(
+		{   
+            email: Joi.string().email().required(),
+            name: Joi.string().max(35).pattern(new RegExp('^[a-zA-Z\\s]*$')).required(),
+			password: Joi.string().max(20).required()
+		});
+	
+	const validationResult = schema.validate({email, name, password});
+	if (validationResult.error != null) {
+	   console.log(validationResult.error);
+	   res.redirect("/signUp");
+	   return;
+   }
+
+    var hashedPassword = await bcrypt.hash(password, saltRounds);
+	
+	await userCollection.insertOne({email: email, name: name, password: hashedPassword, user_type: "user"});
+	console.log("Inserted user");
+
+    //var html = "successfully created user";
+    //res.render("submitUser", {html: html});
+    res.render("home")
 });
 
 app.get('/login', (req, res) => {
@@ -108,7 +110,8 @@ app.post('/login', async (req, res) => {
     const { error } = schema.validate(req.body);
 
     try {
-        const user = await User.findOne({ email: req.body.email });
+
+        const user = await userCollection.findOne({ email: req.body.email });
         if (!user) {
             return res.send(`<h1>Error</h1><p>User not found.</p><a href="/login">Try again</a>`);
         }
@@ -119,12 +122,13 @@ app.post('/login', async (req, res) => {
         req.session.loggedIn = true;
         req.session.name = user.name;
         req.session.user_type = user.user_type;
-        res.redirect('/members');
+        res.redirect('/profile'); // changed from members to profile
     } catch (err) {
         console.log(err);
         res.send('<h1>Error</h1><p>Sorry, an error occurred while processing your request.</p>');
     }
 });    
+
 
 app.get('/profile' , (req, res) => {
     if (req.session.loggedIn) {
