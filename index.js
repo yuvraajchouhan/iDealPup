@@ -98,6 +98,8 @@ app.post('/submitUser', async (req,res) => {
 	console.log("Inserted user");
     req.session.loggedIn = true;
     req.session.name = name;
+    req.session.email = email;
+    req.session.password = hashedPassword;
     res.redirect("/profile");
     //var html = "successfully created user";
     //res.render("submitUser", {html: html});
