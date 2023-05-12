@@ -59,19 +59,16 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    const dogNames = [
-        "Corgi", 
-        "Husky", 
-        "Chihuahua hua hua hua"
-    ]
-    const dogImages = [
-        "happyCorgi.jpg",
-        "happyHusky.jpg",
-        "happyCorgi.jpg"
-    ]
-    res.render('home', {name: req.session.name, todaysDogs: dogNames, 
-        todaysImages: dogImages}
-    );    
+    if(req.session.loggedIn) {
+        const dogNames = [
+            "Beagle",
+            "Labrador Retriever", 
+            "Basenji"
+        ]
+        res.render('home', {name: req.session.name, todaysDogs: dogNames});    
+    } else {
+        res.render('landingPage');
+    }
 });
 
 app.get('/signup', (req, res) => {
@@ -206,7 +203,7 @@ async function getBreedByName(itemName) {
 }
 
 app.get('/bookmark', async (req, res) => {
-    if (req.session.authenticated) {
+    if (req.session.loggedIn) {
         const user = await userCollection.findOne({name: req.session.name});
         res.render('bookmark', {name: req.session.name, user: user});
     } else {
@@ -214,16 +211,18 @@ app.get('/bookmark', async (req, res) => {
     }
 });
 
-async function addBookmark(dogBreed, index) {
-    await userCollection.updateOne({name: req.session.name}, 
+async function addBookmark(sessionName, dogBreed, index) {
+    await userCollection.updateOne({name: sessionName}, 
         {$set: {[`bookmark${index}`]: dogBreed}}
     );
+    console.log("Added bookmark for: " + dogBreed + " at index: " + index);
 };
 
-async function removeBookmark(index) {
-    await userCollection.updateOne({name: req.session.name}, 
-        {$unset: {[`bookmark${index}`]: null}}
+async function removeBookmark(sessionName, index) {
+    await userCollection.updateOne({name: sessionName}, 
+        {$set: {[`bookmark${index}`]: "."}} 
     );
+    console.log("Removed bookmark at index: " + index);
 };
 
 app.get('/addOrRemoveBookmark', async (req, res) => {
@@ -232,30 +231,42 @@ app.get('/addOrRemoveBookmark', async (req, res) => {
     console.log(dogBreed);
 
     const user = await userCollection.findOne({name: req.session.name});
-    const result = bookmarkStatusAndIndex(user, dogBreed);
+    const result = await bookmarkStatusAndIndex(user, dogBreed);
 
     if (result.found) {
-        removeBookmark(result.index);
+        removeBookmark(req.session.name, result.index);
     } else {
-        addBookmark(dogBreed, result.index);
+        addBookmark(req.session.name, dogBreed, result.index);
     }
-    res.render(history.back());
+    res.redirect(req.get('referer'));
 });
 
 async function bookmarkStatusAndIndex(user, dogBreed) {
     let i = 1;
-    while (user[`bookmark${i}`]) {
-        if (user[`bookmark${i}`] != dogBreed) {
+    while (user[`bookmark${i}`] && user[`bookmark${i}`] !== ".") {
+        if (user[`bookmark${i}`] !== dogBreed) {
             i++;
         } else {
+            console.log("Found the breed!" + i);
             return {index: i, found: true};
         }
     }
+    console.log("Not bookmarked!");
     return {index: i, found: false};
 };
 
 app.get('/dogsGood' , (req, res) => {
-    res.render('dogsGood');
+    const shopNames = [
+        "Tisol",
+        "PetSmart", 
+        "Bosleys"
+    ]
+    const shopLinks = [
+        "https://www.petvalu.ca/",
+        "https://www.petsmart.ca/",
+        "https://tisol.ca/"
+    ]
+    res.render('dogsGood', {shopNames: shopNames, shopLinks: shopLinks});
 });
 
 app.get('*', (req, res) => {

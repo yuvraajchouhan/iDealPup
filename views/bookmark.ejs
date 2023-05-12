@@ -17,8 +17,12 @@
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            <% for(let i = 1; user[`bookmark${i}`]; i++) { %>
-                <%- include('templates/bookmarkCard', {bookmarkedDog: user[`bookmark${i}`]}); %>
+            <% let i = 1; %>
+            <% while (user[`bookmark${i}`]) { %>
+                <% if (user[`bookmark${i}`] !== ".") { %>
+                  <%- include('templates/bookmarkCard', { bookmarkedDog: user[`bookmark${i}`] }); %>
+                <% } %>
+                <% i++; %>
             <% } %>
             
           </div>

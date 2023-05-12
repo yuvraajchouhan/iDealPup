@@ -13,7 +13,7 @@
     <div class="overflow-hidden" style="text-align:left">
         <% let i=0; %>
         <% for(i=0; i < todaysDogs.length; i++) { %>
-        <%- include('templates/dogCard', {todaysImage: todaysImages[i], todaysDog: todaysDogs[i]}) %>
+        <%- include('templates/dogCard', {todaysDog: todaysDogs[i]}) %>
         <% } %>
     </div>
 </div>
