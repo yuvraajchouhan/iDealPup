@@ -35,10 +35,11 @@ const breedsCollection = database.db(mongodb_database).collection('Breeds');
 
 // linking to mongoDb database
 var mongoStore = MongoDBStore.create({
-    mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_cluster}/`,
+    mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_cluster}/2800-202310-BBY18`,
     crypto: {
         secret: mongodb_session_secret
-    }
+    },
+    collection: 'sessions'
 });
 
 //printing status of database connection
@@ -70,7 +71,7 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-// repurposed demo 2 code 
+// // repurposed demo 2 code 
 app.post('/submitUser', async (req,res) => {
     var name = req.body.name;
     var password = req.body.password;
@@ -95,17 +96,20 @@ app.post('/submitUser', async (req,res) => {
 	
 	await userCollection.insertOne({email: email, name: name, password: hashedPassword, user_type: "user"});
 	console.log("Inserted user");
-
+    req.session.loggedIn = true;
+    req.session.name = name;
+    res.redirect("/profile");
     //var html = "successfully created user";
     //res.render("submitUser", {html: html});
-    res.render("home")
+    // res.render("home")
 });
+
 
 app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.post('/login', async (req, res) => {
+app.post('/loginsubmit', async (req, res) => {
     const schema = Joi.object({
         email: Joi.string().email().required(),
         password: Joi.string().required()
@@ -124,7 +128,7 @@ app.post('/login', async (req, res) => {
         }
         req.session.loggedIn = true;
         req.session.name = user.name;
-        req.session.user_type = user.user_type;
+        // req.session.user_type = user.user_type;
         res.redirect('/profile'); // changed from members to profile
     } catch (err) {
         console.log(err);
@@ -132,6 +136,10 @@ app.post('/login', async (req, res) => {
     }
 });    
 
+app.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.redirect('/');
+});
 
 app.get('/profile' , (req, res) => {
     if (req.session.loggedIn) {
@@ -140,6 +148,8 @@ app.get('/profile' , (req, res) => {
         res.redirect('/login');
     }
 });
+
+
 
 app.get('/filters' , (req, res) => {
     if (req.session.loggedIn) {
