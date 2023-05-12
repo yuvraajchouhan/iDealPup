@@ -215,9 +215,9 @@ app.get('/filters' , (req, res) => {
 
 app.get('/search', (req,res) => {
     if(req.session.loggedIn) {
-        res.render('/search', {name: req.session.name});
+        res.render('search', {name: req.session.name});
     } else {
-        res.redirect('/login');
+        res.redirect('login');
     }
 });
 
