@@ -102,7 +102,9 @@ app.post('/submitUser', async (req,res) => {
 	console.log("Inserted user");
     req.session.loggedIn = true;
     req.session.name = name;
-    res.redirect("/profile");
+    req.session.email = email;
+    req.session.password = hashedPassword;
+    res.redirect("/");
     //var html = "successfully created user";
     //res.render("submitUser", {html: html});
     // res.render("home")
@@ -148,7 +150,8 @@ app.post('/loginSubmit', async (req, res) => {
     req.session.name = user.name;
     req.session.email = user.email;
     req.session.password = user.password;
-    res.redirect("/profile");
+    console.log(req.session.password);
+    res.redirect("/");
 });
 
 app.get('/logout', (req, res) => {
@@ -164,6 +167,43 @@ app.get('/profile' , (req, res) => {
     }
 });
 
+app.get('/changePassword', (req,res) => {
+    res.render('changePassword');
+});
+
+app.post('/changePassword', async(req, res) => {
+    var password = req.session.password;
+    var email = req.session.email;
+    var currentPassword = req.body.currentPassword;
+    var newPassword = req.body.newPassword;
+    var verifyPassword = req.body.verifyPassword;
+  
+    const user = await userCollection.findOne({ email: email });
+    const userPass = user.password;
+
+    const passwordMatch = await bcrypt.compare(currentPassword, userPass);
+
+    // Check if the current password entered by the user matches the one in the database
+    if (!passwordMatch) {
+        console.log('wrong current pass');
+      return res.render('changePassword');
+    }
+  
+    // Check if the new password and the verify password fields match
+    if (newPassword != verifyPassword) {
+        console.log('not same new pass');
+      return res.render('changePassword');
+    }
+ 
+    // hash the new password
+    var hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+    // Update the user's password in the database
+    req.session.password = hashedNewPassword;
+    // save user details to database 
+    await userCollection.updateOne({email: email}, {$set: {password: hashedNewPassword}});
+    // Redirect the user to a success page
+    res.render('passwordUpdated');
+  });
 
 app.get('/filters' , (req, res) => {
     if (req.session.loggedIn) {
@@ -275,5 +315,9 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
+
 	console.log("Node application listening on port "+port);
 }); 
+
+    console.log(`Listening on port ${port}`);
+
