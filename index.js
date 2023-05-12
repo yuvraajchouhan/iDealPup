@@ -100,7 +100,7 @@ app.post('/submitUser', async (req,res) => {
     req.session.name = name;
     req.session.email = email;
     req.session.password = hashedPassword;
-    res.redirect("/profile");
+    res.redirect("/");
     //var html = "successfully created user";
     //res.render("submitUser", {html: html});
     // res.render("home")
@@ -147,7 +147,7 @@ app.post('/loginSubmit', async (req, res) => {
     req.session.email = user.email;
     req.session.password = user.password;
     console.log(req.session.password);
-    res.redirect("/profile");
+    res.redirect("/");
 });
 
 app.get('/logout', (req, res) => {
