@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
         ]
         res.render('home', {name: req.session.name, todaysDogs: dogNames});    
     } else {
-        res.render('tempLandingPage');   // changed to templanding page **
+        res.render('landingPage');   // changed to templanding page **
     }
 });
 
