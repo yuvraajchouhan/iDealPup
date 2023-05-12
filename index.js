@@ -59,7 +59,14 @@ app.get('/', (req, res) => {
         "Husky", 
         "Chihuahua hua hua hua"
     ]
-    res.render('home', {name: req.session.name, todaysDogs: dogNames});    
+    const dogImages = [
+        "happyCorgi.jpg",
+        "happyHusky.jpg",
+        "happyCorgi.jpg"
+    ]
+    res.render('home', {name: req.session.name, todaysDogs: dogNames, 
+        todaysImages: dogImages}
+    );    
 });
 
 app.get('/signup', (req, res) => {
@@ -137,6 +144,54 @@ app.get('/profile' , (req, res) => {
 app.get('/bookmark' , (req, res) => {
     res.render('bookmark', {name: req.session.name});
 });
+
+async function addBookmark(req, res) {
+    var username = req.session.username; 
+    const findUser = {username: username};
+    const user = await userCollection.findOne(findUser);
+
+    let bookmarkIndex = 1;
+    while (user['bookmark${bookmarkIndex}']) {
+        bookmarkIndex++;
+    }
+
+    var bookmarkValue = req.params.details;
+    await userCollection.updateOne(findUser, 
+        {$set: {['bookmark${bookmarkIndex}']: bookmarkValue}}
+    );
+};
+
+async function removeBookmark(req, res) {
+    var username = req.session.username; 
+    const findUser = {username: username};
+    const user = await userCollection.findOne(findUser);
+
+    var bookmarkValue = req.params.details;
+    let bookmarkIndex = 1;
+    while (user['bookmark${bookmarkIndex}']) {
+        if (user['bookmark${bookmarkIndex}'] != bookmarkValue) {
+            bookmarkIndex++;
+        } else {
+            await userCollection.updateOne(findUser, 
+                {$unset: {['bookmark${bookmarkIndex}']: null}}
+            );
+        }
+    }
+};
+
+function configureBookmark(req, res) {
+    const buttonText = document.querySelector(".btn1");
+
+    if (innerHTML = "Bookmarked") {
+        buttonText.innerHTML = "Click to bookmark";
+        res.render('bookmark', {name: req.session.name});
+        removeBookmark();
+    } else {
+        buttonText.innerHTML = "Bookmarked";
+        res.render('bookmark', {name: req.session.name});
+        addBookmark();
+    }
+}
 
 app.get('/dogsGood' , (req, res) => {
     res.render('dogsGood');
