@@ -1,5 +1,22 @@
-<div class="container">
-    <footer class="py-3 my-4">
+<style>
+  .content {
+    min-height: calc(100vh - 60px); /* 60px is the height of the footer */
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    height: 60px; /* Set the height of the footer */
+  }
+
+
+
+</style>
+
+<div class="container content">
+    <footer class="py-3 fixed-bottom my-4">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <a href='/home'><img src="home.svg" alt="Home" class="img-fluid"></a>
         <a href='/profile'><img src="profile.svg" alt="Profile" class="img-fluid"></a>
