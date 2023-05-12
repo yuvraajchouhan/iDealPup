@@ -205,30 +205,37 @@ async function getBreedByName(itemName) {
     }
 }
 
-app.get('/bookmark' , (req, res) => {
-    res.render('bookmark', {name: req.session.name});
+app.get('/bookmark' , async (req, res) => {
+    var username = req.session.name; 
+    const user = await userCollection.findOne({name: username});
+
+    const bookmarkList = [];
+    let bookmarkIndex = 1;
+    while (user[`bookmark${bookmarkIndex}`]) {
+        bookmarkList.push(user[`bookmark${bookmarkIndex}`]);
+        bookmarkIndex++;
+    }
+    res.render('bookmark', {name: username, bookmarkedDogs: bookmarkList});
 });
 
 async function addBookmark(req, res) {
     var username = req.session.username; 
-    const findUser = {username: username};
-    const user = await userCollection.findOne(findUser);
+    const user = await userCollection.findOne({name: username});
 
     let bookmarkIndex = 1;
-    while (user['bookmark${bookmarkIndex}']) {
+    while (user[`bookmark${bookmarkIndex}`]) {
         bookmarkIndex++;
     }
 
     var bookmarkValue = req.params.details;
     await userCollection.updateOne(findUser, 
-        {$set: {['bookmark${bookmarkIndex}']: bookmarkValue}}
+        {$set: {[`bookmark${bookmarkIndex}`]: bookmarkValue}}
     );
 };
 
 async function removeBookmark(req, res) {
     var username = req.session.username; 
-    const findUser = {username: username};
-    const user = await userCollection.findOne(findUser);
+    const user = await userCollection.findOne({name: username});
 
     var bookmarkValue = req.params.details;
     let bookmarkIndex = 1;
@@ -245,15 +252,16 @@ async function removeBookmark(req, res) {
 
 app.get('/configureBookmark', (req, res) => {
     console.log("Clicked");
-    const buttonText = document.querySelector(".btn1");
+    const buttonText = req.params.status;
+    console.log(buttonText);
 
     if (buttonText = "Bookmarked") {
-        buttonText.innerHTML = "Click to bookmark";
-        res.render('bookmark', {name: req.session.name});
+        buttonText = "Click to bookmark";
+        res.render('bookmark', {button: buttonText});
         removeBookmark();
     } else {
-        buttonText.innerHTML = "Bookmarked";
-        res.render('bookmark', {name: req.session.name});
+        buttonText = "Bookmarked";
+        res.render('bookmark', {button: buttonText});
         addBookmark();
     }
 });

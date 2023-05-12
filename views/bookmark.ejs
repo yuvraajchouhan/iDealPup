@@ -17,50 +17,10 @@
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="/happyCorgi.jpg" onclick="window.location.href='/details?Corgi'">
-                <div class="card-body">
-                  <p class="card-text" onclick="window.location.href='/details?Corgi'"> Golden Retriever </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a class="btn1 btn-sm btn-outline-secondary" href='/configureBookmark'> Bookmarked </a>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="/happyCorgi.jpg">               
-                <div class="card-body">
-                  <p class="card-text">German Shepherd</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn2 btn-sm btn-outline-secondary">Save</button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="/happyCorgi.jpg">               
-                <div class="card-body">
-                  <p class="card-text">Husky</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn3 btn-sm btn-outline-secondary">Save </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <% let i=0; %>
+            <% for(i=0; i < bookmarkedDogs.length; i++) { %>
+            <%- include('templates/bookmarkCard', {bookmarkedDog: bookmarkedDogs[i]}) %>
+            <% } %>
             
           </div>
         </div>
