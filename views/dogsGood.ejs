@@ -1,0 +1,30 @@
+<%- include("templates/header") %> 
+
+<main style="font-size: 30px;">
+
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="display-4 fw-bold">Dogs Goods! </h1>
+          <br>
+          <p class="text-body-secondary" style="font-size: 30px;"> Here are some dogs Goods
+            for your ideal or current dog! </p>
+        </div>
+      </div>
+    </section>
+  
+    <div class="album py-5">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <% for (let i = 0; i < shopNames.length; i++) { %>
+                <%- include('templates/dogGoodsCard', { shopName: shopNames[i], shopLink: shopLinks[i] }); %>
+            <% } %>
+            
+          </div>
+        </div>
+      </div>
+  
+</main>
+
+<%- include("templates/footer") %> 
