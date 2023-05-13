@@ -60,12 +60,26 @@ app.use(session({
 
 app.get('/', (req, res) => {
     if(req.session.loggedIn) {
-        const dogNames = [
-            "Beagle",
-            "Labrador Retriever", 
-            "Basenji"
+        const todayDogNames = [
+            "German Shepherd",
+            "Pitbull", 
+            "Rottweiler",
+            "Golden Retriever",
         ]
-        res.render('home', {name: req.session.name, todaysDogs: dogNames});    
+        const todayDogMessages = [
+            'is a breed of medium to large-sized working dog that'
+            + ' originated in Germany.',
+            'is a breed of dog that is known for its loyalty and'
+            + ' protective instincts.',
+            'is a breed of domestic dog, regarded as medium-to-large'
+            + ' or large.',
+            'is a breed of dog that originated in Scotland in the'
+            + ' mid-19th century.',
+        ]
+        res.render('home', {name: req.session.name, 
+            todayDogNames: todayDogNames, 
+            todayDogMessages: todayDogMessages}
+        );    
     } else {
         res.render('landingPage');   // changed to templanding page **
     }
@@ -105,11 +119,7 @@ app.post('/submitUser', async (req,res) => {
     req.session.email = email;
     req.session.password = hashedPassword;
     res.redirect("/");
-    //var html = "successfully created user";
-    //res.render("submitUser", {html: html});
-    // res.render("home")
 });
-
 
 app.get('/login', (req, res) => {
     res.render('login');
@@ -209,7 +219,7 @@ app.get('/filters' , (req, res) => {
     if (req.session.loggedIn) {
             res.render('filters', {name: req.session.name});
     } else {
-        res.redirect('/login');
+        res.redirect('login');
     }
 });
 
@@ -315,9 +325,6 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-
+    console.log(`Listening on port ${port}`);
 	console.log("Node application listening on port "+port);
 }); 
-
-    console.log(`Listening on port ${port}`);
-
