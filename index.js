@@ -231,10 +231,6 @@ app.get('/search', (req,res) => {
     }
 });
 
-app.get('/filterconfirmation' , (req, res) => {
-    res.render('filterconfirmation', {name: req.session.name});
-});
-
 app.get('/description', async(req,res) => {
     const itemName = req.query.item;
     const breed = await getBreedByName(itemName);

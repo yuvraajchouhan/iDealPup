@@ -7,7 +7,6 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        
         <!-- Custom CSS -->
         <style>
             /* Background color */
@@ -30,65 +29,56 @@
                 margin-bottom: 20px;
             }
         </style>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="/js/filters.js"></script>
+
+
     </head>
     <body>
         <%- include('templates/header') %>
 
             <div class="header">
                 <h1>Filters - Find Your Ideal Dog Breed!</h1>
+                <h3>Required fields are marked with '*'</h3>
             </div>
 
+            <br>
+
             <div class="container">
-                <form id="filter-form" method="POST" action="/filterconfirmation">
+                <form id="filter-form" method="POST"
+                    action="/description">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3>Height: 'Inches'</h3>
+                            <h3> * Height:</h3>
                             <div class="radio">
                                 <label><input type="radio" name="height"
-                                        value="very small">6" - 17"</label>
+                                        value="small">Small</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="height"
-                                        value="small">18" - 29"</label>
+                                        value="medium">Medium</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="height"
-                                        value="medium">30" - 41"</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="large">42" - 53"</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="very large">54" - 66"</label>
+                                        value="large">Large</label>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <h3>Weight: 'Lbs'</h3>
+                            <h3> * Weight:</h3>
                             <div class="radio">
                                 <label><input type="radio" name="weight"
-                                        value="very very light">2 - 34</label>
+                                        value="light">Light</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="weight"
-                                        value="very light">35 - 67</label>
+                                        value="medium">Medium</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="weight"
-                                        value="light">68 - 100</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="medium">101 - 133</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="heavy">134 - 166</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="very heavy">166 - 190</label>
+                                        value="heavy">Heavy</label>
                             </div>
                         </div>
                     </div>
@@ -159,105 +149,105 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3>Traits:</h3>
+                            <h3>Traits (Choose 3):</h3>
                             <div class="checkbox">
                                 <label><input type="checkbox" name="traits[]"
                                         value="loyal"
                                         onclick="limitCheckboxes()">Loyal</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="strong"
                                         onclick="limitCheckboxes()">Strong</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="independent"
                                         onclick="limitCheckboxes()">Independent</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="curious"
                                         onclick="limitCheckboxes()">Curious</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="friendly"
                                         onclick="limitCheckboxes()">Friendly</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="confident"
                                         onclick="limitCheckboxes()">Confident</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="affectionate"
                                         onclick="limitCheckboxes()">Affectionate</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="trainable"
                                         onclick="limitCheckboxes()">Trainable</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="checkbox">
+                            <!-- </div> -->
+                        <!-- </div> -->
+                        <!-- <div class="col-sm-6"> -->
+                            <!-- <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="good natured"
                                         onclick="limitCheckboxes()">Good Natured</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="intelligent"
                                         onclick="limitCheckboxes()">Intelligent</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="gentle"
                                         onclick="limitCheckboxes()">Gentle</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="energetic"
                                         onclick="limitCheckboxes()">Energetic</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="patient"
                                         onclick="limitCheckboxes()">Patient</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="playful"
                                         onclick="limitCheckboxes()">Playful</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="social"
                                         onclick="limitCheckboxes()">Social</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="kind"
                                         onclick="limitCheckboxes()">Kind</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="sensitive"
                                         onclick="limitCheckboxes()">Sensitive</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="charming"
                                         onclick="limitCheckboxes()">Charming</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="protective"
                                         onclick="limitCheckboxes()">Protective</label>
-                            </div>
-                            <div class="checkbox">
+                            <!-- </div>
+                            <div class="checkbox"> -->
                                 <label><input type="checkbox" name="traits[]"
                                         value="athletic"
                                         onclick="limitCheckboxes()">Athletic</label>
@@ -267,15 +257,11 @@
                     </div>
                 </form>
 
-                <a href='/filterconfirmation'><button type="submit" class="btn btn-success">Search With These Filters</button></a>
+                <a href='/description'><button type="submit" class="btn
+                        btn-success">Search With These Filters</button></a>
             </div>
 
-        <%- include('templates/footer') %>
-        
-        <script src="/js/filters.js"></script>
-        <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    </body>
-</html>
+            <%- include('templates/footer') %>
+
+            </body>
+        </html>
