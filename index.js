@@ -73,10 +73,10 @@ app.get('/', async (req, res) => {
         const home4RandomDogs = await get4RandomDogs();
         res.render('home', {name: req.session.name, 
             todayDogNames: home4RandomDogs, 
-            todayDogMessages: todayDogMessages}
-        );
-    } else {
-        res.render('landingPage');   // changed to templanding page **
+            todayDogMessages: todayDogMessages} 
+        ); 
+    } else { 
+        res.render('landingPage');   // changed to templanding page
     }
 });
 
@@ -267,20 +267,6 @@ app.get('/bookmark', async (req, res) => {
     }
 });
 
-async function addBookmark(sessionName, dogBreed, index) {
-    await userCollection.updateOne({name: sessionName}, 
-        {$set: {[`bookmark${index}`]: dogBreed}}
-    );
-    console.log("Added bookmark for: " + dogBreed + " at index: " + index);
-};
-
-async function removeBookmark(sessionName, index) {
-    await userCollection.updateOne({name: sessionName}, 
-        {$set: {[`bookmark${index}`]: "."}} 
-    );
-    console.log("Removed bookmark at index: " + index);
-};
-
 app.get('/addOrRemoveBookmark', async (req, res) => {
     console.log("Clicked on bookmark button");
     const dogBreed = req.query.item;
@@ -309,6 +295,21 @@ async function bookmarkStatusAndIndex(user, dogBreed) {
     }
     console.log("Not bookmarked!");
     return {index: i, found: false};
+};
+
+async function addBookmark(sessionName, dogBreed, index) {
+    await userCollection.updateOne({name: sessionName}, 
+        {$set: {[`bookmark${index}`]: dogBreed}}
+    );
+    
+    console.log("Added bookmark for: " + dogBreed + " at index: " + index);
+};
+
+async function removeBookmark(sessionName, index) {
+    await userCollection.updateOne({name: sessionName}, 
+        {$set: {[`bookmark${index}`]: "."}} 
+    );
+    console.log("Removed bookmark at index: " + index);
 };
 
 app.get('/dogsGood' , (req, res) => {
