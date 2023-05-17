@@ -58,14 +58,8 @@ app.use(session({
     cookie: { maxAge: 60 * 60 * 1000 }  
 }));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     if(req.session.loggedIn) {
-        const todayDogNames = [
-            "German Shepherd",
-            "Pitbull", 
-            "Rottweiler",
-            "Golden Retriever",
-        ]
         const todayDogMessages = [
             'is a breed of medium to large-sized working dog that'
             + ' originated in Germany.',
@@ -76,14 +70,26 @@ app.get('/', (req, res) => {
             'is a breed of dog that originated in Scotland in the'
             + ' mid-19th century.',
         ]
+        const home4RandomDogs = await get4RandomDogs();
         res.render('home', {name: req.session.name, 
-            todayDogNames: todayDogNames, 
+            todayDogNames: home4RandomDogs, 
             todayDogMessages: todayDogMessages}
-        );    
+        );
     } else {
         res.render('landingPage');   // changed to templanding page **
     }
 });
+
+async function get4RandomDogs() {
+    const randomDogs = await breedsCollection.aggregate([
+        { $sample: { size: 4 } },
+        { $project: { _id: 0, Breed: 1 } }
+    ]).toArray();
+
+    let result = [];
+    await randomDogs.map(dog => {result.push(dog.Breed)});
+    return result;
+}
 
 app.get('/signup', (req, res) => {
     res.render('signup');
