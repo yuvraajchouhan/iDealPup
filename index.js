@@ -309,6 +309,24 @@ app.get('/dogsGood' , (req, res) => {
     res.render('dogsGood', {shopNames: shopNames, shopLinks: shopLinks});
 });
 
+
+
+app.get('/compare', async (req, res) => {
+    try {
+      const breeds = await breedsCollection.find().toArray();
+      res.render('compare', { breeds });
+      console.log(breeds);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+
+  
+
+  
+
 app.get('*', (req, res) => {
     res.status(404);
     res.render('404Page');

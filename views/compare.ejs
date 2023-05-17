@@ -1,0 +1,97 @@
+<%- include("templates/header") %>
+
+<div class="container pb-5 mb-2">
+    <div class="comparison-table">
+        <table class="table table-bordered">
+            <thead class="bg-secondary">
+                <tr>
+                    <td class="align-middle">
+                        <div class="pt-3">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="differences">
+                                <label class="custom-control-label" for="differences">Show differences only</label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>
+                            Select Breed
+                            <select id="dropdown1" onchange="selectOption(1)">
+                                <% for (let i = 0; i < breeds.length; i++) { %>
+                                    <option value="<%= breeds[i].Breed %>"><%= breeds[i].Breed %></option>
+                                <% } %>
+                            </select>
+                        </label>
+                        <div class="comparison-item">
+                            <img src="/germanshepherd.jpg" alt="Dog1" id="table-image1">
+                            <button>Learn More</button>
+                        </div>
+                    </td>
+                    <td>
+                        <select id="dropdown2" onchange="selectOption(2)">
+                            <% for (let i = 0; i < breeds.length; i++) { %>
+                                <option value="<%= breeds[i].Breed %>"><%= breeds[i].Breed %></option>
+                            <% } %>
+                        </select>
+                        <div class="comparison-item">
+                            <img src="/pitbull.jpg" alt="Dog2" id="table-image2">
+                            <button>Learn More</button>
+                        </div>
+                    </td>
+                    <td>
+                        <select id="dropdown3" onchange="selectOption(3)">
+                            <% for (let i = 0; i < breeds.length; i++) { %>
+                                <option value="<%= breeds[i].Breed %>"><%= breeds[i].Breed %></option>
+                            <% } %>
+                        </select>
+                        <div class="comparison-item">
+                            <img src="/Basenji.jpg" alt="Dog3" id="table-image3">
+                            <button>Learn More</button>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="summary" data-filter="target">
+                <tr class="bg-secondary">
+                    <th class="text-uppercase">Summary</th>
+                    <td><span class="text-dark font-weight-semibold">Dog 1</span></td>
+                    <td><span class="text-dark font-weight-semibold">Dog 2</span></td>
+                    <td><span class="text-dark font-weight-semibold">Dog 3</span></td>
+                </tr>
+                <tr>
+                    <th>Country of Origin</th>
+                    <td>Dog origin 1</td>
+                    <td>Dog origin 2</td>
+                    <td>Dog origin 3</td>
+                </tr>
+                <tr>
+                    <th>Fur Color</th>
+                    <td>Dog color 1</td>
+                    <td>Dog color 2</td>
+                    <td>Dog color 3</td>
+                </tr>
+                <tr>
+                    <th>Longevity</th>
+                    <td>Longevity dog 1</td>
+                    <td>Longevity dog 2</td>
+                    <td>Longevity dog 3</td>
+                </tr>
+                <tr>
+                    <th>Character Traits</th>
+                    <td>Traits dog 1 placeholder</td>
+                    <td>Traits dog 2 placeholder</td>
+                    <td>Traits dog 3 placeholder</td>
+                </tr>
+                <tr>
+                    <th>Common Health Issues</th>
+                    <td>Health dog 1 placeholder</td>
+                    <td>Health dog 2 placeholder</td>
+                    <td>Health dog 3 placeholder</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%- include("templates/footer") %>
+
