@@ -252,6 +252,11 @@ async function getBreedByName(itemName) {
     }
 }
 
+// easter egg page
+app.get('/easterEgg', (req, res) => {
+    res.render('easterEgg');
+  });
+
 app.get('/bookmark', async (req, res) => {
     if (req.session.loggedIn) {
         const user = await userCollection.findOne({name: req.session.name});
