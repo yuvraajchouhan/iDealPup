@@ -14,8 +14,17 @@
       .logo {
         display: block;
         margin: 0 auto;
-        width: 150px; /* Adjust the width as per your preference */
+        width: 150px;
         height: auto;
+      }
+
+      .forgot-password {
+        color: grey; 
+        transition: color 0.3s ease; 
+      }
+
+      .forgot-password:hover {
+        color: green;
       }
     </style>
   </head>
@@ -36,13 +45,16 @@
               id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
           </div>
+          <br>
           <div class="form-floating mb-3">
             <input name='password' type="password" class="form-control"
               id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
 
-
+          <a class="forgot-password" href="/forgotpassword">Forgot Your Password?</a>
+          <br>
+          <br>
           <button class="w-100 btn btn-lg btn-success" type="submit">Sign in</button>
           <p class="mt-5 mb-3 text-body-secondary">iDealPup © 2023</p>
         </form>
