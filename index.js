@@ -25,7 +25,7 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 // importing the database object from databaseConnection.js file
-var {database} = include('databaseConnection');
+var { database } = include('databaseConnection');
 
 // referencing to users collection in database
 const userCollection = database.db(mongodb_database).collection('users');
@@ -45,7 +45,7 @@ var mongoStore = MongoDBStore.create({
 //printing status of database connection
 database.connect().then(() => {
     console.log('MongoDB connected successfully');
-  }).catch((err) => {
+}).catch((err) => {
     console.log('Error connecting to MongoDB', err);
 });
 
@@ -55,65 +55,79 @@ app.use(session({
     saveUninitialized: false,
     resave: true,
     store: mongoStore,
-    cookie: { maxAge: 60 * 60 * 1000 }  
+    cookie: { maxAge: 60 * 60 * 1000 }
 }));
 
-app.get('/', (req, res) => {
-    if(req.session.loggedIn) {
-        const todayDogNames = [
-            "German Shepherd",
-            "Pitbull", 
-            "Rottweiler",
-            "Golden Retriever",
-        ]
+app.get('/', async (req, res) => {
+    if (req.session.loggedIn) {
+        const home4RandomDogs = await get4RandomDogs();
+        const todayDog = home4RandomDogs[0]; // Assuming the first dog in the array is the displayed dog
+
+        // Fetch the complete dog object from the database using the dog breed
+        const dog = await getDogByBreed(todayDog);
+
         const todayDogMessages = [
-            'is a breed of medium to large-sized working dog that'
-            + ' originated in Germany.',
-            'is a breed of dog that is known for its loyalty and'
-            + ' protective instincts.',
-            'is a breed of domestic dog, regarded as medium-to-large'
-            + ' or large.',
-            'is a breed of dog that originated in Scotland in the'
-            + ' mid-19th century.',
-        ]
-        res.render('home', {name: req.session.name, 
-            todayDogNames: todayDogNames, 
-            todayDogMessages: todayDogMessages}
-        );    
+            `is known to be ${dog.CharacterTraits}.`,
+            `lives for an average of ${dog.LongevityYrs} years.`,
+            `is ${dog.HeightLowInches}-${dog.HeightHighInches} tall and weighs ${dog.WeightLowLbs}-${dog.WeightHighLbs} pounds.`,
+            `originates from the country ${dog.CountryOfOrigin}.`,
+        ];
+
+        res.render('home', {
+            name: req.session.name,
+            todayDogNames: home4RandomDogs,
+            todayDogMessages: todayDogMessages,
+        });
     } else {
-        res.render('landingPage');   // changed to templanding page **
+        res.render('landingPage');
     }
 });
+
+async function get4RandomDogs() {
+    const randomDogs = await breedsCollection.aggregate([
+        { $sample: { size: 4 } },
+        { $project: { _id: 0, Breed: 1 } }
+    ]).toArray();
+
+    return randomDogs.map(dog => dog.Breed);
+}
+
+async function getDogByBreed(breed) {
+    // Fetch the complete dog object from the database based on the breed
+    const dog = await breedsCollection.findOne({ Breed: breed });
+
+    return dog;
+}
 
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
 // // // repurposed demo 2 code 
-app.post('/submitUser', async (req,res) => {
+app.post('/submitUser', async (req, res) => {
     var name = req.body.name;
     var password = req.body.password;
     var email = req.body.email;
 
 
-	const schema = Joi.object(
-		{   
+    const schema = Joi.object(
+        {
             email: Joi.string().email().required(),
             name: Joi.string().max(35).pattern(new RegExp('^[a-zA-Z\\s]*$')).required(),
-			password: Joi.string().max(20).required()
-		});
-	
-	const validationResult = schema.validate({email, name, password});
-	if (validationResult.error != null) {
-	   console.log(validationResult.error);
-	   res.redirect("/signup");
-	   return;
-   }
+            password: Joi.string().max(20).required()
+        });
+
+    const validationResult = schema.validate({ email, name, password });
+    if (validationResult.error != null) {
+        console.log(validationResult.error);
+        res.redirect("/signup");
+        return;
+    }
 
     var hashedPassword = await bcrypt.hash(password, saltRounds);
-	
-	await userCollection.insertOne({email: email, name: name, password: hashedPassword, user_type: "user"});
-	console.log("Inserted user");
+
+    await userCollection.insertOne({ email: email, name: name, password: hashedPassword, user_type: "user" });
+    console.log("Inserted user");
     req.session.loggedIn = true;
     req.session.name = name;
     req.session.email = email;
@@ -124,7 +138,7 @@ app.post('/submitUser', async (req,res) => {
 app.get('/login', (req, res) => {
     res.render('login');
 });
- 
+
 app.post('/loginSubmit', async (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
@@ -135,11 +149,11 @@ app.post('/loginSubmit', async (req, res) => {
             password: Joi.string().max(20).required()
         });
 
-    const validationResult = schema.validate({email, password});
+    const validationResult = schema.validate({ email, password });
     if (validationResult.error != null) {
-       console.log(validationResult.error);
-       res.redirect("/login");
-       return;
+        console.log(validationResult.error);
+        res.redirect("/login");
+        return;
     }
 
     const user = await userCollection.findOne({ email: email });
@@ -169,25 +183,25 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.get('/profile' , (req, res) => {
+app.get('/profile', (req, res) => {
     if (req.session.loggedIn) {
-        res.render('profile', {name: req.session.name, email: req.session.email, password: req.session.password});
+        res.render('profile', { name: req.session.name, email: req.session.email, password: req.session.password });
     } else {
         res.redirect('/login');
     }
 });
 
-app.get('/changePassword', (req,res) => {
+app.get('/changePassword', (req, res) => {
     res.render('changePassword');
 });
 
-app.post('/changePassword', async(req, res) => {
+app.post('/changePassword', async (req, res) => {
     var password = req.session.password;
     var email = req.session.email;
     var currentPassword = req.body.currentPassword;
     var newPassword = req.body.newPassword;
     var verifyPassword = req.body.verifyPassword;
-  
+
     const user = await userCollection.findOne({ email: email });
     const userPass = user.password;
 
@@ -196,87 +210,88 @@ app.post('/changePassword', async(req, res) => {
     // Check if the current password entered by the user matches the one in the database
     if (!passwordMatch) {
         console.log('wrong current pass');
-      return res.render('changePassword');
+        return res.render('changePassword');
     }
-  
+
     // Check if the new password and the verify password fields match
     if (newPassword != verifyPassword) {
         console.log('not same new pass');
-      return res.render('changePassword');
+        return res.render('changePassword');
     }
- 
+
     // hash the new password
     var hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
     // Update the user's password in the database
     req.session.password = hashedNewPassword;
     // save user details to database 
-    await userCollection.updateOne({email: email}, {$set: {password: hashedNewPassword}});
+    await userCollection.updateOne({ email: email }, { $set: { password: hashedNewPassword } });
     // Redirect the user to a success page
     res.render('passwordUpdated');
-  });
+});
 
-app.get('/filters' , (req, res) => {
+app.get('/filters', (req, res) => {
     if (req.session.loggedIn) {
-            res.render('filters', {name: req.session.name});
+        res.render('filters', { name: req.session.name });
     } else {
         res.redirect('login');
     }
 });
 
-app.get('/search', (req,res) => {
-    if(req.session.loggedIn) {
-        res.render('search', {name: req.session.name});
+app.get('/search', (req, res) => {
+    if (req.session.loggedIn) {
+        res.render('search', { name: req.session.name });
     } else {
         res.redirect('login');
     }
 });
 
-app.get('/description', async(req,res) => {
+
+app.get('/filterconfirmation', (req, res) => {
+    res.render('filterconfirmation', { name: req.session.name });
+});
+
+app.get('/description', async (req, res) => {
+
     const itemName = req.query.item;
     const breed = await getBreedByName(itemName);
     res.render('description', { name: req.session.name, dog: breed });
 });
 
 async function getBreedByName(itemName) {
-    try{
-        const query = {Breed: itemName};
+    try {
+        const query = { Breed: itemName };
 
         const dog = await breedsCollection.findOne(query);
         return dog;
-    } catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
+// easter egg page
+app.get('/easterEgg', (req, res) => {
+    res.render('easterEgg');
+});
+
+app.get('/easterEgg2', (req, res) => {
+    res.render('easterEgg2');
+});
+
 app.get('/bookmark', async (req, res) => {
     if (req.session.loggedIn) {
-        const user = await userCollection.findOne({name: req.session.name});
-        res.render('bookmark', {name: req.session.name, user: user});
+        const user = await userCollection.findOne({ name: req.session.name });
+        res.render('bookmark', { name: req.session.name, user: user });
     } else {
         res.redirect('/login');
     }
 });
-
-async function addBookmark(sessionName, dogBreed, index) {
-    await userCollection.updateOne({name: sessionName}, 
-        {$set: {[`bookmark${index}`]: dogBreed}}
-    );
-    console.log("Added bookmark for: " + dogBreed + " at index: " + index);
-};
-
-async function removeBookmark(sessionName, index) {
-    await userCollection.updateOne({name: sessionName}, 
-        {$set: {[`bookmark${index}`]: "."}} 
-    );
-    console.log("Removed bookmark at index: " + index);
-};
 
 app.get('/addOrRemoveBookmark', async (req, res) => {
     console.log("Clicked on bookmark button");
     const dogBreed = req.query.item;
     console.log(dogBreed);
 
-    const user = await userCollection.findOne({name: req.session.name});
+    const user = await userCollection.findOne({ name: req.session.name });
     const result = await bookmarkStatusAndIndex(user, dogBreed);
 
     if (result.found) {
@@ -294,17 +309,32 @@ async function bookmarkStatusAndIndex(user, dogBreed) {
             i++;
         } else {
             console.log("Found the breed!" + i);
-            return {index: i, found: true};
+            return { index: i, found: true };
         }
     }
     console.log("Not bookmarked!");
-    return {index: i, found: false};
+    return { index: i, found: false };
 };
 
-app.get('/dogsGood' , (req, res) => {
+async function addBookmark(sessionName, dogBreed, index) {
+    await userCollection.updateOne({ name: sessionName },
+        { $set: { [`bookmark${index}`]: dogBreed } }
+    );
+
+    console.log("Added bookmark for: " + dogBreed + " at index: " + index);
+};
+
+async function removeBookmark(sessionName, index) {
+    await userCollection.updateOne({ name: sessionName },
+        { $set: { [`bookmark${index}`]: "." } }
+    );
+    console.log("Removed bookmark at index: " + index);
+};
+
+app.get('/dogsGood', (req, res) => {
     const shopNames = [
         "Tisol",
-        "PetSmart", 
+        "PetSmart",
         "Bosleys"
     ]
     const shopLinks = [
@@ -312,7 +342,7 @@ app.get('/dogsGood' , (req, res) => {
         "https://www.petsmart.ca/",
         "https://tisol.ca/"
     ]
-    res.render('dogsGood', {shopNames: shopNames, shopLinks: shopLinks});
+    res.render('dogsGood', { shopNames: shopNames, shopLinks: shopLinks });
 });
 
 app.get('*', (req, res) => {
@@ -322,5 +352,5 @@ app.get('*', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
-	console.log("Node application listening on port "+port);
+    console.log("Node application listening on port " + port);
 }); 
