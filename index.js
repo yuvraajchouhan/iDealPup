@@ -255,7 +255,11 @@ async function getBreedByName(itemName) {
 // easter egg page
 app.get('/easterEgg', (req, res) => {
     res.render('easterEgg');
-  });
+});
+
+app.get('/easterEgg2', (req, res) => {
+    res.render('easterEgg2');
+});
 
 app.get('/bookmark', async (req, res) => {
     if (req.session.loggedIn) {
