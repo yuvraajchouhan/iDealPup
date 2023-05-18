@@ -229,6 +229,17 @@ app.post('/changePassword', async (req, res) => {
     res.render('passwordUpdated');
 });
 
+app.post('/forgotpassword', async (req, res) => {
+    const user = await userCollection.findOne({ email: email });
+    const userPass = user.password;
+});
+
+app.get('/forgotpassword' , (req, res) => {
+    res.render('forgotPassword');
+});
+
+
+
 app.get('/filters', (req, res) => {
     if (req.session.loggedIn) {
         res.render('filters', { name: req.session.name });
