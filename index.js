@@ -275,12 +275,13 @@ app.get('/addOrRemoveBookmark', async (req, res) => {
     const user = await userCollection.findOne({name: req.session.name});
     const result = await bookmarkStatusAndIndex(user, dogBreed);
 
+    let bookmarkFeedback = "";
     if (result.found) {
-        const bookmarkFeedback = removeBookmark(req.session.name, result.index);
+        bookmarkFeedback = removeBookmark(req.session.name, result.index);
     } else {
-        const bookmarkFeedback = addBookmark(req.session.name, dogBreed, result.index);
+        bookmarkFeedback = addBookmark(req.session.name, dogBreed, result.index);
     }
-    res.redirect(req.get('referer'), {bookmarkFeedback: bookmarkFeedback});
+    res.redirect(`${req.get('referer')}?message=${bookmarkFeedback}`);
 });
 
 async function bookmarkStatusAndIndex(user, dogBreed) {
@@ -301,17 +302,21 @@ async function addBookmark(sessionName, dogBreed, index) {
     await userCollection.updateOne({name: sessionName}, 
         {$set: {[`bookmark${index}`]: dogBreed}}
     );
+
     console.log("Added bookmark for: " + dogBreed + " at index: " + index);
+    
     const bookmarkFeedback = `Added bookmark for: ${dogBreed}`
     return bookmarkFeedback;
 };
 
 async function removeBookmark(sessionName, index) {
+    const bookmarkFeedback = `Removed bookmark for: ${`bookmark${index}`}`
+
     await userCollection.updateOne({name: sessionName}, 
         {$set: {[`bookmark${index}`]: "."}} 
     );
+
     console.log("Removed bookmark at index: " + index);
-    const bookmarkFeedback = `Removed bookmark for: ${dogBreed}`
     return bookmarkFeedback;
 };
 
