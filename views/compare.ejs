@@ -1,0 +1,201 @@
+    <%- include("templates/header") %>
+    <link rel="stylesheet" type="text/css" href="/css/compare.css">
+    
+    <div class="container pb-5 mb-2">
+        <div class="comparison-table">
+            <table class="table table-bordered table-responsive table-responsive-sm">
+                <thead class="bg-secondary">
+                    <tr>
+                        <td class="align-middle">
+                            <div class="pt-3">
+                                <div class="custom-control custom-checkbox">
+                                    Please select up to 3 Breeds
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <label>
+                                Select Breed
+                                <select id="dropdown1">
+                                    <% for (let i = 0; i < breeds.length; i++) { %>
+                                        <option value="<%= breeds[i].Breed %>"><%= breeds[i].Breed %></option>
+                                    <% } %>
+                                    
+                                </select>
+                            </label>
+                            <div class="comparison-item">
+                                <img src="" alt="Dog1" id="table-image1">
+                                <button>Learn More</button>
+                            </div>
+                        </td>
+                        <td> 
+                            Select Breed
+                            <select id="dropdown2">
+                                <% for (let i = 0; i < breeds.length; i++) { %>
+                                    <option value="<%= breeds[i].Breed %>"><%= breeds[i].Breed %></option>
+                                <% } %>
+
+                            </select>
+                            <div class="comparison-item">
+                                <img src="" alt="Dog2" id="table-image2">
+                                <button>Learn More</button>
+                            </div>
+                        </td>
+                        <td>
+                            Select Breed
+                            <select id="dropdown3">
+                                <% for (let i = 0; i < breeds.length; i++) { %>
+                                    <option value="<%= breeds[i].Breed %>"><%= breeds[i].Breed %></option>
+                                <% } %>
+                            </select>
+
+                            <div class="comparison-item">
+                                <img src="" alt="Dog3" id="table-image3">
+                                <button>Learn More</button>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="summary" data-filter="target">
+                    <tr class="bg-secondary">
+                        <th class="text-uppercase">Detail</th>
+                        <td><span class="text-dark font-weight-semibold"> Dog #1</span></td>
+                        <td><span class="text-dark font-weight-semibold"> Dog #2</span></td>
+                        <td><span class="text-dark font-weight-semibold"> Dog #3</span></td>
+                    </tr>
+                    <tr>
+                        <th>Country of Origin</th>
+                        <td id= "origin1"></td>
+                        <td id= "origin2"></td>
+                        <td id= "origin3"></td>
+                    </tr>
+                    <tr>
+                        <th>Fur Color</th>
+                        <td id="color1"></td>
+                        <td id="color2"></td>
+                        <td id="color3"></td>
+                    </tr>
+                    <tr>
+                        <th>Longevity (Years) </th>
+                        <td id="long1"></td>
+                        <td id="long2"></td>
+                        <td id="long3"></td>
+                    </tr>
+                    <tr>
+                        <th>Character Traits</th>
+                        <td id="traits1"></td>
+                        <td id="traits2"></td>
+                        <td id="traits3"></td>
+                    </tr>
+                    <tr>
+                        <th>Common Health Issues</th>
+                        <td id="health1"></td>
+                        <td id="health2"></td>
+                        <td id="health3"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <%- include("templates/footer") %>
+
+<script>
+    
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var dropdown1 = document.getElementById('dropdown1');
+    //     var dropdown2 = document.getElementById('dropdown2');
+    //     var dropdown3 = document.getElementById('dropdown3');
+
+    //     dropdown1.addEventListener('change', function() {
+    //         var selectedValue = this.value;
+    //         console.log(selectedValue);
+    //         const dog = breeds.find(selectedValue);
+
+    //         for (let i = 0; i < breeds.data.length; i++) {
+    //           if(breeds.data[i].breed === selectedValue){
+    //               console.log("dog exists.")
+    //          }else{
+    //           console.log("dog not found.")
+    //          };
+    //         }
+    //     });  
+
+    //     dropdown2.addEventListener('change', function() {
+    //         var selectedValue = this.value;
+    //         console.log(selectedValue);
+
+    //         var selectedBreed = breeds.find(function(breed) {
+    //         return breed.Breed === selectedValue;
+
+    //     });
+    //     });
+
+    //     dropdown3.addEventListener('change', function() {
+    //         var selectedValue3 = this.value;
+    //         // Update elements based on selectedValue for dropdown3
+    //         // ...
+    //     });
+    // });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var dropdown1 = document.getElementById('dropdown1');
+    var dropdown2 = document.getElementById('dropdown2');
+    var dropdown3 = document.getElementById('dropdown3');
+    var breeds = JSON.parse('<%- JSON.stringify(breeds) %>')
+
+    dropdown1.addEventListener('change', function() {
+        var selectedValue = this.value;
+        console.log(selectedValue);
+
+        // Finds the selected breed in the breeds array
+        var selectedBreed = breeds.find(function(breed) {
+            return breed.Breed === selectedValue;
+        });
+
+        // Updates the table with the selected breed's information
+        document.getElementById('origin1').textContent = selectedBreed.CountryOfOrigin;
+        document.getElementById('color1').textContent = selectedBreed.FurColor;
+        document.getElementById('long1').textContent = selectedBreed.LongevityYrs;
+        document.getElementById('traits1').textContent = selectedBreed.CharacterTraits;
+        document.getElementById('health1').textContent = selectedBreed.CommonHealthProblems;
+    
+        document.getElementById('table-image1').src = selectedBreed.Image;
+    });
+
+    dropdown2.addEventListener('change', function() {
+        var selectedValue2 = this.value;
+        console.log(selectedValue2);
+
+          var selectedBreed2 = breeds.find(function(breed) {
+            return breed.Breed === selectedValue2;
+        });
+
+        document.getElementById('origin2').textContent = selectedBreed2.CountryOfOrigin;
+        document.getElementById('color2').textContent = selectedBreed2.FurColor;
+        document.getElementById('long2').textContent = selectedBreed2.LongevityYrs;
+        document.getElementById('traits2').textContent = selectedBreed2.CharacterTraits;
+        document.getElementById('health2').textContent = selectedBreed2.CommonHealthProblems;
+ 
+        document.getElementById('table-image2').src = selectedBreed2.Image;
+    });
+
+    dropdown3.addEventListener('change', function() {
+        var selectedValue3 = this.value;
+        console.log(selectedValue3);
+    
+        var selectedBreed3 = breeds.find(function(breed) {
+            return breed.Breed === selectedValue3;
+        });
+
+        document.getElementById('origin3').textContent = selectedBreed3.CountryOfOrigin;
+        document.getElementById('color3').textContent = selectedBreed3.FurColor;
+        document.getElementById('long3').textContent = selectedBreed3.LongevityYrs;
+        document.getElementById('traits3').textContent = selectedBreed3.CharacterTraits;
+        document.getElementById('health3').textContent = selectedBreed3.CommonHealthProblems;
+    
+        document.getElementById('table-image3').src = selectedBreed3.Image;
+    });
+});
+
+</script>

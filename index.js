@@ -237,9 +237,9 @@ app.get('/filters', (req, res) => {
     }
 });
 
-app.get('/search', (req, res) => {
-    if (req.session.loggedIn) {
-        res.render('search', { name: req.session.name });
+app.get('/search', (req,res) => {
+    if(req.session.loggedIn) {
+        res.render('search', {name: req.session.name});
     } else {
         res.redirect('login');
     }
@@ -380,6 +380,25 @@ app.get('/dogsGood', (req, res) => {
     res.render('dogsGood', { shopNames: shopNames, shopLinks: shopLinks });
 });
 
+
+
+
+app.get('/compare', async (req, res) => {
+    try {
+      const breeds = await breedsCollection.find().toArray();
+      res.render('compare', { breeds });
+      console.log(breeds);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+
+  
+
+  
+
 app.get('/dogTrivia' , async (req, res) => {
     const randomDogs = await breedsCollection.aggregate([
         { $sample: { size: 4 } },
@@ -401,6 +420,7 @@ app.get('/dogTriviaLost', (req, res) => {
     const correctAnswer = '';
     res.render('dogTriviaLost', {correctAnswer: req.session.correctAnswer});
 })
+
 
 app.get('*', (req, res) => {
     res.status(404);
