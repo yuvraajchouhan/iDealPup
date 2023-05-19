@@ -10,25 +10,25 @@
       </div>      
     </div>
 
-    <div class="container" style="font-size:30px">
+    <div class="mx-5" style="font-size:30px">
 
       <br>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-sm-12 col-md-6">
           <ul>
             <li><strong>Country of Origin:</strong> <%= dog.CountryOfOrigin %></li>
             <li><strong>Fur Color:</strong> <%= dog.FurColor %></li>
             <li><strong>Height:</strong> <%= dog.HeightLowInches %>"-<%= dog.HeightHighInches %>"</li>
             </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-12 col-md-6">
           <ul>
-          <li><strong>Weight:</strong> <%= dog.WeightLowLbs %>-<%= dog.WeightHighLbs %> lbs</li>
-          <li><strong>Reps:</strong> <%= dog.RepsLower %>-<%= dog.RepsUpper %></li>
-          <li><strong>Color of Eyes:</strong> <%= dog.ColorOfEyes %></li>
-        </ul>
+            <li><strong>Weight:</strong> <%= dog.WeightLowLbs %>-<%= dog.WeightHighLbs %> lbs</li>
+            <li><strong>Reps:</strong> <%= dog.RepsLower %>-<%= dog.RepsUpper %></li>
+            <li><strong>Color of Eyes:</strong> <%= dog.ColorOfEyes %></li>
+          </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-12 col-md-6">
           <ul>
           <li><strong>Longevity:</strong> <%= dog.LongevityYrs %> years</li>
           <li><strong>Character Traits:</strong> <%= dog.CharacterTraits %></li>
@@ -39,6 +39,13 @@
       <button style="display: block; margin: 0 auto;" 
         onclick="window.location.href='/addOrRemoveBookmark?item=<%= dog.Breed %>'"> Bookmark 
       </button>
+
+      <% if (bookmarkFeedback !== "") { %>
+        <div class="bookmarkFeedback my-5" style="background-color: rgb(94, 202, 103); 
+        text-align: center;"> 
+          <%= bookmarkFeedback %> 
+        </div>
+      <% } %>
 
     </div> 
   </main>

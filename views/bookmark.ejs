@@ -14,8 +14,13 @@
       </div>
     </section>
 
-    <div class="bookmarkFeedback"> </div>
-  
+    <% if (bookmarkFeedback !== "") { %>
+      <div class="bookmarkFeedback" style="background-color: rgb(94, 202, 103); 
+      text-align: center; margin: 10px;"> 
+        <%= bookmarkFeedback %> 
+      </div>
+    <% } %>
+
     <div class="album py-5">
         <div class="container">
           <div class="row row-cols-1 row-cols-md-2 g-4">
