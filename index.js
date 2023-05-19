@@ -297,9 +297,6 @@ app.get('/bookmark', async (req, res) => {
             bookmarkFeedback: message}
         );
 
-        const user = await userCollection.findOne({ name: req.session.name });
-        res.render('bookmark', { name: req.session.name, user: user });
-
     } else {
         res.redirect('/login');
     }
@@ -339,9 +336,6 @@ async function bookmarkStatusAndIndex(user, dogBreed) {
             console.log("Found the breed! " + i);
             return {index: i, found: true};
 
-            console.log("Found the breed!" + i);
-            return { index: i, found: true };
-
         }
     }
     if (availableIndex == 0) {
@@ -350,8 +344,6 @@ async function bookmarkStatusAndIndex(user, dogBreed) {
     console.log("Not bookmarked!");
 
     return {index: availableIndex, found: false};
-
-    return { index: i, found: false };
 
 };
 
@@ -366,8 +358,6 @@ async function addBookmark(sessionName, dogBreed, index) {
 async function removeBookmark(sessionName, index) {
 
     const bookmarkFeedback = `Removed bookmark for: ${`bookmark${index}`} at index: ${index}`
-    await userCollection.updateOne({name: sessionName}, 
-        {$set: {[`bookmark${index}`]: "."}} 
 
     await userCollection.updateOne({ name: sessionName },
         { $set: { [`bookmark${index}`]: "." } }
