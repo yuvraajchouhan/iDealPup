@@ -329,11 +329,162 @@ app.get('/search', (req,res) => {
     }
 });
 
+
 app.get('/filterconfirmation', (req, res) => {
     res.render('filterconfirmation', { name: req.session.name });
 });
 
+// method to filter
+app.post('/filterSubmit', async (req, res) => {
+    // height ranges
+    const heightRanges = {
+      small: { min: 6, max: 15 },
+      medium: { min: 16, max: 30 },
+      large: { min: 31, max: Infinity }
+    };
+ 
+    // weight ranges
+    const weightRanges = {
+      light: { min: 2, max: 50 },
+      medium: { min: 51, max: 85 },
+      heavy: { min: 86, max: Infinity }
+    };
+  
+    // trainability levels
+    const trainabilityLevels = {
+      low: { min: 0, max: 20 },
+      average: { min: 21, max: 40 },
+      high: { min: 41, max: 60 },
+      'very high': { min: 61, max: 80 },
+      exceptional: { min: 81, max: Infinity }
+    };
+  
+    // variables to represent user choices
+    const selectedHeight = req.body.height;
+    const selectedWeight = req.body.weight;
+    const selectedColor = req.body.color;
+    const selectedTrainability = req.body.size;
+    const selectedTraits = Array.isArray(req.body.traits) ? req.body.traits : [req.body.traits].filter(Boolean);
+
+    // const selectedTraits = [];
+    // selectedTraits.push(selectedTrait);
+
+    console.log(selectedTraits)
+    // grab everything from every breed in database
+    const filteredBreeds = await breedsCollection
+      .find()
+      .project({
+        Breed: 1,
+        CountryOfOrigin: 1,
+        FurColor: 1,
+        HeightLowInches: 1,
+        HeightHighInches: 1,
+        WeightLowLbs: 1,
+        WeightHighLbs: 1,
+        RepsLower: 1,
+        RepsUpper: 1,
+        ColorOfEyes: 1,
+        LongevityYrs: 1,
+        CharacterTraits: 1,
+        CommonHealthProblems: 1
+      })
+      .toArray();
+  
+      // filter out every breed 
+    const filteredResults = filteredBreeds.filter((breed) => {
+      const heightLow = parseInt(breed.HeightLowInches);
+      const heightHigh = parseInt(breed.HeightHighInches);
+      const weightLow = parseInt(breed.WeightLowLbs);
+      const weightHigh = parseInt(breed.WeightHighLbs);
+      const averageHeight = (heightLow + heightHigh) / 2;
+      const averageWeight = (weightLow + weightHigh) / 2;
+  
+      const heightRange = heightRanges[selectedHeight];
+      const weightRange = weightRanges[selectedWeight];
+  
+      // Check if the breed falls within the selected height and weight range
+      if (
+        averageHeight >= heightRange.min &&
+        averageHeight <= heightRange.max &&
+        averageWeight >= weightRange.min &&
+        averageWeight <= weightRange.max
+      ) {
+        // If both color and trainability are selected, filter by both
+        if (selectedColor && selectedTrainability) {
+          const furColors = breed.FurColor.split(',').map((color) => color.trim().toLowerCase());
+          const trainabilityRange = trainabilityLevels[selectedTrainability.toLowerCase()];
+          const repsLower = parseInt(breed.RepsLower);
+          const repsUpper = parseInt(breed.RepsUpper);
+          const averageReps = Math.round((repsLower + repsUpper) / 2);
+          const breedTraits = breed.CharacterTraits.toLowerCase().split(',').map((trait) => trait.trim());
+         // console.log(breedTraits)
+  
+          // check if a color matches
+          if (
+            !furColors.includes(selectedColor.toLowerCase()) ||
+            averageReps < trainabilityRange.min ||
+            averageReps > trainabilityRange.max ||
+            !selectedTraits.every((trait) => breedTraits.includes(trait.toLowerCase()))
+          ) {
+            return false;
+          }
+        }
+        // If only color is selected, filter by color
+        else if (selectedColor) {
+          const furColors = breed.FurColor.split(',').map((color) => color.trim().toLowerCase());
+          if (!furColors.includes(selectedColor.toLowerCase())) {
+            return false;
+          }
+        }
+        // If only trainability is selected, filter by trainability
+        else if (selectedTrainability) {
+          const trainabilityRange = trainabilityLevels[selectedTrainability.toLowerCase()];
+          const repsLower = parseInt(breed.RepsLower);
+          const repsUpper = parseInt(breed.RepsUpper);
+          const averageReps = Math.round((repsLower + repsUpper) / 2);
+          const breedTraits = breed.CharacterTraits.toLowerCase().split(',').map((trait) => trait.trim());
+  
+          if (
+            averageReps < trainabilityRange.min ||
+            averageReps > trainabilityRange.max ||
+            !selectedTraits.every((trait) => breedTraits.includes(trait.toLowerCase()))
+          ) {
+            return false;
+          }
+        }
+        
+        // If traits are selected, filter by traits
+        if (selectedTraits.length > 0) {
+            const breedTraits = breed.CharacterTraits.split(',').map((trait) => trait.trim().toLowerCase());
+      
+            //console.log(breedTraits)
+            // Check if at least one of the selected traits exists in the breed's traits
+            if (!selectedTraits.some((trait) => breedTraits.includes(trait.toLowerCase()))) {
+              return false;
+            }
+          }
+ 
+        return true;
+      }
+  
+      return false;
+    });
+  
+    if (filteredResults.length > 0) {
+      res.render('results', { dogs: filteredResults });
+    } else {
+      res.render('retryFilters');
+    }
+  });
+  
+  
+  
+  
+  
+  
+
 app.get('/description', async (req, res) => {
+
     const itemName = req.query.item;
     const breed = await getBreedByName(itemName);
 

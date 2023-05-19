@@ -1,281 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>iDealpup - Find Your Ideal Dog Breed</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        
-        <!-- Custom CSS -->
-        <style>
-            /* Background color */
-            body {
-                background-color: #C8E6C9;
-            }
-            /* Header style */
-            .header {
-                background-color: #2E7D32;
-                color: white;
-                padding: 10px;
-            }
-            /* Container style */
-            .container {
-                background-color: #FFFFFF;
-                padding: 20px;
-            }
-            /* Form style */
-            form {
-                margin-bottom: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <%- include('templates/header') %>
 
-            <div class="header">
-                <h1>Filters - Find Your Ideal Dog Breed!</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    @media (max-width: 576px) {
+
+      /* Increase font size */
+      .display-4 {
+        font-size: 1.5rem;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+      }
+
+      /* Increase button size */
+      .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+      }
+
+      /* Increase checkbox and radio button size */
+      .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+
+<%- include('templates/header') %>
+
+  <div class="header">
+    <h1 class="display-4">Filters - Find Your Ideal Dog Breed!</h1>
+    <h3 class="lead">Required fields are marked with '*'</h3>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <form method="POST" action="/filterSubmit">
+      <div class="row">
+        <div class=" col-6 col-md-6 col-sm-12">
+          <h3 class="h4">* Height:</h3>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="height" id="Small" value="small">
+            <label class="form-check-label" for="Small">Small</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="height" id="Medium" value="medium">
+            <label class="form-check-label" for="Medium">Medium</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="height" id="Large" value="large">
+            <label class="form-check-label" for="Large">Large</label>
+          </div>
+        </div>
+        <div class=" col-6 col-md-6 col-sm-12">
+          <h3 class="h4">* Weight:</h3>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="weight" id="Light" value="light">
+            <label class="form-check-label" for="Light">Light</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="weight" id="Medium" value="medium">
+            <label class="form-check-label" for="Medium">Medium</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="weight" id="Heavy" value="heavy">
+            <label class="form-check-label" for="Heavy">Heavy</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class=" col-6 col-md-6 col-sm-12">
+          <fieldset id="color-selection">
+            <h3 class="h4">Fur Color:</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Red" value="red">
+              <label class="form-check-label" for="Red">Red</label>
             </div>
-
-            <div class="container">
-                <form id="filter-form" method="POST" action="/filterconfirmation">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3>Height: 'Inches'</h3>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="very small">6" - 17"</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="small">18" - 29"</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="medium">30" - 41"</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="large">42" - 53"</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="height"
-                                        value="very large">54" - 66"</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <h3>Weight: 'Lbs'</h3>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="very very light">2 - 34</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="very light">35 - 67</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="light">68 - 100</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="medium">101 - 133</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="heavy">134 - 166</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="weight"
-                                        value="very heavy">166 - 190</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3>Fur Color:</h3>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="red">Red</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="black">Black</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="white">White</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="cream">Cream</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="blue">Blue</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="grey">Grey</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="apricot">Apricot</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="golden">Golden</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="color"
-                                        value="tan">Tan</label>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="col-sm-6">
-                            <h3>Trainability:</h3>
-                            <div class="radio">
-                                <label><input type="radio" name="size"
-                                        value="low">Low</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="size"
-                                        value="average">Average</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="size"
-                                        value="high">High</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="size"
-                                        value="very high">Very High</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="size"
-                                        value="exceptional">Exceptional</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3>Traits:</h3>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="loyal"
-                                        onclick="limitCheckboxes()">Loyal</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="strong"
-                                        onclick="limitCheckboxes()">Strong</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="independent"
-                                        onclick="limitCheckboxes()">Independent</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="curious"
-                                        onclick="limitCheckboxes()">Curious</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="friendly"
-                                        onclick="limitCheckboxes()">Friendly</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="confident"
-                                        onclick="limitCheckboxes()">Confident</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="affectionate"
-                                        onclick="limitCheckboxes()">Affectionate</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="trainable"
-                                        onclick="limitCheckboxes()">Trainable</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="good natured"
-                                        onclick="limitCheckboxes()">Good Natured</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="intelligent"
-                                        onclick="limitCheckboxes()">Intelligent</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="gentle"
-                                        onclick="limitCheckboxes()">Gentle</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="energetic"
-                                        onclick="limitCheckboxes()">Energetic</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="patient"
-                                        onclick="limitCheckboxes()">Patient</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="playful"
-                                        onclick="limitCheckboxes()">Playful</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="social"
-                                        onclick="limitCheckboxes()">Social</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="kind"
-                                        onclick="limitCheckboxes()">Kind</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="sensitive"
-                                        onclick="limitCheckboxes()">Sensitive</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="charming"
-                                        onclick="limitCheckboxes()">Charming</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="protective"
-                                        onclick="limitCheckboxes()">Protective</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="traits[]"
-                                        value="athletic"
-                                        onclick="limitCheckboxes()">Athletic</label>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-
-                <a href='/filterconfirmation'><button type="submit" class="btn btn-success">Search With These Filters</button></a>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Black" value="black">
+              <label class="form-check-label" for="Black">Black</label>
             </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="White" value="white">
+              <label class="form-check-label" for="White">White</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Cream" value="cream">
+              <label class="form-check-label" for="Cream">Cream</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Blue" value="blue">
+              <label class="form-check-label" for="Blue">Blue</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Grey" value="grey">
+              <label class="form-check-label" for="Grey">Grey</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Apricot" value="apricot">
+              <label class="form-check-label" for="Apricot">Apricot</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Golden" value="golden">
+              <label class="form-check-label" for="Golden">Golden</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="color" id="Tan" value="tan">
+              <label class="form-check-label" for="Tan">Tan</label>
+            </div>
+            <!-- Add more color options here -->
+          </fieldset>
+        </div>
 
-        <%- include('templates/footer') %>
-        
-        <script src="/js/filters.js"></script>
-        <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        <div class=" col-6 col-md-6 col-sm-12">
+          <h3 class="h4">Trainability:</h3>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="size" id="Low" value="low">
+            <label class="form-check-label" for="Low">Low</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="size" id="Average" value="average">
+            <label class="form-check-label" for="Average">Average</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="size" id="High" value="high">
+            <label class="form-check-label" for="High">High</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="size" id="Very High" value="very high">
+            <label class="form-check-label" for="Very High">Very High</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="size" id="Exceptional" value="exceptional">
+            <label class="form-check-label" for="Exceptional">Exceptional</label>
+          </div>
+          <!-- Add more trainability options here -->
+        </div>
+      </div>
+      <h3 class="h4 text-center">Traits (Choose 3):</h3>
+      <div class="row">
+        <div class=" col-6 col-md-6 col-sm-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Loyal" value="loyal">
+            <label class="form-check-label" for="Loyal">Loyal</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Strong" value="strong">
+            <label class="form-check-label" for="Strong">Strong</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Independent" value="independent">
+            <label class="form-check-label" for="Independent">Independent</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Curious" value="curious">
+            <label class="form-check-label" for="Curious">Curious</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Friendly" value="friendly">
+            <label class="form-check-label" for="Friendly">Friendly</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Confident" value="confident">
+            <label class="form-check-label" for="Confident">Confident</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Affectionate" value="affectionate">
+            <label class="form-check-label" for="Affectionate">Affectionate</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Trainable" value="trainable">
+            <label class="form-check-label" for="Trainable">Trainable</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Good Natured" value="good natured">
+            <label class="form-check-label" for="Good Natured">Good Natured</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Intelligent" value="intelligent">
+            <label class="form-check-label" for="Intelligent">Intelligent</label>
+          </div>
+        </div>
+        <div class="col-6 col-md-6 col-sm-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Gentle" value="gentle">
+            <label class="form-check-label" for="Gentle">Gentle</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Energetic" value="energetic">
+            <label class="form-check-label" for="Energetic">Energetic</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Patient" value="patient">
+            <label class="form-check-label" for="Patient">Patient</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Playful" value="playful">
+            <label class="form-check-label" for="Playful">Playful</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Social" value="social">
+            <label class="form-check-label" for="Social">Social</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Kind" value="kind">
+            <label class="form-check-label" for="Kind">Kind</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Sensitive" value="sensitive">
+            <label class="form-check-label" for="Sensitive">Sensitive</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Charming" value="charming">
+            <label class="form-check-label" for="Charming">Charming</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Protective" value="protective">
+            <label class="form-check-label" for="Protective">Protective</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="traits" id="Athletic" value="athletic">
+            <label class="form-check-label" for="Athletic">Athletic</label>
+          </div>
+        </div>
+      </div>
+  </div>
+<br>
+  <button type="submit" class="btn btn-lg btn-success">Search With These Filters</button>
+  </form>
+  </div>
+
+  <%- include('templates/footer') %>
