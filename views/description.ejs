@@ -3,32 +3,33 @@
 
     <div class="jumbotron">
       <div class="container" style="display: flex; justify-content: center; align-items: center">
-        <h1 class="display-3"><%= dog.Breed %></h1>
+        <h1 class="display-1 fw-bold my-5"><%= dog.Breed %></h1>
       </div>
-      <div style="display: flex; justify-content: center;">
-        <img src="/<%= dog.Breed %>.jpg" style="align-self: center;">
+      <div style="display: flex; justify-content: center; height: 30vh">
+        <img src="/pups/<%= dog.Breed %>.png" style="align-self: center;
+          height:100%">
       </div>      
     </div>
 
-    <div class="container" style="font-size:30px">
+    <div class="mx-5" style="font-size:40px">
 
       <br>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-12">
           <ul>
             <li><strong>Country of Origin:</strong> <%= dog.CountryOfOrigin %></li>
             <li><strong>Fur Color:</strong> <%= dog.FurColor %></li>
             <li><strong>Height:</strong> <%= dog.HeightLowInches %>"-<%= dog.HeightHighInches %>"</li>
-            </ul>
+          </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-12">
           <ul>
-          <li><strong>Weight:</strong> <%= dog.WeightLowLbs %>-<%= dog.WeightHighLbs %> lbs</li>
-          <li><strong>Reps:</strong> <%= dog.RepsLower %>-<%= dog.RepsUpper %></li>
-          <li><strong>Color of Eyes:</strong> <%= dog.ColorOfEyes %></li>
-        </ul>
+            <li><strong>Weight:</strong> <%= dog.WeightLowLbs %>-<%= dog.WeightHighLbs %> lbs</li>
+            <li><strong>Reps:</strong> <%= dog.RepsLower %>-<%= dog.RepsUpper %></li>
+            <li><strong>Color of Eyes:</strong> <%= dog.ColorOfEyes %></li>
+          </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-12">
           <ul>
           <li><strong>Longevity:</strong> <%= dog.LongevityYrs %> years</li>
           <li><strong>Character Traits:</strong> <%= dog.CharacterTraits %></li>
@@ -36,9 +37,17 @@
         </ul>
         </div>
       </div>
+      <br>
       <button style="display: block; margin: 0 auto;" 
         onclick="window.location.href='/addOrRemoveBookmark?item=<%= dog.Breed %>'"> Bookmark 
       </button>
+
+      <% if (bookmarkFeedback !== "") { %>
+        <div class="bookmarkFeedback my-5" style="background-color: rgb(94, 202, 103); 
+        text-align: center;"> 
+          <%= bookmarkFeedback %> 
+        </div>
+      <% } %>
 
     </div> 
   </main>

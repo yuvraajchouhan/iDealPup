@@ -1,11 +1,18 @@
 <div class="col">
     <div class="card shadow-sm">
-      <img src="/<%= bookmarkedDog %>.jpg" onclick="window.location.href='/description?item=<%= bookmarkedDog %>'">
+      <img src="/pups/<%= bookmarkedDog %>.png" onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"
+        style="height:250px;">
       <div class="card-body">
-        <p class="card-text" onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"> <%= bookmarkedDog %> </p>
-        <div class="d-flex justify-content-between align-items-center">
-        </div>
+        <p class="card-text" onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"
+          style="height: 100px"> <%= bookmarkedDog %> </p>
       </div>
-      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/addOrRemoveBookmark?item=<%= bookmarkedDog %>'"> Unbookmark </button>
+      <div class="mx-auto">
+        <button type="button" class="btn btn-sm btn-outline-secondary mb-3" 
+          onclick="window.location.href='/addOrRemoveBookmark?item=<%= bookmarkedDog %>'"
+          style="font-size: 30px;"> 
+          Unbookmark 
+        </button>
+        <div> </div>
+      </div>
     </div>
 </div>

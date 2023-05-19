@@ -7,28 +7,29 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        
         <!-- Custom CSS -->
         <style>
-    /* Background color */
-    body {
-      background-color: #C8E6C9;
-    }
-    /* Header style */
-    .header {
-      background-color: #2E7D32;
-      color: white;
-      padding: 10px;
-    }
-    /* Container style */
-    .container {
-      background-color: #FFFFFF;
-      padding: 20px;
-    }
-    /* Form style */
-    form {
-      margin-bottom: 20px;
-    }
-  </style>
+            /* Background color */
+            body {
+                background-color: #C8E6C9;
+            }
+            /* Header style */
+            .header {
+                background-color: #2E7D32;
+                color: white;
+                padding: 10px;
+            }
+            /* Container style */
+            .container {
+                background-color: #FFFFFF;
+                padding: 20px;
+            }
+            /* Form style */
+            form {
+                margin-bottom: 20px;
+            }
+        </style>
     </head>
     <body>
         <%- include('templates/header') %>
@@ -264,24 +265,17 @@
 
                         </div>
                     </div>
-
-
-                <a href="/filterconfirmation"><button type="submit" class="btn btn-success">Search With These Filters</button></a>
-            </form>
-        </div>
-
-
-
-                    <a href='/filterconfirmation'><button type="submit"
-                            class="btn btn-success">Search With These Filters</button></a>
                 </form>
+
+                <a href='/filterconfirmation'><button type="submit" class="btn btn-success">Search With These Filters</button></a>
             </div>
 
-            <%- include('templates/footer') %>
-                <script src="/js/filters.js"></script>
-                <script
-                    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                <script
-                    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-            </body>
-        </html>
+        <%- include('templates/footer') %>
+        
+        <script src="/js/filters.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
