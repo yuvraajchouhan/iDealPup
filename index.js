@@ -371,7 +371,7 @@ app.get('/dogTriviaStart', (req, res) => {
 })
 
 app.get('/dogTriviaLost', (req, res) => {
-    const correctAnswer = '';
+    console.log(req.session.correctAnswer);
     res.render('dogTriviaLost', {correctAnswer: req.session.correctAnswer});
 })
 

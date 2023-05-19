@@ -12,15 +12,15 @@
         </div>
         <div class="mt-5">
             <p> What is the name of this dog breed? </p>
-            <% let i=0; %>
-            <% for(i=0; i < result.length; i++) { %>
+            <% let i=1; %>
+            <% for(i=1; i < result.length + 1; i++) { %>
                 <% if (result[i] == correctAnswer) { %>
                     <button onclick="window.location.href='/dogTrivia'"> 
                         <%= i %>. <%= result[i] %> 
                     </button>
                 <% } else { %>
                     <button onclick="window.location.href='/dogTriviaLost'; 
-                    req.session.correctAnswer = '<%= correctAnswer %>'"> 
+                    req.session.correctAnswer = `<%= correctAnswer %>`"> 
                         <%= i %>. <%= result[i] %> 
                     </button>
                 <% } %>   
