@@ -5,6 +5,7 @@ const Joi = require('joi');                     // include the joi module
 const MongoDBStore = require('connect-mongo');  // include the connect-mongo module
 const session = require('express-session');     // include the express-session module
 const express = require('express');             // include the express module
+const nodemailer = require('nodemailer');       // include the nodemailer module
 const saltRounds = 12;
 
 const app = express();                          // create an express app
@@ -23,6 +24,9 @@ const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_database = process.env.MONGODB_DATABASE;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
+const nodemailer_email = process.env.NODEMAILER_EMAIL;
+const nodemailer_password = process.env.NODEMAILER_PASSWORD;
+
 
 // importing the database object from databaseConnection.js file
 var { database } = include('databaseConnection');
@@ -47,6 +51,15 @@ database.connect().then(() => {
     console.log('MongoDB connected successfully');
 }).catch((err) => {
     console.log('Error connecting to MongoDB', err);
+});
+
+// creating a transporter
+const transporter = nodemailer.createTransport({
+    service: 'hotmail',
+    auth: {
+        user: nodemailer_email,
+        pass: nodemailer_password
+    }
 });
 
 // creating a session
@@ -229,16 +242,76 @@ app.post('/changePassword', async (req, res) => {
     res.render('passwordUpdated');
 });
 
-app.post('/forgotpassword', async (req, res) => {
-    const user = await userCollection.findOne({ email: email });
-    const userPass = user.password;
-});
-
 app.get('/forgotpassword' , (req, res) => {
     res.render('forgotPassword');
 });
 
+app.post('/forgotpasswordsubmit', async (req, res) => {
+    const user = await userCollection.find().project({email: 1}).toArray();
 
+    const userEmail = req.body.email;
+
+    const mailOptions = {
+        from: nodemailer_email,
+        to: userEmail,
+        subject: 'Reset Your Password.',
+        text: 'Click the link to reset your password: https://relieved-puce-swallow.cyclic.app/resetpassword'
+    };
+
+    for(i = 0; i < user.length; i++){
+        if(user[i].email == userEmail){
+            req.session.email = user[i].email;
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                  res.redirect('/emailsent');
+                }
+              });
+        } 
+    }
+});
+
+app.get('/emailsent', (req, res) => {
+    res.render('emailSent');
+});
+
+app.get('/resetpassword', (req, res) => {
+    res.render('resetPassword');
+});
+
+app.post('/resetpasswordsubmit', async (req, res) => {
+    var email = req.session.email;
+    var newPassword = req.body.newPassword;
+    var verifyPassword = req.body.verifyPassword;
+
+    // Check if the new password and the verify password fields match
+    if (newPassword != verifyPassword) {
+        console.log('not same new pass');
+        return res.render('resetPassword');
+    }
+
+    // hash the new password
+    var hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    // Update the user's password in the database
+    req.session.password = hashedNewPassword;
+
+    // save user details to database
+    await userCollection.updateOne({ email: req.session.email }, { $set: { password: hashedNewPassword } });
+
+    const user = await userCollection.find({ email }).project({ name: 1, password: 1}).toArray();
+
+    req.session.loggedIn = true;
+    req.session.name = user[0].name;
+    req.session.password = user[0].password;
+
+    // Redirect the user to a success page
+    res.render('passwordUpdated');
+
+
+});
 
 app.get('/filters', (req, res) => {
     if (req.session.loggedIn) {
@@ -361,5 +434,4 @@ app.get('*', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
-    console.log("Node application listening on port " + port);
 }); 
