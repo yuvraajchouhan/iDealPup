@@ -1,9 +1,9 @@
 #table-image {
     width: 100px;
     height: 50px;
-  }
+  
 
-  @media (max-width: 576px) {
+  @media (max-width: 400px) {
     table td {
       display: block;
     }
@@ -11,7 +11,7 @@
   
 
     /* Media query for devices smaller than 576px width */
-    @media (max-width: 575px) {
+    @media (max-width: 400px) {
         .comparison-table table {
             display: block;
             overflow-x: auto;
@@ -52,3 +52,4 @@
         }
     }
 
+}
