@@ -252,7 +252,16 @@ app.get('/filterconfirmation', (req, res) => {
 app.get('/description', async (req, res) => {
     const itemName = req.query.item;
     const breed = await getBreedByName(itemName);
-    res.render('description', { name: req.session.name, dog: breed });
+
+    let message = "";
+    if (req.session.bookmarkFeedback) {
+        message = req.session.bookmarkFeedback;
+        delete req.session.bookmarkFeedback;
+    }
+
+    res.render('description', { name: req.session.name, dog: breed,
+        bookmarkFeedback: message
+    });
 });
 
 async function getBreedByName(itemName) {
@@ -277,8 +286,20 @@ app.get('/easterEgg2', (req, res) => {
 
 app.get('/bookmark', async (req, res) => {
     if (req.session.loggedIn) {
+
+        const user = await userCollection.findOne({name: req.session.name});
+        let message = "";
+        if (req.session.bookmarkFeedback) {
+            message = req.session.bookmarkFeedback;
+            delete req.session.bookmarkFeedback;
+        }
+        res.render('bookmark', {name: req.session.name, user: user, 
+            bookmarkFeedback: message}
+        );
+
         const user = await userCollection.findOne({ name: req.session.name });
         res.render('bookmark', { name: req.session.name, user: user });
+
     } else {
         res.redirect('/login');
     }
@@ -294,24 +315,44 @@ app.get('/addOrRemoveBookmark', async (req, res) => {
 
     if (result.found) {
         removeBookmark(req.session.name, result.index);
+        req.session.bookmarkFeedback = `Removed bookmark for: ${dogBreed}`;
     } else {
         addBookmark(req.session.name, dogBreed, result.index);
+        req.session.bookmarkFeedback = `Added bookmark for: ${dogBreed}`;
     }
-    res.redirect(req.get('referer'));
+    res.redirect(`${req.get('referer')}`);
 });
 
 async function bookmarkStatusAndIndex(user, dogBreed) {
     let i = 1;
-    while (user[`bookmark${i}`] && user[`bookmark${i}`] !== ".") {
+    let availableIndex = 0;
+    let availableIndexCounter = 0;
+    while (user[`bookmark${i}`] || user[`bookmark${i}`] == ".") {
+        if (user[`bookmark${i}`] == "." && availableIndexCounter == 0) {
+            availableIndex = i;
+            availableIndexCounter++;
+        }
         if (user[`bookmark${i}`] !== dogBreed) {
             i++;
         } else {
+
+            console.log("Found the breed! " + i);
+            return {index: i, found: true};
+
             console.log("Found the breed!" + i);
             return { index: i, found: true };
+
         }
     }
+    if (availableIndex == 0) {
+        availableIndex = i;
+    }
     console.log("Not bookmarked!");
+
+    return {index: availableIndex, found: false};
+
     return { index: i, found: false };
+
 };
 
 async function addBookmark(sessionName, dogBreed, index) {
@@ -323,10 +364,16 @@ async function addBookmark(sessionName, dogBreed, index) {
 };
 
 async function removeBookmark(sessionName, index) {
+
+    const bookmarkFeedback = `Removed bookmark for: ${`bookmark${index}`} at index: ${index}`
+    await userCollection.updateOne({name: sessionName}, 
+        {$set: {[`bookmark${index}`]: "."}} 
+
     await userCollection.updateOne({ name: sessionName },
         { $set: { [`bookmark${index}`]: "." } }
+
     );
-    console.log("Removed bookmark at index: " + index);
+    console.log(bookmarkFeedback);
 };
 
 app.get('/dogsGood', (req, res) => {
@@ -342,6 +389,28 @@ app.get('/dogsGood', (req, res) => {
     ]
     res.render('dogsGood', { shopNames: shopNames, shopLinks: shopLinks });
 });
+
+app.get('/dogTrivia' , async (req, res) => {
+    const randomDogs = await breedsCollection.aggregate([
+        { $sample: { size: 4 } },
+        { $project: { _id: 0, Breed: 1 } }
+    ]).toArray();
+
+    let result = [];
+    await randomDogs.map(dog => {result.push(dog.Breed)});
+
+    const correctAnswer = result[Math.floor(Math.random() * result.length)];
+    res.render('dogTrivia', {result: result, correctAnswer: correctAnswer});
+});
+
+app.get('/dogTriviaStart', (req, res) => {
+    res.render('dogTriviaStart');
+})
+
+app.get('/dogTriviaLost', (req, res) => {
+    const correctAnswer = '';
+    res.render('dogTriviaLost', {correctAnswer: req.session.correctAnswer});
+})
 
 app.get('*', (req, res) => {
     res.status(404);

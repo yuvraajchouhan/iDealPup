@@ -6,7 +6,7 @@
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-10 mx-auto">
           <h1 class="display-3 fw-bold mb-5"> Bookmarks </h1>
-          <p class="mb-5 text-body-secondary"> 
+          <p class="text-body-secondary"> 
             <%= name %>'s bookmarks. <br>
             Click on the card to view the dog breed! <br>
             Click on 'Unbookmark' to remove the dog breed from your bookmarks. </p>
@@ -14,10 +14,15 @@
       </div>
     </section>
 
-    <div class="bookmarkFeedback"> </div>
-  
+    <% if (bookmarkFeedback !== "") { %>
+      <div class="bookmarkFeedback" style="background-color: rgb(94, 202, 103); 
+      text-align: center; margin: 10px;"> 
+        <%= bookmarkFeedback %> 
+      </div>
+    <% } %>
+
     <div class="album py-5">
-        <div class="container">
+        <div class="mx-5">
           <div class="row row-cols-1 row-cols-md-2 g-4">
 
             <% let i = 1; %>

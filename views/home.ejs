@@ -1,38 +1,57 @@
 <%- include("templates/header") %>
 
-    <div class="px-5 pt-5 text-center border-bottom" style="font-size:30px">
-        <div class="col-lg-6 mx-auto">
-            <h1 class="display-4 fw-bold text-body-emphasis mb-5"> Hey, <%= name %>! </h1>
+<div class="px-5 pt-5 text-center border-bottom" style="font-size:40px">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="display-3 fw-bold"> Hey, <%= name %>! </h1>
+        <br>
+        <p class="text-body-secondary"> How is your search for your ideal puppy going? <br>
+            Or rather, how are you and your puppy doing? <br>
+            We hope the best for you all! </p>
+    </div>
+</div>
+
+<div class="px-5 pt-5 text-center border-bottom" style="font-size:30px">
+    <div class="col-lg-6 mx-auto">
+        <h1 class="display-4 fw-bold text-body-emphasis mb-5"> Hey, <%= name %>! </h1>
+        <br>
+        <p class="mb-5 text-body-secondary"> How is your search for your ideal puppy going? <br>
+            Or rather, how are you and your puppy doing? <br>
+            We hope the best for you all! <br>
             <br>
-            <p class="mb-5 text-body-secondary"> How is your search for your ideal puppy going? <br>
-                Or rather, how are you and your puppy doing? <br>
-                We hope the best for you all! <br>
-                <br>
-                Here are some well-known and liked dog breeds of today!
-            </p>
-        </div>
+            Here are some well-known and liked dog breeds of today!
+        </p>
     </div>
+</div>
 
-    <div class="container mt-5 mx-auto">
-        <div class="row">
-            <% let i=0; %>
-                <% for(i=0; i < todayDogNames.length; i++) { %>
-                    <%- include('templates/homeDogs', {todayDogName: todayDogNames[i], todayDogMessage:
-                        todayDogMessages[i]}) %>
-                        <% } %>
-        </div>
+<div class="mx-5 mt-5">
+    <div class="row">
+        <% let i=0; %>
+        <% for(i=0; i < todayDogNames.length; i++) { %>
+            <%- include('templates/homeDogs', {todayDogName: todayDogNames[i], todayDogMessage: todayDogMessages[i]}) %>
+        <% } %>
     </div>
+</div>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+<div class="container mt-5 mx-auto">
+    <div class="row">
+        <% let i=0; %>
+        <% for(i=0; i < todayDogNames.length; i++) { %>
+            <%- include('templates/homeDogs', {todayDogName: todayDogNames[i], todayDogMessage: todayDogMessages[i]}) %>
+        <% } %>
+    </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
 
-    <%- include ('templates/footer') %>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76"
+    crossorigin="anonymous"></script>
+
+<%- include ('templates/footer') %>
