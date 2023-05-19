@@ -1,10 +1,10 @@
 <%- include("templates/header") %> 
 
-<div class="px-5 pt-5 text-center border-bottom" style="font-size:30px">
+<div class="px-5 pt-5 text-center border-bottom" style="font-size:40px">
     <div class="col-lg-6 mx-auto">
-        <h1 class="display-4 fw-bold text-body-emphasis mb-5"> Hey, <%= name %>! </h1>
+        <h1 class="display-3 fw-bold"> Hey, <%= name %>! </h1>
         <br>
-        <p class="mb-5 text-body-secondary"> How is your search for your ideal puppy going? <br>
+        <p class="text-body-secondary"> How is your search for your ideal puppy going? <br>
             Or rather, how are you and your puppy doing? <br>
             We hope the best for you all! <br>
             <br>
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="container mt-5 mx-auto">
+<div class="mx-5 mt-5">
     <div class="row">
         <% let i=0; %>
         <% for(i=0; i < todayDogNames.length; i++) { %>
@@ -32,7 +32,8 @@ integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b
 crossorigin="anonymous"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76"></script>
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76"
+crossorigin="anonymous"></script>
 
 <%- include ('templates/footer') %>
 
