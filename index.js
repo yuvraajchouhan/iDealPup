@@ -353,6 +353,28 @@ app.get('/dogsGood' , (req, res) => {
     res.render('dogsGood', {shopNames: shopNames, shopLinks: shopLinks});
 });
 
+app.get('/dogTrivia' , async (req, res) => {
+    const randomDogs = await breedsCollection.aggregate([
+        { $sample: { size: 4 } },
+        { $project: { _id: 0, Breed: 1 } }
+    ]).toArray();
+
+    let result = [];
+    await randomDogs.map(dog => {result.push(dog.Breed)});
+
+    const correctAnswer = result[Math.floor(Math.random() * result.length)];
+    res.render('dogTrivia', {result: result, correctAnswer: correctAnswer});
+});
+
+app.get('/dogTriviaStart', (req, res) => {
+    res.render('dogTriviaStart');
+})
+
+app.get('/dogTriviaLost', (req, res) => {
+    const correctAnswer = '';
+    res.render('dogTriviaLost', {correctAnswer: req.session.correctAnswer});
+})
+
 app.get('*', (req, res) => {
     res.status(404);
     res.render('404Page');
