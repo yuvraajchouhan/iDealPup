@@ -380,9 +380,6 @@ app.get('/dogsGood', (req, res) => {
     res.render('dogsGood', { shopNames: shopNames, shopLinks: shopLinks });
 });
 
-
-
-
 app.get('/compare', async (req, res) => {
     try {
       const breeds = await breedsCollection.find().toArray();
@@ -393,10 +390,6 @@ app.get('/compare', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
-
-
-  
-
   
 
 app.get('/dogTrivia' , async (req, res) => {

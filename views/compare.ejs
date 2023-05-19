@@ -160,7 +160,7 @@
         document.getElementById('traits1').textContent = selectedBreed.CharacterTraits;
         document.getElementById('health1').textContent = selectedBreed.CommonHealthProblems;
     
-        document.getElementById('table-image1').src = selectedBreed.Image;
+        document.getElementById('table-image1').src = `/pups/${selectedValue}.png`;
     });
 
     dropdown2.addEventListener('change', function() {
@@ -177,7 +177,7 @@
         document.getElementById('traits2').textContent = selectedBreed2.CharacterTraits;
         document.getElementById('health2').textContent = selectedBreed2.CommonHealthProblems;
  
-        document.getElementById('table-image2').src = selectedBreed2.Image;
+        document.getElementById('table-image2').src = `/pups/${selectedValue2}.png`;
     });
 
     dropdown3.addEventListener('change', function() {
@@ -194,7 +194,7 @@
         document.getElementById('traits3').textContent = selectedBreed3.CharacterTraits;
         document.getElementById('health3').textContent = selectedBreed3.CommonHealthProblems;
     
-        document.getElementById('table-image3').src = selectedBreed3.Image;
+        document.getElementById('table-image3').src = `/pups/${selectedValue3}.png`;
     });
 });
 
