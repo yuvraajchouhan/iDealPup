@@ -1,5 +1,6 @@
     <%- include("templates/header") %>
-
+    <link rel="stylesheet" type="text/css" href="/css/compare.css">
+    
     <div class="container pb-5 mb-2">
         <div class="comparison-table">
             <table class="table table-bordered table-responsive table-responsive-sm">
@@ -8,8 +9,7 @@
                         <td class="align-middle">
                             <div class="pt-3">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="differences">
-                                    <label class="custom-control-label" for="differences">Show differences only</label>
+                                    Please select up to 3 Breeds
                                 </div>
                             </div>
                         </td>
@@ -58,40 +58,40 @@
                 </thead>
                 <tbody id="summary" data-filter="target">
                     <tr class="bg-secondary">
-                        <th class="text-uppercase">Summary</th>
-                        <td><span class="text-dark font-weight-semibold">Dog 1</span></td>
-                        <td><span class="text-dark font-weight-semibold">Dog 2</span></td>
-                        <td><span class="text-dark font-weight-semibold">Dog 3</span></td>
+                        <th class="text-uppercase">Detail</th>
+                        <td><span class="text-dark font-weight-semibold"> Dog #1</span></td>
+                        <td><span class="text-dark font-weight-semibold"> Dog #2</span></td>
+                        <td><span class="text-dark font-weight-semibold"> Dog #3</span></td>
                     </tr>
                     <tr>
                         <th>Country of Origin</th>
-                        <td id= "origin1">Dog origin 1 </td>
-                        <td id= "origin2">Dog origin 2</td>
-                        <td id= "origin3">Dog origin 3</td>
+                        <td id= "origin1"></td>
+                        <td id= "origin2"></td>
+                        <td id= "origin3"></td>
                     </tr>
                     <tr>
                         <th>Fur Color</th>
-                        <td id="color1">Dog color 1</td>
-                        <td id="color2">Dog color 2</td>
-                        <td id="color3">Dog color 3</td>
+                        <td id="color1"></td>
+                        <td id="color2"></td>
+                        <td id="color3"></td>
                     </tr>
                     <tr>
                         <th>Longevity (Years) </th>
-                        <td id="long1">Longevity 1 </td>
-                        <td id="long2">Longevity 2</td>
-                        <td id="long3">Longevity 3</td>
+                        <td id="long1"></td>
+                        <td id="long2"></td>
+                        <td id="long3"></td>
                     </tr>
                     <tr>
                         <th>Character Traits</th>
-                        <td id="traits1">Traits dog 1 </td>
-                        <td id="traits2">Traits dog 2 </td>
-                        <td id="traits3">Traits dog 3 </td>
+                        <td id="traits1"></td>
+                        <td id="traits2"></td>
+                        <td id="traits3"></td>
                     </tr>
                     <tr>
                         <th>Common Health Issues</th>
-                        <td id="health1">Common Health Problems 1 </td>
-                        <td id="health2">Common Health Problems 2 </td>
-                        <td id="health3">Common Health Problems 3 </td>
+                        <td id="health1"></td>
+                        <td id="health2"></td>
+                        <td id="health3"></td>
                     </tr>
                 </tbody>
             </table>
