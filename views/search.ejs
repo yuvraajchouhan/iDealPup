@@ -1,132 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>Header</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Search</title>
+</head>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-          crossorigin="anonymous">
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  </head>
-
-  <body>
-    <header class="bg-light">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-12 col-md-1">
-            <a href="#" class="btn btn-link" onclick="history.back()"><button class="btn btn-outline-success btn-sm" type="submit">Back</button></a>
-          </div>
+<body>
+  <header class="bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-1">
+          <a href="#" class="btn btn-link" onclick="history.back()"><button class="btn btn-outline-success btn-sm"
+              type="submit">Back</button></a>
         </div>
       </div>
-    </header>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-            integrity="sha384-"
-            crossorigin="anonymous"></script>   
-    <div class="container-fluid text-black py-5"
-    style="background-color:darkseagreen">
-        <h1 class="text-center"> Search for a Dog Breed</h1>
-        <h5 class="text-center">Or choose one that catches your <img src="eye.svg" alt="eye" class="img-fluid"> from the list below!</h5>
     </div>
+  </header>
 
-    <div class="container col-6 mt-5">
-        <input type="text" class="form-control mb-5 p-3" placeholder="Search here..." id="search-input">
-        <div class="list-group overflow-auto shadow" style="max-height: 500px;">
-        <ul class="list-group list-group-flush text-primary h5" id="breed-list">
-            <a href='/description?item=Akita' style="text-decoration:none"><li class="list-group-item p-3">Akita</li></a>
-            <a href='/description?item=Bloodhound' style="text-decoration:none"><li class="list-group-item p-3">Bloodhound</li></a>
-            <a href='/description?item=Borzoi' style="text-decoration:none"><li class="list-group-item p-3">Borzoi</li></a>
-            <a href='/description?item=Great Dane' style="text-decoration:none"><li class="list-group-item p-3">Great Dane</li></a>
-            <a href='/description?item=Great Pyrenees' style="text-decoration:none"><li class="list-group-item p-3">Great Pyrenees</li></a>
-            <a href='/description?item=Irish Wolfhound' style="text-decoration:none"><li class="list-group-item p-3">Irish Wolfhound</li></a>
-            <a href='/description?item=Kuvasz' style="text-decoration:none"><li class="list-group-item p-3">Kuvasz</li></a>
-            <a href='/description?item=Mastiff' style="text-decoration:none"><li class="list-group-item p-3">Mastiff</li></a>
-            <a href='/description?item=Newfoundland' style="text-decoration:none"><li class="list-group-item p-3">Newfoundland</li></a>
-            <a href='/description?item=Rottweiler' style="text-decoration:none"><li class="list-group-item p-3">Rottweiler</li></a>
-            <a href='/description?item=Belgian Malinois' style="text-decoration:none"><li class="list-group-item p-3">Belgian Malinois</li></a>
-            <a href='/description?item=Belgian Tervuren' style="text-decoration:none"><li class="list-group-item p-3">Belgian Tervuren</li></a>
-            <a href='/description?item=Boxer' style="text-decoration:none"><li class="list-group-item p-3">Boxer</li></a>
-            <a href='/description?item=Chesapeake Bay Retriever' style="text-decoration:none"><li class="list-group-item p-3">Chesapeake Bay Retriever</li></a>
-            <a href='/description?item=Doberman Pinscher' style="text-decoration:none"><li class="list-group-item p-3">Doberman Pinscher</li></a>
-            <a href='/description?item=English Setter' style="text-decoration:none"><li class="list-group-item p-3">English Setter</li></a>
-            <a href='/description?item=Golden Retriever' style="text-decoration:none"><li class="list-group-item p-3">Golden Retriever</li></a>
-            <a href='/description?item=Gordon Setter' style="text-decoration:none"><li class="list-group-item p-3">Gordon Setter</li></a>
-            <a href='/description?item=Greyhound' style="text-decoration:none"><li class="list-group-item p-3">Greyhound</li></a>
-            <a href='/description?item=Irish Setter' style="text-decoration:none"><li class="list-group-item p-3">Irish Setter</li></a>
-            <a href='/description?item=Labrador Retriever' style="text-decoration:none"><li class="list-group-item p-3">Labrador Retriever</li></a>
-            <a href='/description?item=Rhodesian Ridgeback' style="text-decoration:none"><li class="list-group-item p-3">Rhodesian Ridgeback</li></a>
-            <a href='/description?item=Scottish Deerhound' style="text-decoration:none"><li class="list-group-item p-3">Scottish Deerhound</li></a>
-            <a href='/description?item=Weimaraner' style="text-decoration:none"><li class="list-group-item p-3">Weimaraner</li></a>
-            <a href='/description?item=Australian Cattle Dog' style="text-decoration:none"><li class="list-group-item p-3">Australian Cattle Dog</li></a>
-            <a href='/description?item=Australian Shepherd' style="text-decoration:none"><li class="list-group-item p-3">Australian Shepherd</li></a>
-            <a href='/description?item=Basset Hound' style="text-decoration:none"><li class="list-group-item p-3">Basset Hound</li></a>
-            <a href='/description?item=Border Collie' style="text-decoration:none"><li class="list-group-item p-3">Border Collie</li></a>
-            <a href='/description?item=Bull Terrier' style="text-decoration:none"><li class="list-group-item p-3">Bull Terrier</li></a>
-            <a href='/description?item=English Springer Spaniel' style="text-decoration:none"><li class="list-group-item p-3">English Springer Spaniel</li></a>
-            <a href='/description?item=Field Spaniel' style="text-decoration:none"><li class="list-group-item p-3">Field Spaniel</li></a>
-            <a href='/description?item=Finnish Spitz' style="text-decoration:none"><li class="list-group-item p-3">Finnish Spitz</li></a>
-            <a href='/description?item=Harrier' style="text-decoration:none"><li class="list-group-item p-3">Harrier</li></a>
-            <a href='/description?item=Irish Terrier' style="text-decoration:none"><li class="list-group-item p-3">Irish Terrier</li></a>
-            <a href='/description?item=Irish Water Spaniel' style="text-decoration:none"><li class="list-group-item p-3">Irish Water Spaniel</li></a>
-            <a href='/description?item=Keeshond' style="text-decoration:none"><li class="list-group-item p-3">Keeshond</li></a>
-            <a href='/description?item=Kerry Blue Terrier' style="text-decoration:none"><li class="list-group-item p-3">Kerry Blue Terrier</li></a>
-            <a href='/description?item=Pharaoh Hound' style="text-decoration:none"><li class="list-group-item p-3">Pharaoh Hound</li></a>
-            <a href='/description?item=Pointer' style="text-decoration:none"><li class="list-group-item p-3">Pointer</li></a>
-            <a href='/description?item=Saluki' style="text-decoration:none"><li class="list-group-item p-3">Saluki</li></a>
-            <a href='/description?item=Samoyed' style="text-decoration:none"><li class="list-group-item p-3">Samoyed</li></a>
-            <a href='/description?item=Siberian Husky' style="text-decoration:none"><li class="list-group-item p-3">Siberian Husky</li></a>
-            <a href='/description?item=Staffordshire Bull Terrier' style="text-decoration:none"><li class="list-group-item p-3">Staffordshire Bull Terrier</li></a>
-            <a href='/description?item=Vizsla' style="text-decoration:none"><li class="list-group-item p-3">Vizsla</li></a>
-            <a href='/description?item=Welsh Springer Spaniel' style="text-decoration:none"><li class="list-group-item p-3">Welsh Springer Spaniel</li></a>
-            <a href='/description?item=Wirehaired Pointing Griffon' style="text-decoration:none"><li class="list-group-item p-3">Wirehaired Pointing Griffon</li></a>
-            <a href='/description?item=Australian Terrier' style="text-decoration:none"><li class="list-group-item p-3">Australian Terrier</li></a>
-            <a href='/description?item=Basenji' style="text-decoration:none"><li class="list-group-item p-3">Basenji</li></a>
-            <a href='/description?item=Beagle' style="text-decoration:none"><li class="list-group-item p-3">Beagle</li></a>
-            <a href='/description?item=Bichon Frise' style="text-decoration:none"><li class="list-group-item p-3">Bichon Frise</li></a>
-            <a href='/description?item=Border Terrier' style="text-decoration:none"><li class="list-group-item p-3">Border Terrier</li></a>
-            <a href='/description?item=Boston Terrier' style="text-decoration:none"><li class="list-group-item p-3">Boston Terrier</li></a>
-            <a href='/description?item=Brussels Griffon' style="text-decoration:none"><li class="list-group-item p-3">Brussels Griffon</li></a>
-            <a href='/description?item=Cairn Terrier' style="text-decoration:none"><li class="list-group-item p-3">Cairn Terrier</li></a>
-            <a href='/description?item=Cardigan Welsh Corgi' style="text-decoration:none"><li class="list-group-item p-3">Cardigan Welsh Corgi</li></a>
-            <a href='/description?item=Dachshund' style="text-decoration:none"><li class="list-group-item p-3">Dachshund</li></a>
-            <a href='/description?item=English Toy Spaniel' style="text-decoration:none"><li class="list-group-item p-3">English Toy Spaniel</li></a>
-            <a href='/description?item=French Bulldog' style="text-decoration:none"><li class="list-group-item p-3">French Bulldog</li></a>
-            <a href='/description?item=Pug' style="text-decoration:none"><li class="list-group-item p-3">Pug</li></a>
-            <a href='/description?item=Shih Tzu' style="text-decoration:none"><li class="list-group-item p-3">Shih Tzu</li></a>
-            <a href='/description?item=Welsh Terrier' style="text-decoration:none"><li class="list-group-item p-3">Welsh Terrier</li></a>
-            <a href='/description?item=West Highland White Terrier' style="text-decoration:none"><li class="list-group-item p-3">West Highland White Terrier</li></a>
-            <a href='/description?item=Whippet' style="text-decoration:none"><li class="list-group-item p-3">Whippet</li></a>
-            <a href='/description?item=Affenpinscher' style="text-decoration:none"><li class="list-group-item p-3">Affenpinscher</li></a>
-            <a href='/description?item=Chihuahua' style="text-decoration:none"><li class="list-group-item p-3">Chihuahua</li></a>
-            <a href='/description?item=Chinese Crested' style="text-decoration:none"><li class="list-group-item p-3">Chinese Crested</li></a>
-            <a href='/description?item=Italian Greyhound' style="text-decoration:none"><li class="list-group-item p-3">Italian Greyhound</li></a>
-            <a href='/description?item=Japanese Chin' style="text-decoration:none"><li class="list-group-item p-3">Japanese Chin</li></a>
-            <a href='/description?item=Maltese' style="text-decoration:none"><li class="list-group-item p-3">Maltese</li></a>
-            <a href='/description?item=Papillon' style="text-decoration:none"><li class="list-group-item p-3">Papillon</li></a>
-            <a href='/description?item=Pomeranian' style="text-decoration:none"><li class="list-group-item p-3">Pomeranian</li></a>
-            <a href='/description?item=Yorkshire Terrier' style="text-decoration:none"><li class="list-group-item p-3">Yorkshire Terrier</li></a>
-        </ul>
-        </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-"
+    crossorigin="anonymous"></script>
+  <div class="container-fluid text-black py-5" style="background-color:darkseagreen">
+    <h1 class="text-center"> Search for a Dog Breed</h1>
+    <h5 class="text-center">Or choose one that catches your <img src="eye.svg" alt="eye" class="img-fluid"> from the
+      list below!</h5>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <input type="text" class="form-control mb-5 p-3" placeholder="Search here..." id="search-input">
+    <div class="list-group overflow-auto shadow" style="max-height: 1000px;">
+      <ul class="list-group list-group-flush text-primary h5" id="breed-list">
+        <a href='/description?item=Affenpinscher' style="text-decoration:none">
+          <li class="list-group-item p-3">Affenpinscher</li>
+        </a>
+        <a href='/description?item=Akita' style="text-decoration:none">
+          <li class="list-group-item p-3">Akita</li>
+        </a>
+        <a href='/description?item=Australian Cattle Dog' style="text-decoration:none">
+          <li class="list-group-item p-3">Australian Cattle Dog</li>
+        </a>
+        <a href='/description?item=Australian Shepherd' style="text-decoration:none">
+          <li class="list-group-item p-3">Australian Shepherd</li>
+        </a>
+        <a href='/description?item=Australian Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Australian Terrier</li>
+        </a>
+        <a href='/description?item=Basenji' style="text-decoration:none">
+          <li class="list-group-item p-3">Basenji</li>
+        </a>
+        <a href='/description?item=Basset Hound' style="text-decoration:none">
+          <li class="list-group-item p-3">Basset Hound</li>
+        </a>
+        <a href='/description?item=Beagle' style="text-decoration:none">
+          <li class="list-group-item p-3">Beagle</li>
+        </a>
+        <a href='/description?item=Belgian Malinois' style="text-decoration:none">
+          <li class="list-group-item p-3">Belgian Malinois</li>
+        </a>
+        <a href='/description?item=Belgian Tervuren' style="text-decoration:none">
+          <li class="list-group-item p-3">Belgian Tervuren</li>
+        </a>
+        <a href='/description?item=Bichon Frise' style="text-decoration:none">
+          <li class="list-group-item p-3">Bichon Frise</li>
+        </a>
+        <a href='/description?item=Bloodhound' style="text-decoration:none">
+          <li class="list-group-item p-3">Bloodhound</li>
+        </a>
+        <a href='/description?item=Border Collie' style="text-decoration:none">
+          <li class="list-group-item p-3">Border Collie</li>
+        </a>
+        <a href='/description?item=Border Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Border Terrier</li>
+        </a>
+        <a href='/description?item=Borzoi' style="text-decoration:none">
+          <li class="list-group-item p-3">Borzoi</li>
+        </a>
+        <a href='/description?item=Boston Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Boston Terrier</li>
+        </a>
+        <a href='/description?item=Boxer' style="text-decoration:none">
+          <li class="list-group-item p-3">Boxer</li>
+        </a>
+        <a href='/description?item=Brussels Griffon' style="text-decoration:none">
+          <li class="list-group-item p-3">Brussels Griffon</li>
+        </a>
+        <a href='/description?item=Bull Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Bull Terrier</li>
+        </a>
+        <a href='/description?item=Cairn Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Cairn Terrier</li>
+        </a>
+        <a href='/description?item=Cardigan Welsh Corgi' style="text-decoration:none">
+          <li class="list-group-item p-3">Cardigan Welsh Corgi</li>
+        </a>
+        <a href='/description?item=Chesapeake Bay Retriever' style="text-decoration:none">
+          <li class="list-group-item p-3">Chesapeake Bay Retriever</li>
+        </a>
+        <a href='/description?item=Chihuahua' style="text-decoration:none">
+          <li class="list-group-item p-3">Chihuahua</li>
+        </a>
+        <a href='/description?item=Chinese Crested' style="text-decoration:none">
+          <li class="list-group-item p-3">Chinese Crested</li>
+        </a>
+        <a href='/description?item=Dachshund' style="text-decoration:none">
+          <li class="list-group-item p-3">Dachshund</li>
+        </a>
+        <a href='/description?item=Doberman Pinscher' style="text-decoration:none">
+          <li class="list-group-item p-3">Doberman Pinscher</li>
+        </a>
+        <a href='/description?item=English Setter' style="text-decoration:none">
+          <li class="list-group-item p-3">English Setter</li>
+        </a>
+        <a href='/description?item=English Springer Spaniel' style="text-decoration:none">
+          <li class="list-group-item p-3">English Springer Spaniel</li>
+        </a>
+        <a href='/description?item=English Toy Spaniel' style="text-decoration:none">
+          <li class="list-group-item p-3">English Toy Spaniel</li>
+        </a>
+        <a href='/description?item=Field Spaniel' style="text-decoration:none">
+          <li class="list-group-item p-3">Field Spaniel</li>
+        </a>
+        <a href='/description?item=Finnish Spitz' style="text-decoration:none">
+          <li class="list-group-item p-3">Finnish Spitz</li>
+        </a>
+        <a href='/description?item=French Bulldog' style="text-decoration:none">
+          <li class="list-group-item p-3">French Bulldog</li>
+        </a>
+        <a href='/description?item=Golden Retriever' style="text-decoration:none">
+          <li class="list-group-item p-3">Golden Retriever</li>
+        </a>
+        <a href='/description?item=Gordon Setter' style="text-decoration:none">
+          <li class="list-group-item p-3">Gordon Setter</li>
+        </a>
+        <a href='/description?item=Great Dane' style="text-decoration:none">
+          <li class="list-group-item p-3">Great Dane</li>
+        </a>
+        <a href='/description?item=Great Pyrenees' style="text-decoration:none">
+          <li class="list-group-item p-3">Great Pyrenees</li>
+        </a>
+        <a href='/description?item=Greyhound' style="text-decoration:none">
+          <li class="list-group-item p-3">Greyhound</li>
+        </a>
+        <a href='/description?item=Harrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Harrier</li>
+        </a>
+        <a href='/description?item=Irish Setter' style="text-decoration:none">
+          <li class="list-group-item p-3">Irish Setter</li>
+        </a>
+        <a href='/description?item=Irish Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Irish Terrier</li>
+        </a>
+        <a href='/description?item=Irish Water Spaniel' style="text-decoration:none">
+          <li class="list-group-item p-3">Irish Water Spaniel</li>
+        </a>
+        <a href='/description?item=Irish Wolfhound' style="text-decoration:none">
+          <li class="list-group-item p-3">Irish Wolfhound</li>
+        </a>
+        <a href='/description?item=Italian Greyhound' style="text-decoration:none">
+          <li class="list-group-item p-3">Italian Greyhound</li>
+        </a>
+        <a href='/description?item=Japanese Chin' style="text-decoration:none">
+          <li class="list-group-item p-3">Japanese Chin</li>
+        </a>
+        <a href='/description?item=Keeshond' style="text-decoration:none">
+          <li class="list-group-item p-3">Keeshond</li>
+        </a>
+        <a href='/description?item=Kerry Blue Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Kerry Blue Terrier</li>
+        </a>
+        <a href='/description?item=Kuvasz' style="text-decoration:none">
+          <li class="list-group-item p-3">Kuvasz</li>
+        </a>
+        <a href='/description?item=Labrador Retriever' style="text-decoration:none">
+          <li class="list-group-item p-3">Labrador Retriever</li>
+        </a>
+        <a href='/description?item=Maltese' style="text-decoration:none">
+          <li class="list-group-item p-3">Maltese</li>
+        </a>
+        <a href='/description?item=Mastiff' style="text-decoration:none">
+          <li class="list-group-item p-3">Mastiff</li>
+        </a>
+        <a href='/description?item=Newfoundland' style="text-decoration:none">
+          <li class="list-group-item p-3">Newfoundland</li>
+        </a>
+        <a href='/description?item=Papillon' style="text-decoration:none">
+          <li class="list-group-item p-3">Papillon</li>
+        </a>
+        <a href='/description?item=Pharaoh Hound' style="text-decoration:none">
+          <li class="list-group-item p-3">Pharaoh Hound</li>
+        </a>
+        <a href='/description?item=Pointer' style="text-decoration:none">
+          <li class="list-group-item p-3">Pointer</li>
+        </a>
+        <a href='/description?item=Pomeranian' style="text-decoration:none">
+          <li class="list-group-item p-3">Pomeranian</li>
+        </a>
+        <a href='/description?item=Pug' style="text-decoration:none">
+          <li class="list-group-item p-3">Pug</li>
+        </a>
+        <a href='/description?item=Rhodesian Ridgeback' style="text-decoration:none">
+          <li class="list-group-item p-3">Rhodesian Ridgeback</li>
+        </a>
+        <a href='/description?item=Rottweiler' style="text-decoration:none">
+          <li class="list-group-item p-3">Rottweiler</li>
+        </a>
+        <a href='/description?item=Saluki' style="text-decoration:none">
+          <li class="list-group-item p-3">Saluki</li>
+        </a>
+        <a href='/description?item=Samoyed' style="text-decoration:none">
+          <li class="list-group-item p-3">Samoyed</li>
+        </a>
+        <a href='/description?item=Scottish Deerhound' style="text-decoration:none">
+          <li class="list-group-item p-3">Scottish Deerhound</li>
+        </a>
+        <a href='/description?item=Shih Tzu' style="text-decoration:none">
+          <li class="list-group-item p-3">Shih Tzu</li>
+        </a>
+        <a href='/description?item=Siberian Husky' style="text-decoration:none">
+          <li class="list-group-item p-3">Siberian Husky</li>
+        </a>
+        <a href='/description?item=Staffordshire Bull Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Staffordshire Bull Terrier</li>
+        </a>
+        <a href='/description?item=Vizsla' style="text-decoration:none">
+          <li class="list-group-item p-3">Vizsla</li>
+        </a>
+        <a href='/description?item=Weimaraner' style="text-decoration:none">
+          <li class="list-group-item p-3">Weimaraner</li>
+        </a>
+        <a href='/description?item=Welsh Springer Spaniel' style="text-decoration:none">
+          <li class="list-group-item p-3">Welsh Springer Spaniel</li>
+        </a>
+        <a href='/description?item=Welsh Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Welsh Terrier</li>
+        </a>
+        <a href='/description?item=West Highland White Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">West Highland White Terrier</li>
+        </a>
+        <a href='/description?item=Whippet' style="text-decoration:none">
+          <li class="list-group-item p-3">Whippet</li>
+        </a>
+        <a href='/description?item=Wirehaired Pointing Griffon' style="text-decoration:none">
+          <li class="list-group-item p-3">Wirehaired Pointing Griffon</li>
+        </a>
+        <a href='/description?item=Yorkshire Terrier' style="text-decoration:none">
+          <li class="list-group-item p-3">Yorkshire Terrier</li>
+        </a>
+      </ul>
     </div>
+  </div>
 
-    <script>
+  <script>
 
-        document.querySelector('#search-input').addEventListener('input', filterList);
-        function filterList(){
-            const searchInput = document.querySelector('#search-input');
-            const filter = searchInput.value.toLowerCase();
-            const listItems = document.querySelectorAll('.list-group-item');
+    document.querySelector('#search-input').addEventListener('input', filterList);
+    function filterList() {
+      const searchInput = document.querySelector('#search-input');
+      const filter = searchInput.value.toLowerCase();
+      const listItems = document.querySelectorAll('.list-group-item');
 
-            listItems.forEach((item) => {
-                let text = item.textContent;
-                if(text.toLowerCase().includes(filter.toLowerCase().replace(/\s+/g, ''))){
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+      listItems.forEach((item) => {
+        let text = item.textContent;
+        if (text.toLowerCase().includes(filter.toLowerCase().replace(/\s+/g, ''))) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
         }
-    </script>
-<%- include('templates/footer') %> 
+      });
+    }
+  </script>
+  <%- include('templates/footer') %>

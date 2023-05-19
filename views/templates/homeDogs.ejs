@@ -1,13 +1,17 @@
-<div class="col-6 mb-4">
+<div class="mb-4" style="font-size: 30px">
     <div class="card">
-
-        <img src="/<%= todayDogName %>.jpg" alt="<%= todayDogName %>" 
-            class="card-img-top" style="height:250px; object-fit: cover;">
+        <img src="/pups/<%= todayDogName %>.png" alt="<%= todayDogName %>" class="card-img-top"
+            style="object-fit: cover;">
 
         <div class="card-body">
-            <h5 class="card-title"> <%= todayDogName %> </h5>
+
+            <h2 class="card-title fw-bold"> <%= todayDogName %> </h5>
             <p class="card-text"> The <%= todayDogName %> <%= todayDogMessage %></p>
-            <a href="/description?item=<%= todayDogName %>" class="btn btn-success"> Learn More </a>
+            <a href="/description?item=<%= todayDogName %>" 
+                class="btn btn-success" style="font-size: 30px;"> Learn More 
+            </a>
+
         </div>
     </div>
+
 </div>

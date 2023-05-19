@@ -1,0 +1,25 @@
+<%- include('templates/header') %>
+<div class="jumbotron text-center">
+  <h1 class="display-4">Results for Your Filters</h1>
+  <p class="lead">These are the dogs that match your selected filters.</p>
+</div>
+
+<ul class="list-group">
+  <% for(let i = 0; i < dogs.length; i++) { %>
+    <li class="list-group-item">
+      <div class="jumbotron">
+        <div class="container text-center">
+          <h1 class="display-3"><%= dogs[i].Breed %></h1>
+        </div>
+        <div class="container text-center">
+          <img src="/pups/<%= dogs[i].Breed %>.png" class="img-fluid" alt="<%= dogs[i].Breed %>">
+        </div>
+        <div class="container text-center mt-3">
+          <a class="btn btn-success" href="/description?item=<%= dogs[i].Breed %>">Learn More</a>
+        </div>
+      </div>
+    </li>
+  <% } %>
+</ul>
+
+<%- include('templates/footer') %>
