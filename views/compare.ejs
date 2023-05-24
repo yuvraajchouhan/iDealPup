@@ -36,18 +36,17 @@
                                 <th class="bg-success" class="text-uppercase">DETAIL</th>
                                 <td>
                                     <select id="dropdown1">
-                                        <% for (let i=0; i < breeds.length; i++)
-                                            { %>
-                                            <option
-                                                value="<%= breeds[i].Breed %>"><%=
-                                                    breeds[i].Breed %></option>
-                                                <% } %>
+                                        <% const sortedBreeds = breeds.sort((a, b) => a.Breed.localeCompare(b.Breed)); %>
+                                        <% for (let i=0; i < sortedBreeds.length; i++) { %>
+                                        <option value="<%= sortedBreeds[i].Breed %>"><%= sortedBreeds[i].Breed %></option>
+                                        <% } %>
+
                                                 </select>
-                                                <!-- <div class="comparison-item">
+                                                <div class="comparison-item">
                                                     <img src alt="Dog1"
                                                         id="table-image1">
-                                                    <a href='/description'><button>Learn More</button></a>
-                                                </div> -->
+                                                    <!-- <a href='/description'><button>Learn More</button></a> -->
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -70,26 +69,24 @@
                                             <th>Common Health Issues</th>
                                             <td id="health1"></td>
                                         </tr>
+                                        
                                         <tr>
                                             <th class="bg-success" class="text-uppercase">DETAIL</th>
                                             <td>
                                                 <select id="dropdown2">
                                                     <% for (let i=0; i <
                                                         breeds.length; i++) { %>
-                                                        <option
-                                                            value="<%= breeds[i].Breed %>"><%=
-                                                                breeds[i].Breed
-                                                                %></option>
+                                                            <option value="<%= sortedBreeds[i].Breed %>"><%= sortedBreeds[i].Breed %></option>
                                                             <% } %>
                                                             </select>
-                                                            <!-- <div
+                                                            <div
                                                                 class="comparison-item">
                                                                 <img src
                                                                     alt="Dog2"
                                                                     id="table-image2">
-                                                                <button>Learn
-                                                                    More</button>
-                                                            </div> -->
+                                                                <!-- <button>Learn
+                                                                    More</button> -->
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -122,21 +119,18 @@
                                                                     i <
                                                                     breeds.length;
                                                                     i++) { %>
-                                                                    <option
-                                                                        value="<%= breeds[i].Breed %>"><%=
-                                                                            breeds[i].Breed
-                                                                            %></option>
+                                                                        <option value="<%= sortedBreeds[i].Breed %>"><%= sortedBreeds[i].Breed %></option>
                                                                         <% } %>
                                                                         </select>
-                                                                        <!-- <div
+                                                                        <div
                                                                             class="comparison-item">
                                                                             <img
                                                                                 src
                                                                                 alt="Dog3"
                                                                                 id="table-image3">
-                                                                            <button>Learn
-                                                                                More</button>
-                                                                        </div> -->
+                                                                            <!-- <button>Learn
+                                                                                More</button> -->
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
