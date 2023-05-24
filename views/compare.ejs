@@ -16,207 +16,149 @@
 
     <body>
         <%- include("templates/header") %>
-            <div class="container py-5">
-                <div class="comparison-table">
-                    <table class="table table-bordered table-responsive">
-                        <thead class="bg-success">
-                            <tr>
-                                <td class="align-middle">
-                                    <div class="pt-3">
-                                        <div
-                                            class="custom-control custom-checkbox">
-                                            Please select up to 3 Breeds
-                                        </div>
+        <div class="container py-5">
+            <div class="comparison-table">
+                <table class="table table-bordered table-responsive">
+                    <thead class="bg-success">
+                        <tr>
+                            <td class="align-middle">
+                                <div class="pt-3">
+                                    <div
+                                        class="custom-control custom-checkbox">
+                                        Please select up to 3 Breeds
                                     </div>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody id="summary" data-filter="target">
-                            <tr>
-                                <th class="bg-success" class="text-uppercase">DETAIL</th>
-                                <td>
-                                    <select id="dropdown1">
-                                        <% for (let i=0; i < breeds.length; i++)
-                                            { %>
-                                            <option
-                                                value="<%= breeds[i].Breed %>"><%=
-                                                    breeds[i].Breed %></option>
-                                                <% } %>
-                                                </select>
-                                                <!-- <div class="comparison-item">
-                                                    <img src alt="Dog1"
-                                                        id="table-image1">
-                                                    <a href='/description'><button>Learn More</button></a>
-                                                </div> -->
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Country of Origin</th>
-                                            <td id="origin1"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Fur Color</th>
-                                            <td id="color1"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Longevity (Years)</th>
-                                            <td id="long1"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Character Traits</th>
-                                            <td id="traits1"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Common Health Issues</th>
-                                            <td id="health1"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-success" class="text-uppercase">DETAIL</th>
-                                            <td>
-                                                <select id="dropdown2">
-                                                    <% for (let i=0; i <
-                                                        breeds.length; i++) { %>
-                                                        <option
-                                                            value="<%= breeds[i].Breed %>"><%=
-                                                                breeds[i].Breed
-                                                                %></option>
-                                                            <% } %>
-                                                            </select>
-                                                            <!-- <div
-                                                                class="comparison-item">
-                                                                <img src
-                                                                    alt="Dog2"
-                                                                    id="table-image2">
-                                                                <button>Learn
-                                                                    More</button>
-                                                            </div> -->
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Country of Origin</th>
-                                                        <td id="origin2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Fur Color</th>
-                                                        <td id="color2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Longevity (Years)</th>
-                                                        <td id="long2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Character Traits</th>
-                                                        <td id="traits2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Common Health Issues</th>
-                                                        <td id="health2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th
-                                                        class="bg-success" class="text-uppercase">DETAIL</th>
-                                                        <td>
-                                                            <select
-                                                                id="dropdown3">
-                                                                <% for (let i=0;
-                                                                    i <
-                                                                    breeds.length;
-                                                                    i++) { %>
-                                                                    <option
-                                                                        value="<%= breeds[i].Breed %>"><%=
-                                                                            breeds[i].Breed
-                                                                            %></option>
-                                                                        <% } %>
-                                                                        </select>
-                                                                        <!-- <div
-                                                                            class="comparison-item">
-                                                                            <img
-                                                                                src
-                                                                                alt="Dog3"
-                                                                                id="table-image3">
-                                                                            <button>Learn
-                                                                                More</button>
-                                                                        </div> -->
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Country
-                                                                        of
-                                                                        Origin</th>
-                                                                    <td
-                                                                        id="origin3"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Fur
-                                                                        Color</th>
-                                                                    <td
-                                                                        id="color3"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Longevity
-                                                                        (Years)</th>
-                                                                    <td
-                                                                        id="long3"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Character
-                                                                        Traits</th>
-                                                                    <td
-                                                                        id="traits3"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Common
-                                                                        Health
-                                                                        Issues</th>
-                                                                    <td
-                                                                        id="health3"></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="summary" data-filter="target">
+                        <tr>
+                            <th class="bg-success" class="text-uppercase">DETAIL</th>
+                            <td>
+                                <select id="dropdown1">
+                                    <% for (let i=0; i < breeds.length; i++)
+                                    { %>
+                                    <option
+                                        value="<%= breeds[i].Breed %>"><%=
+                                        breeds[i].Breed %></option>
+                                    <% } %>
+                                </select>
 
-                                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Country of Origin</th>
+                            <td id="origin1"></td>
+                        </tr>
+                        <tr>
+                            <th>Fur Color</th>
+                            <td id="color1"></td>
+                        </tr>
+                        <tr>
+                            <th>Longevity (Years)</th>
+                            <td id="long1"></td>
+                        </tr>
+                        <tr>
+                            <th>Character Traits</th>
+                            <td id="traits1"></td>
+                        </tr>
+                        <tr>
+                            <th>Common Health Issues</th>
+                            <td id="health1"></td>
+                        </tr>
+                        <tr>
+                            <th class="bg-success" class="text-uppercase">DETAIL</th>
+                            <td>
+                                <select id="dropdown2">
+                                    <% for (let i=0; i <
+                                    breeds.length; i++) { %>
+                                    <option
+                                        value="<%= breeds[i].Breed %>"><%=
+                                        breeds[i].Breed
+                                        %></option>
+                                    <% } %>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Country of Origin</th>
+                            <td id="origin2"></td>
+                        </tr>
+                        <tr>
+                            <th>Fur Color</th>
+                            <td id="color2"></td>
+                        </tr>
+                        <tr>
+                            <th>Longevity (Years)</th>
+                            <td id="long2"></td>
+                        </tr>
+                        <tr>
+                            <th>Character Traits</th>
+                            <td id="traits2"></td>
+                        </tr>
+                        <tr>
+                            <th>Common Health Issues</th>
+                            <td id="health2"></td>
+                        </tr>
+                        <tr>
+                            <th
+                                class="bg-success" class="text-uppercase">DETAIL</th>
+                            <td>
+                                <select
+                                    id="dropdown3">
+                                    <% for (let i=0;
+                                    i <
+                                    breeds.length;
+                                    i++) { %>
+                                    <option
+                                        value="<%= breeds[i].Breed %>"><%=
+                                        breeds[i].Breed
+                                        %></option>
+                                    <% } %>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Country
+                                of
+                                Origin</th>
+                            <td
+                                id="origin3"></td>
+                        </tr>
+                        <tr>
+                            <th>Fur
+                                Color</th>
+                            <td
+                                id="color3"></td>
+                        </tr>
+                        <tr>
+                            <th>Longevity
+                                (Years)</th>
+                            <td
+                                id="long3"></td>
+                        </tr>
+                        <tr>
+                            <th>Character
+                                Traits</th>
+                            <td
+                                id="traits3"></td>
+                        </tr>
+                        <tr>
+                            <th>Common
+                                Health
+                                Issues</th>
+                            <td
+                                id="health3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
         <%- include("templates/footer") %>
-                                                <script
-                                                    src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                                                    <script>
-    
-                                                        // document.addEventListener('DOMContentLoaded', function() {
-                                                        //     var dropdown1 = document.getElementById('dropdown1');
-                                                        //     var dropdown2 = document.getElementById('dropdown2');
-                                                        //     var dropdown3 = document.getElementById('dropdown3');
-                                                    
-                                                        //     dropdown1.addEventListener('change', function() {
-                                                        //         var selectedValue = this.value;
-                                                        //         console.log(selectedValue);
-                                                        //         const dog = breeds.find(selectedValue);
-                                                    
-                                                        //         for (let i = 0; i < breeds.data.length; i++) {
-                                                        //           if(breeds.data[i].breed === selectedValue){
-                                                        //               console.log("dog exists.")
-                                                        //          }else{
-                                                        //           console.log("dog not found.")
-                                                        //          };
-                                                        //         }
-                                                        //     });  
-                                                    
-                                                        //     dropdown2.addEventListener('change', function() {
-                                                        //         var selectedValue = this.value;
-                                                        //         console.log(selectedValue);
-                                                    
-                                                        //         var selectedBreed = breeds.find(function(breed) {
-                                                        //         return breed.Breed === selectedValue;
-                                                    
-                                                        //     });
-                                                        //     });
-                                                    
-                                                        //     dropdown3.addEventListener('change', function() {
-                                                        //         var selectedValue3 = this.value;
-                                                        //         // Update elements based on selectedValue for dropdown3
-                                                        //         // ...
-                                                        //     });
-                                                        // });
-                                                    
+        <script
+            src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
                                                         document.addEventListener('DOMContentLoaded', function() {
                                                         var dropdown1 = document.getElementById('dropdown1');
                                                         var dropdown2 = document.getElementById('dropdown2');

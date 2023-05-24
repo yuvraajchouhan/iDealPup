@@ -1,18 +1,20 @@
 <div class="col">
-    <div class="card shadow-sm">
-      <img src="/pups/<%= bookmarkedDog %>.png" onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"
-        style="height:250px;">
-      <div class="card-body">
-        <p class="card-text" onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"
-          style="height: 100px"> <%= bookmarkedDog %> </p>
-      </div>
-      <div class="mx-auto">
-        <button type="button" class="btn btn-sm btn-outline-secondary mb-3" 
-          onclick="window.location.href='/addOrRemoveBookmark?item=<%= bookmarkedDog %>'"
-          style="font-size: 30px;"> 
-          Unbookmark 
-        </button>
-        <div> </div>
-      </div>
+  <div class="card shadow-sm">
+    <img src="/pups/<%= bookmarkedDog %>.png"
+      onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"
+      style="height:250px;">
+    <div class="card-body">
+      <p class="card-text"
+        onclick="window.location.href='/description?item=<%= bookmarkedDog %>'"
+        style="height: 100px"> <%= bookmarkedDog %> </p>
     </div>
+    <div class="mx-auto">
+      <button type="button" class="btn btn-sm btn-outline-secondary mb-3"
+        onclick="window.location.href='/addOrRemoveBookmark?item=<%= bookmarkedDog %>'"
+        style="font-size: 30px;">
+        Unbookmark
+      </button>
+      <div> </div>
+    </div>
+  </div>
 </div>
