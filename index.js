@@ -58,6 +58,8 @@ database.connect().then(() => {
 // creating a transporter
 const transporter = nodemailer.createTransport({
     service: 'hotmail',
+    host: 'smtp.live.com',
+    port: 587,
     auth: {
         user: nodemailer_email,
         pass: nodemailer_password
