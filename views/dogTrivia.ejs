@@ -1,4 +1,4 @@
-<%- include("templates/header") %> 
+<%- include("templates/header") %>
 
 <main style="font-size:40px">
     <div class="text-center py-5">
@@ -14,20 +14,19 @@
             <p> What is the name of this dog breed? </p>
             <% let i=0; %>
             <% for(i=0; i < result.length; i++) { %>
-                <% if (result[i] == correctAnswer) { %>
-                    <button onclick="window.location.href='/dogTrivia'"> 
-                        <%= i %>. <%= result[i] %> 
-                    </button>
-                <% } else { %>
-                    <button onclick="window.location.href='/dogTriviaLost'; 
-                    req.session.correctAnswer = '<%= correctAnswer %>'"> 
-                        <%= i %>. <%= result[i] %> 
-                    </button>
-                <% } %>   
+            <% if (result[i] == correctAnswer) { %>
+            <button onclick="window.location.href='/dogTrivia'">
+                <%= i %>. <%= result[i] %>
+            </button>
+            <% } else { %>
+            <button onclick="window.location.href='/dogTriviaLost'; 
+                    req.session.correctAnswer = '<%= correctAnswer %>'">
+                <%= i %>. <%= result[i] %>
+            </button>
+            <% } %>
             <% } %>
         </div>
     </div>
 </main>
 
-<%- include("templates/footer") %> 
- 
+<%- include("templates/footer") %>
