@@ -12,7 +12,9 @@ const app = express();                          // create an express app
 app.set('view engine', 'ejs');                  // set the view engine to ejs
 
 app.use(express.urlencoded({ extended: false }));           // parse urlencoded request bodies
-app.use(express.static('public'));                          // serve static files
+app.use(express.static('public'));                          // serve static image files
+app.use(express.static('css'));                             // serve static css files
+app.use(express.static('js'));                              // serve static js files
 app.use(express.json());                                    // parse json request bodies
 
 const port = process.env.PORT || 3000;                      // set the port
