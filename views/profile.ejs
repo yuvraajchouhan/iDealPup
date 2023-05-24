@@ -10,10 +10,21 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous">
     <title>Profile</title>
+
+    <style>
+      .change-password {
+        color: grey; 
+        transition: color 0.3s ease; 
+      }
+
+      .change-password:hover {
+        color: green;
+      }
+    </style>
   </head>
 
   <body>
-    <section style="background-color: #eee;">
+    <section style="background-color: #ffffff;">
       <%- include('templates/header') %>
 
       <div class="row">
@@ -27,7 +38,10 @@
               <h5 class="my-3"><%= name %></h5>
               <p class="text-muted mb-1">BCIT Student</p>
               <p class="text-muted mb-4">Vancouver, BC </p>
-              <a href="/logout"><button class="btn btn-outline-success btn-sm">Logout</button></a>
+              <!-- <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary"> Edit Profile </button>
+                    <button type="button" class="btn btn-outline-primary ms-1"> Logout </button>
+                  </div> -->
             </div>
           </div>
 
@@ -37,19 +51,10 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0"><%= name %></p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
                   <p class="mb-0">Username</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">placeholder</p>
+                  <p class="text-muted mb-0"><%= name %></p>
                 </div>
               </div>
               <hr>
@@ -65,7 +70,7 @@
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Password</p>
-                  <a href="/changePassword">Change Password</a>
+                  <a class="change-password" href="/changePassword">Change Password</a>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">
@@ -78,30 +83,28 @@
               <hr>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">Favorite
-                      Breeds</span>
-                  </p>
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">Products</span>
-                  </p>
-
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
-
+  <br>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <a href="/logout"><button class="btn btn-outline-success btn-lg">Logout</button></a>
+  <br>
+  <br>
   <%- include('templates/footer') %>

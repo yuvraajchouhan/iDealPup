@@ -16,27 +16,25 @@
 
     <%- include("templates/header") %>
 
-    <main style="font-size: 40px;">
+<main style="font-size: 24px;">
 
-      <section class="py-5 text-center">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-10 mx-auto">
-            <h1 class="display-3 fw-bold mb-5"> Bookmarks </h1>
-            <p class="text-body-secondary">
-              <%= name %>'s bookmarks. <br>
-              Click on the card to view the dog breed! <br>
-              Click on 'Unbookmark' to remove the dog breed from your bookmarks.
-            </p>
-          </div>
+    <section class="py-5 text-center">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-10 mx-auto">
+          <h1 class="display-3 fw-bold mb-5"> Bookmarks </h1>
+          <p class="text-body-secondary"> 
+            Click on the card to view the dog breed! <br>
+            Click on 'Unbookmark' to remove the dog breed from your bookmarks. </p>
         </div>
+      </div>
       </section>
 
-      <% if (bookmarkFeedback !== "") { %>
-      <div class="bookmarkFeedback" style="background-color: rgb(94, 202, 103); 
-      text-align: center; margin: 10px;">
-        <%= bookmarkFeedback %>
+    <% if (bookmarkFeedback !== "") { %>
+      <div class="bookmarkFeedback" style="background-color:#1c8354; 
+      text-align: center; margin: 10px;"> 
+        <%= bookmarkFeedback %> 
       </div>
-      <% } %>
+    <% } %>
 
       <div class="album py-5">
         <div class="mx-5">
