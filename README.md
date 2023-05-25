@@ -19,7 +19,7 @@ iDealPup
 
 
 
-1. Project Description:
+2. Project Description:
 
 We are team BBY-18 and we are developing an app called iDealPup, designed to help prospective dog owners find the perfect pet by selecting preferable dog traits and getting matched with the ideal breeds for them through the use of AI’s assistance, and Kaggle’s datasets.
 
@@ -37,7 +37,7 @@ We are team BBY-18 and we are developing an app called iDealPup, designed to hel
 4. Technologies used
 
 Front end:                            
-- Boostrap
+- Bootstrap
 
 Back end:                           
 - MongoDB Atlas
@@ -93,12 +93,13 @@ We suggest you install the following to make your work easier;
 
 
 
-1. Product Features:
+6. Product Features:
 
 The core features of the app include the following;
 
 6.1: Search breeds
-- The user may select from a list of breeds to view their details.
+
+The user may select from a list of breeds to view their details.
 - Select "Search Breeds" at the top of the page.
 - Scrool through the list and tap on the dog of oyur choice.
 - Click "Learn More" to view details.
@@ -134,7 +135,7 @@ Dog Trivia:
 
 
 
-7. Our use of AI:
+1. Our use of AI:
 
 Our goal with this project was to implement AI during its development. Contrary to what you might think, we did not end up AI actively used in the application itself.
 
@@ -149,21 +150,27 @@ The main reason we ended upi not actively using AI in the app itself, is because
 8. List of File Contents of Folder:
 
 2800-202310-BBY18
+
+Folder PATH listing for volume OS
+Volume serial number is 724C-DD94
+C:.
 ├── .env
 ├── .gitignore
 ├── databaseConnection.js
+├── Directory.txt
 ├── filters
 ├── index.js
 ├── package-lock.json
 ├── package.json
 ├── Procfile
 ├── README.md
+├── Tree.txt
 ├── utils.js
 ├── css
 │   └── compare.css
 ├── js
 │   └── filters.js
-├── node_modules (folder)
+├── node_modules
 ├── public
 │   ├── appBackground.jpg
 │   ├── bookmark.svg
