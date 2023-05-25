@@ -150,109 +150,109 @@ The main reason we ended upi not actively using AI in the app itself, is because
 8. List of File Contents of Folder:
 
 2800-202310-BBY18
--├── .env
--├── .gitignore
--├── databaseConnection.js
--├── Directory.txt
--├── filters
--├── index.js
--├── package-lock.json
--├── package.json
--├── Procfile
--├── README.md
--├── Tree.txt
--├── utils.js
--├── css
--│   └── compare.css
--├── js
--│   └── filters.js
--├── node_modules
--├── public
--│   ├── appBackground.jpg
--│   ├── bookmark.svg
--│   ├── Bosleys.jpg
--│   ├── compare.svg
--│   ├── dogsGood.svg
--│   ├── eye.svg
--│   ├── home.svg
--│   ├── iDealPup_Logo.png
--│   ├── logo.png
--│   ├── PetSmart.jpg
--│   ├── profile.svg
--│   ├── Tisol.jpg
--│   └── pups
--│       ├── Affenpinscher.png
--│       ├── Akita.png
--│       ├── Australian Cattle Dog.png
--│       ├── Australian Shepherd.png
--│       ├── Australian Terrier.png
--│       ├── Basenji.png
--│       ├── Basset Hound.png
--│       ├── Beagle.png
--│       ├── Belgian Malinois.png
--│       ├── Belgian Tervuren.png
--│       ├── Bichon Frise.png
--│       ├── Bloodhound.png
--│       ├── Border Collie.png
--│       ├── Border Terrier.png
--│       ├── Borzoi.png
--│       ├── Boston Terrier.png
--│       ├── Boxer.png
--│       ├── Brussels Griffon.png
--│       ├── Bull Terrier.png
--│       ├── Cairn Terrier.png
--│       ├── Cardigan Welsh Corgi.png
--│       ├── Chesapeake Bay Retriever.png
--│       ├── Chihuahua.png
--│       ├── Chinese Crested.png
--│       ├── Dachshund.png
--│       ├── Doberman Pinscher.png
--│       ├── English Setter.png
--│       ├── English Springer Spaniel.png
--│       ├── English Toy Spaniel.png
--│       ├── Field Spaniel.png
--│       ├── Finnish Spitz.png
--│       ├── French Bulldog.png
--│       ├── Golden Retriever.png
--│       ├── Gordon Setter.png
--│       ├── Great Dane.png
--│       ├── Great Pyrenees.png
--│       ├── Greyhound.png
--│       ├── Harrier.png
--│       ├── Irish Setter.png
--│       ├── Irish Terrier.png
--│       ├── Irish Water Spaniel.png
--│       ├── Irish Wolfhound.png
--│       ├── Italian Greyhound.png
--│       ├── Japanese Chin.png
--│       ├── Keeshond.png
--│       ├── Kerry Blue Terrier.png
--│       ├── Kuvasz.png
--│       ├── Labrador Retriever.png
--│       ├── Maltese.png
--│       ├── Mastiff.png
--│       ├── Newfoundland.png
--│       ├── Papillon.png
--│       ├── Pharaoh Hound.png
--│       ├── Pointer.png
--│       ├── Pomeranian.png
--│       ├── Pug.png
--│       ├── Rhodesian Ridgeback.png
--│       ├── Rottweiler.png
--│       ├── Saluki.png
--│       ├── Samoyed.png
--│       ├── Scottish Deerhound.png
--│       ├── Shih Tzu.png
--│       ├── Siberian Husky.png
--│       ├── Staffordshire Bull Terrier.png
--│       ├── Vizsla.png
--│       ├── Weimaraner.png
--│       ├── Welsh Springer Spaniel.png
--│       ├── Welsh Terrier.png
--│       ├── West Highland White Terrier.png
--│       ├── Whippet.png
--│       └── Wirehaired Pointing Griffon.png
--└── views
+- ├── .env
+- ├── .gitignore
+- ├── databaseConnection.js
+- ├── Directory.txt
+- ├── filters
+- ├── index.js
+- ├── package-lock.json
+- ├── package.json
+- ├── Procfile
+- ├── README.md
+- ├── Tree.txt
+- ├── utils.js
+- ├── css
+- │   └── compare.css
+- ├── js
+- │   └── filters.js
+- ├── node_modules
+- ├── public
+- │   ├── appBackground.jpg
+- │   ├── bookmark.svg
+- │   ├── Bosleys.jpg
+- │   ├── compare.svg
+- │   ├── dogsGood.svg
+- │   ├── eye.svg
+- │   ├── home.svg
+- │   ├── iDealPup_Logo.png
+- │   ├── logo.png
+- │   ├── PetSmart.jpg
+- │   ├── profile.svg
+- │   ├── Tisol.jpg
+- │   └── pups
+- │       ├── Affenpinscher.png
+- │       ├── Akita.png
+- │       ├── Australian Cattle Dog.png
+- │       ├── Australian Shepherd.png
+- │       ├── Australian Terrier.png
+- │       ├── Basenji.png
+- │       ├── Basset Hound.png
+- │       ├── Beagle.png
+- │       ├── Belgian Malinois.png
+- │       ├── Belgian Tervuren.png
+- │       ├── Bichon Frise.png
+- │       ├── Bloodhound.png
+- │       ├── Border Collie.png
+- │       ├── Border Terrier.png
+- │       ├── Borzoi.png
+- │       ├── Boston Terrier.png
+- │       ├── Boxer.png
+- │       ├── Brussels Griffon.png
+- │       ├── Bull Terrier.png
+- │       ├── Cairn Terrier.png
+- │       ├── Cardigan Welsh Corgi.png
+- │       ├── Chesapeake Bay Retriever.png
+- │       ├── Chihuahua.png
+- │       ├── Chinese Crested.png
+- │       ├── Dachshund.png
+- │       ├── Doberman Pinscher.png
+- │       ├── English Setter.png
+- │       ├── English Springer Spaniel.png
+- │       ├── English Toy Spaniel.png
+- │       ├── Field Spaniel.png
+- │       ├── Finnish Spitz.png
+- │       ├── French Bulldog.png
+- │       ├── Golden Retriever.png
+- │       ├── Gordon Setter.png
+- │       ├── Great Dane.png
+- │       ├── Great Pyrenees.png
+- │       ├── Greyhound.png
+- │       ├── Harrier.png
+- │       ├── Irish Setter.png
+- │       ├── Irish Terrier.png
+- │       ├── Irish Water Spaniel.png
+- │       ├── Irish Wolfhound.png
+- │       ├── Italian Greyhound.png
+- │       ├── Japanese Chin.png
+- │       ├── Keeshond.png
+- │       ├── Kerry Blue Terrier.png
+- │       ├── Kuvasz.png
+- │       ├── Labrador Retriever.png
+- │       ├── Maltese.png
+- │       ├── Mastiff.png
+- │       ├── Newfoundland.png
+- │       ├── Papillon.png
+- │       ├── Pharaoh Hound.png
+- │       ├── Pointer.png
+- │       ├── Pomeranian.png
+- │       ├── Pug.png
+- │       ├── Rhodesian Ridgeback.png
+- │       ├── Rottweiler.png
+- │       ├── Saluki.png
+- │       ├── Samoyed.png
+- │       ├── Scottish Deerhound.png
+- │       ├── Shih Tzu.png
+- │       ├── Siberian Husky.png
+- │       ├── Staffordshire Bull Terrier.png
+- │       ├── Vizsla.png
+- │       ├── Weimaraner.png
+- │       ├── Welsh Springer Spaniel.png
+- │       ├── Welsh Terrier.png
+- │       ├── West Highland White Terrier.png
+- │       ├── Whippet.png
+- │       └── Wirehaired Pointing Griffon.png
+- └── views
 -    ├── 404Page.ejs
 -    ├── bookmark.ejs
 -    ├── changePassword.ejs
