@@ -150,23 +150,7 @@ The main reason we ended upi not actively using AI in the app itself, is because
 8. List of File Contents of Folder:
 
 2800-202310-BBY18
-- ├── .env
-- ├── .gitignore
-- ├── databaseConnection.js
-- ├── Directory.txt
-- ├── filters
-- ├── index.js
-- ├── package-lock.json
-- ├── package.json
-- ├── Procfile
-- ├── README.md
-- ├── Tree.txt
-- ├── utils.js
-- ├── css
-- │   └── compare.css
-- ├── js
-- │   └── filters.js
-- ├── node_modules
+
 - ├── public
 - │   ├── appBackground.jpg
 - │   ├── bookmark.svg
@@ -253,34 +237,51 @@ The main reason we ended upi not actively using AI in the app itself, is because
 - │       ├── Whippet.png
 - │       └── Wirehaired Pointing Griffon.png
 - └── views
--    ├── 404Page.ejs
--    ├── bookmark.ejs
--    ├── changePassword.ejs
--    ├── compare.ejs
--    ├── description.ejs
--    ├── dogsGood.ejs
--    ├── dogTrivia.ejs
--    ├── dogTriviaLost.ejs
--    ├── dogTriviaStart.ejs
--    ├── easterEgg.ejs
--    ├── easterEgg2.ejs
--    ├── emailSent.ejs
--    ├── filters.ejs
--    ├── forgotPassword.ejs
--    ├── home.ejs
--    ├── landingPage.ejs
--    ├── login.ejs
--    ├── passwordUpdated.ejs
--    ├── profile.ejs
--    ├── resetPassword.ejs
--    ├── results.ejs
--    ├── retryFilters.ejs
--    ├── search.ejs
--    ├── signup.ejs
--    ├── submitUser.ejs
--    └── templates
--        ├── bookmarkCard.ejs
--        ├── dogGoodsCard.ejs
--        ├── footer.ejs
--        ├── header.ejs
--        └── homeDogs.ejs
+- |   ├── 404Page.ejs
+- |   ├── bookmark.ejs
+- |   ├── changePassword.ejs
+- |   ├── compare.ejs
+- |   ├── description.ejs
+- |   ├── dogsGood.ejs
+- |   ├── dogTrivia.ejs
+- |   ├── dogTriviaLost.ejs
+- |   ├── dogTriviaStart.ejs
+- |   ├── easterEgg.ejs
+- |   ├── easterEgg2.ejs
+- |   ├── emailSent.ejs
+- |   ├── filters.ejs
+- |   ├── forgotPassword.ejs
+- |   ├── home.ejs
+- |   ├── landingPage.ejs
+- |   ├── login.ejs
+- |   ├── passwordUpdated.ejs
+- |   ├── profile.ejs
+- |   ├── resetPassword.ejs
+- |   ├── results.ejs
+- |   ├── retryFilters.ejs
+- |   ├── search.ejs
+- |   ├── signup.ejs
+- |   ├── submitUser.ejs
+- |   └── templates
+- |       ├── bookmarkCard.ejs
+- |       ├── dogGoodsCard.ejs
+- |       ├── footer.ejs
+- |       ├── header.ejs
+- |       └── homeDogs.ejs
+- ├── .env
+- ├── .gitignore
+- ├── databaseConnection.js
+- ├── Directory.txt
+- ├── filters
+- ├── index.js
+- ├── package-lock.json
+- ├── package.json
+- ├── Procfile
+- ├── README.md
+- ├── Tree.txt
+- ├── utils.js
+- ├── css
+- │   └── compare.css
+- ├── js
+- │   └── filters.js
+- ├── node_modules
