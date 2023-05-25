@@ -1,32 +1,52 @@
 <%- include("templates/header") %> 
 
-<main style="font-size:40px">
+<main style="font-size:40px;">
     <div class="text-center py-5">
-        <h1 class="display-1 mb-5">Dog Trivia</h1>
+        <h1 class="display-3 fw-bold mb-5">Dog Trivia</h1>
     </div>
 
     <div class="container">
+        <div class="gameInfo">
+            <p class="fw-bold text-center"> Round <%= round %> </p>
+        </div>
+
         <div style="display: flex; justify-content: center; height: 30vh">
             <img src="/pups/<%= correctAnswer %>.png" style="align-self: center;
               height:100%">
         </div>
+        
         <div class="mt-5">
-            <p> What is the name of this dog breed? </p>
+            <p class="mb-5"> What is the name of this dog breed? </p>
             <% let i=1; %>
             <% for(i=1; i < result.length + 1; i++) { %>
-                <% if (result[i] == correctAnswer) { %>
-                    <button onclick="window.location.href='/dogTrivia'"> 
-                        <%= i %>. <%= result[i] %> 
-                    </button>
+                <% if (result[i-1] == correctAnswer) { %>
+                    <button class="btn btn-success mb-5" style="font-size:40px"
+                    onclick="window.location.href='/dogTriviaConfigureAnswer?answer=<%= correctAnswer %>'"> 
+                        <%= i %>. <%= result[i-1] %> 
+                    </button><br>
                 <% } else { %>
-                    <button onclick="window.location.href='/dogTriviaLost'; 
-                    req.session.correctAnswer = `<%= correctAnswer %>`"> 
-                        <%= i %>. <%= result[i] %> 
-                    </button>
+                    <button class="btn btn-success mb-5" style="font-size:40px"
+                    onclick="window.location.href='/dogTriviaConfigureAnswer?answer=<%= result[i-1] %>'"> 
+                        <%= i %>. <%= result[i-1] %> 
+                    </button><br>
                 <% } %>   
             <% } %>
         </div>
     </div>
+
+    <% if (round > 1) { %>
+        <% if (!answerStatus) { %>
+            <div class="bookmarkFeedback" style="background-color: rgb(240, 190, 98); 
+            text-align: center; margin: 10px; border-radius: 10px"> 
+                <%= answerFeedback %>
+            </div>
+        <% } else { %>
+            <div class="bookmarkFeedback" style="background-color: rgb(94, 202, 103); 
+            text-align: center; margin: 10px; border-radius: 10px"> 
+                <%= answerFeedback %>
+            </div>
+        <% } %>
+    <% } %>
 </main>
 
 <%- include("templates/footer") %> 

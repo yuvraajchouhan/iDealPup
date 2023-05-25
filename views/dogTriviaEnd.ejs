@@ -1,0 +1,79 @@
+<%- include("templates/header") %> 
+
+<main style="font-size:40px">
+    <div class="text-center py-5">
+        <h1 class="display-3 fw-bold">Dog Trivia</h1>
+    </div>
+
+    <div class="gameReview mx-5 text-center">
+        <% if (score < 6) { %>
+            <p> There's always more to learn! </p>
+        <% } else if (score < 8){ %>
+            <p> Good game! </p>
+        <% } else if (score < 10){ %>
+            <p> So close yet so far! </p>
+        <% } else { %>
+            <p> You aced it! </p>
+        <% } %>
+
+        <p class="my-5"> You got <%= score %> / 10 !</p>
+        
+        <% if (score < 6) { %>
+            <p> 
+                Did a dog mesmerize you during the game? <br>
+                They are all so pretty, aren't they.
+            </p>
+        <% } else if (score < 8){ %>
+            <p>
+                Some breeds got you questioning really hard. <br>
+                Maybe it's your first time seeing them?
+            </p>
+        <% } else if (score < 10){ %>
+            <p> 
+                Okay dog-breed-identifying professional? <br>
+                Only a little more until you know them all!
+            </p>
+        <% } else { %>
+            <p> 
+                You did it... You actually did it! <br>
+                You are now a dog-breed-identifying master.
+            </p>
+        <% } %>
+        
+        <p class="mt-5"> 
+        <% if (score < 10) { %>
+            You got these dog breeds slightly off: 
+        <% } else { %>
+            No flaw to show, dog-breed-identifier master.
+        <% } %>
+        </p>
+    </div>
+
+    <div class="gameReport mx-5 mt-5">
+        <div class="row">       
+            <% let i=0; %>
+            <% for(i=0; i < wrongAnswers.length; i++) { %>
+                <div class="col-6 mb-4">
+                    <div class="card">
+                        <img src="/pups/<%= wrongAnswers[i] %>.png" onclick="window.location.href='/description?item=<%= wrongAnswers[i] %>'"
+                        class="card-img-top" style="height:250px; object-fit: cover;">
+                        <p class="card-text text-center" onclick="window.location.href='/description?item=<%= wrongAnswers[i] %>'"
+                        style="height: 120px;"> 
+                            <%= wrongAnswers[i] %> 
+                        </p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="playAgainButton text-center mt-3">
+        <button class="btn btn-success" onclick="window.location.href='/dogTriviaStart'"
+        style="font-size:40px">
+            Play again
+        </button>
+    </div>
+</main>
+
+<%- include("templates/footer") %> 
+ 
