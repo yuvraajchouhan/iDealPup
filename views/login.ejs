@@ -26,6 +26,10 @@
       .forgot-password:hover {
         color: green;
       }
+
+      .mandatory {
+        color:red;
+      }
     </style>
   </head>
   <body class="d-flex justify-content-center mb-2">
@@ -49,13 +53,13 @@
           <div class="form-floating mb-3">
             <input name='email' type="email" class="form-control"
               id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput">Email address <span class="mandatory">*</span></label>
           </div>
           <br>
           <div class="form-floating mb-3">
             <input name='password' type="password" class="form-control"
               id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <label for="floatingPassword">Password <span class="mandatory">*</span></label>
           </div>
 
           <a class="forgot-password" href="/forgotpassword">Forgot Your
