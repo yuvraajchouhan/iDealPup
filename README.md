@@ -150,7 +150,6 @@ The main reason we ended upi not actively using AI in the app itself, is because
 8. List of File Contents of Folder:
 
 2800-202310-BBY18
-
 - ├── public
 - │   ├── appBackground.jpg
 - │   ├── bookmark.svg
@@ -284,4 +283,4 @@ The main reason we ended upi not actively using AI in the app itself, is because
 - │   └── compare.css
 - ├── js
 - │   └── filters.js
-- ├── node_modules
+- └── node_modules
