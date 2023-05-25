@@ -246,12 +246,12 @@ app.post('/changePassword', async (req, res) => {
     res.render('passwordUpdated');
 });
 
-app.get('/forgotpassword' , (req, res) => {
+app.get('/forgotpassword', (req, res) => {
     res.render('forgotPassword');
 });
 
 app.post('/forgotpasswordsubmit', async (req, res) => {
-    const user = await userCollection.find().project({email: 1}).toArray();
+    const user = await userCollection.find().project({ email: 1 }).toArray();
 
     const userEmail = req.body.email;
 
@@ -262,18 +262,18 @@ app.post('/forgotpasswordsubmit', async (req, res) => {
         text: 'Click the link to reset your password: https://relieved-puce-swallow.cyclic.app/resetpassword'
     };
 
-    for(i = 0; i < user.length; i++){
-        if(user[i].email == userEmail){
+    for (i = 0; i < user.length; i++) {
+        if (user[i].email == userEmail) {
             req.session.email = user[i].email;
-            transporter.sendMail(mailOptions, function(error, info){
+            transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                  console.log(error);
+                    console.log(error);
                 } else {
-                  console.log('Email sent: ' + info.response);
-                  res.redirect('/emailsent');
+                    console.log('Email sent: ' + info.response);
+                    res.redirect('/emailsent');
                 }
-              });
-        } 
+            });
+        }
     }
 });
 
@@ -305,7 +305,7 @@ app.post('/resetpasswordsubmit', async (req, res) => {
     // save user details to database
     await userCollection.updateOne({ email: req.session.email }, { $set: { password: hashedNewPassword } });
 
-    const user = await userCollection.find({ email }).project({ name: 1, password: 1}).toArray();
+    const user = await userCollection.find({ email }).project({ name: 1, password: 1 }).toArray();
 
     req.session.loggedIn = true;
     req.session.name = user[0].name;
@@ -325,9 +325,9 @@ app.get('/filters', (req, res) => {
     }
 });
 
-app.get('/search', (req,res) => {
-    if(req.session.loggedIn) {
-        res.render('search', {name: req.session.name});
+app.get('/search', (req, res) => {
+    if (req.session.loggedIn) {
+        res.render('search', { name: req.session.name });
     } else {
         res.redirect('login');
     }
@@ -342,27 +342,27 @@ app.get('/filterconfirmation', (req, res) => {
 app.post('/filterSubmit', async (req, res) => {
     // height ranges
     const heightRanges = {
-      small: { min: 6, max: 15 },
-      medium: { min: 16, max: 30 },
-      large: { min: 31, max: Infinity }
+        small: { min: 6, max: 15 },
+        medium: { min: 16, max: 30 },
+        large: { min: 31, max: Infinity }
     };
- 
+
     // weight ranges
     const weightRanges = {
-      light: { min: 2, max: 50 },
-      medium: { min: 51, max: 85 },
-      heavy: { min: 86, max: Infinity }
+        light: { min: 2, max: 50 },
+        medium: { min: 51, max: 85 },
+        heavy: { min: 86, max: Infinity }
     };
-  
+
     // trainability levels
     const trainabilityLevels = {
-      low: { min: 0, max: 20 },
-      average: { min: 21, max: 40 },
-      high: { min: 41, max: 60 },
-      'very high': { min: 61, max: 80 },
-      exceptional: { min: 81, max: Infinity }
+        low: { min: 0, max: 20 },
+        average: { min: 21, max: 40 },
+        high: { min: 41, max: 60 },
+        'very high': { min: 61, max: 80 },
+        exceptional: { min: 81, max: Infinity }
     };
-  
+
     // variables to represent user choices
     const selectedHeight = req.body.height;
     const selectedWeight = req.body.weight;
@@ -373,119 +373,125 @@ app.post('/filterSubmit', async (req, res) => {
     // const selectedTraits = [];
     // selectedTraits.push(selectedTrait);
 
+    // Check if selectedHeight or selectedWeight is null
+    if (selectedHeight == null || selectedWeight == null) {
+        res.render('filtersError');
+        return;
+    }
+
     console.log(selectedTraits)
     // grab everything from every breed in database
     const filteredBreeds = await breedsCollection
-      .find()
-      .project({
-        Breed: 1,
-        CountryOfOrigin: 1,
-        FurColor: 1,
-        HeightLowInches: 1,
-        HeightHighInches: 1,
-        WeightLowLbs: 1,
-        WeightHighLbs: 1,
-        RepsLower: 1,
-        RepsUpper: 1,
-        ColorOfEyes: 1,
-        LongevityYrs: 1,
-        CharacterTraits: 1,
-        CommonHealthProblems: 1
-      })
-      .toArray();
-  
-      // filter out every breed 
+        .find()
+        .project({
+            Breed: 1,
+            CountryOfOrigin: 1,
+            FurColor: 1,
+            HeightLowInches: 1,
+            HeightHighInches: 1,
+            WeightLowLbs: 1,
+            WeightHighLbs: 1,
+            RepsLower: 1,
+            RepsUpper: 1,
+            ColorOfEyes: 1,
+            LongevityYrs: 1,
+            CharacterTraits: 1,
+            CommonHealthProblems: 1
+        })
+        .toArray();
+
+    // filter out every breed 
     const filteredResults = filteredBreeds.filter((breed) => {
-      const heightLow = parseInt(breed.HeightLowInches);
-      const heightHigh = parseInt(breed.HeightHighInches);
-      const weightLow = parseInt(breed.WeightLowLbs);
-      const weightHigh = parseInt(breed.WeightHighLbs);
-      const averageHeight = (heightLow + heightHigh) / 2;
-      const averageWeight = (weightLow + weightHigh) / 2;
-  
-      const heightRange = heightRanges[selectedHeight];
-      const weightRange = weightRanges[selectedWeight];
-  
-      // Check if the breed falls within the selected height and weight range
-      if (
-        averageHeight >= heightRange.min &&
-        averageHeight <= heightRange.max &&
-        averageWeight >= weightRange.min &&
-        averageWeight <= weightRange.max
-      ) {
-        // If both color and trainability are selected, filter by both
-        if (selectedColor && selectedTrainability) {
-          const furColors = breed.FurColor.split(',').map((color) => color.trim().toLowerCase());
-          const trainabilityRange = trainabilityLevels[selectedTrainability.toLowerCase()];
-          const repsLower = parseInt(breed.RepsLower);
-          const repsUpper = parseInt(breed.RepsUpper);
-          const averageReps = Math.round((repsLower + repsUpper) / 2);
-          const breedTraits = breed.CharacterTraits.toLowerCase().split(',').map((trait) => trait.trim());
-         // console.log(breedTraits)
-  
-          // check if a color matches
-          if (
-            !furColors.includes(selectedColor.toLowerCase()) ||
-            averageReps < trainabilityRange.min ||
-            averageReps > trainabilityRange.max ||
-            !selectedTraits.every((trait) => breedTraits.includes(trait.toLowerCase()))
-          ) {
-            return false;
-          }
-        }
-        // If only color is selected, filter by color
-        else if (selectedColor) {
-          const furColors = breed.FurColor.split(',').map((color) => color.trim().toLowerCase());
-          if (!furColors.includes(selectedColor.toLowerCase())) {
-            return false;
-          }
-        }
-        // If only trainability is selected, filter by trainability
-        else if (selectedTrainability) {
-          const trainabilityRange = trainabilityLevels[selectedTrainability.toLowerCase()];
-          const repsLower = parseInt(breed.RepsLower);
-          const repsUpper = parseInt(breed.RepsUpper);
-          const averageReps = Math.round((repsLower + repsUpper) / 2);
-          const breedTraits = breed.CharacterTraits.toLowerCase().split(',').map((trait) => trait.trim());
-  
-          if (
-            averageReps < trainabilityRange.min ||
-            averageReps > trainabilityRange.max ||
-            !selectedTraits.every((trait) => breedTraits.includes(trait.toLowerCase()))
-          ) {
-            return false;
-          }
-        }
-        
-        // If traits are selected, filter by traits
-        if (selectedTraits.length > 0) {
-            const breedTraits = breed.CharacterTraits.split(',').map((trait) => trait.trim().toLowerCase());
-      
-            //console.log(breedTraits)
-            // Check if at least one of the selected traits exists in the breed's traits
-            if (!selectedTraits.some((trait) => breedTraits.includes(trait.toLowerCase()))) {
-              return false;
+        const heightLow = parseInt(breed.HeightLowInches);
+        const heightHigh = parseInt(breed.HeightHighInches);
+        const weightLow = parseInt(breed.WeightLowLbs);
+        const weightHigh = parseInt(breed.WeightHighLbs);
+        const averageHeight = (heightLow + heightHigh) / 2;
+        const averageWeight = (weightLow + weightHigh) / 2;
+
+        const heightRange = heightRanges[selectedHeight];
+        const weightRange = weightRanges[selectedWeight];
+
+        // Check if the breed falls within the selected height and weight range
+        if (
+            averageHeight >= heightRange.min &&
+            averageHeight <= heightRange.max &&
+            averageWeight >= weightRange.min &&
+            averageWeight <= weightRange.max
+        ) {
+            // If both color and trainability are selected, filter by both
+            if (selectedColor && selectedTrainability) {
+                const furColors = breed.FurColor.split(',').map((color) => color.trim().toLowerCase());
+                const trainabilityRange = trainabilityLevels[selectedTrainability.toLowerCase()];
+                const repsLower = parseInt(breed.RepsLower);
+                const repsUpper = parseInt(breed.RepsUpper);
+                const averageReps = Math.round((repsLower + repsUpper) / 2);
+                const breedTraits = breed.CharacterTraits.toLowerCase().split(',').map((trait) => trait.trim());
+                // console.log(breedTraits)
+
+                // check if a color matches
+                if (
+                    !furColors.includes(selectedColor.toLowerCase()) ||
+                    averageReps < trainabilityRange.min ||
+                    averageReps > trainabilityRange.max ||
+                    !selectedTraits.every((trait) => breedTraits.includes(trait.toLowerCase()))
+                ) {
+                    return false;
+                }
             }
-          }
- 
-        return true;
-      }
-  
-      return false;
+            // If only color is selected, filter by color
+            else if (selectedColor) {
+                const furColors = breed.FurColor.split(',').map((color) => color.trim().toLowerCase());
+                if (!furColors.includes(selectedColor.toLowerCase())) {
+                    return false;
+                }
+            }
+            // If only trainability is selected, filter by trainability
+            else if (selectedTrainability) {
+                const trainabilityRange = trainabilityLevels[selectedTrainability.toLowerCase()];
+                const repsLower = parseInt(breed.RepsLower);
+                const repsUpper = parseInt(breed.RepsUpper);
+                const averageReps = Math.round((repsLower + repsUpper) / 2);
+                const breedTraits = breed.CharacterTraits.toLowerCase().split(',').map((trait) => trait.trim());
+
+                if (
+                    averageReps < trainabilityRange.min ||
+                    averageReps > trainabilityRange.max ||
+                    !selectedTraits.every((trait) => breedTraits.includes(trait.toLowerCase()))
+                ) {
+                    return false;
+                }
+            }
+
+            // If traits are selected, filter by traits
+            if (selectedTraits.length > 0) {
+                const breedTraits = breed.CharacterTraits.split(',').map((trait) => trait.trim().toLowerCase());
+
+                //console.log(breedTraits)
+                // Check if at least one of the selected traits exists in the breed's traits
+                if (!selectedTraits.some((trait) => breedTraits.includes(trait.toLowerCase()))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     });
-  
+
     if (filteredResults.length > 0) {
-      res.render('results', { dogs: filteredResults });
+        res.render('results', { dogs: filteredResults });
     } else {
-      res.render('retryFilters');
+        res.render('retryFilters');
     }
-  });
-  
-  
-  
-  
-  
-  
+});
+
+
+
+
+
+
 
 app.get('/description', async (req, res) => {
 
@@ -498,7 +504,8 @@ app.get('/description', async (req, res) => {
         delete req.session.bookmarkFeedback;
     }
 
-    res.render('description', { name: req.session.name, dog: breed,
+    res.render('description', {
+        name: req.session.name, dog: breed,
         bookmarkFeedback: message
     });
 });
@@ -526,14 +533,16 @@ app.get('/easterEgg2', (req, res) => {
 app.get('/bookmark', async (req, res) => {
     if (req.session.loggedIn) {
 
-        const user = await userCollection.findOne({name: req.session.name});
+        const user = await userCollection.findOne({ name: req.session.name });
         let message = "";
         if (req.session.bookmarkFeedback) {
             message = req.session.bookmarkFeedback;
             delete req.session.bookmarkFeedback;
         }
-        res.render('bookmark', {name: req.session.name, user: user, 
-            bookmarkFeedback: message}
+        res.render('bookmark', {
+            name: req.session.name, user: user,
+            bookmarkFeedback: message
+        }
         );
 
     } else {
@@ -573,7 +582,7 @@ async function bookmarkStatusAndIndex(user, dogBreed) {
         } else {
 
             console.log("Found the breed! " + i);
-            return {index: i, found: true};
+            return { index: i, found: true };
 
         }
     }
@@ -582,7 +591,7 @@ async function bookmarkStatusAndIndex(user, dogBreed) {
     }
     console.log("Not bookmarked!");
 
-    return {index: availableIndex, found: false};
+    return { index: availableIndex, found: false };
 
 };
 
@@ -621,27 +630,27 @@ app.get('/dogsGood', (req, res) => {
 
 app.get('/compare', async (req, res) => {
     try {
-      const breeds = await breedsCollection.find().toArray();
-      res.render('compare', { breeds });
-      console.log(breeds);
+        const breeds = await breedsCollection.find().toArray();
+        res.render('compare', { breeds });
+        console.log(breeds);
     } catch (error) {
-      console.log(error);
-      res.status(500).send('Internal Server Error');
+        console.log(error);
+        res.status(500).send('Internal Server Error');
     }
-  });
-  
+});
 
-app.get('/dogTrivia' , async (req, res) => {
+
+app.get('/dogTrivia', async (req, res) => {
     const randomDogs = await breedsCollection.aggregate([
         { $sample: { size: 4 } },
         { $project: { _id: 0, Breed: 1 } }
     ]).toArray();
 
     let result = [];
-    await randomDogs.map(dog => {result.push(dog.Breed)});
+    await randomDogs.map(dog => { result.push(dog.Breed) });
 
     const correctAnswer = result[Math.floor(Math.random() * result.length)];
-    res.render('dogTrivia', {result: result, correctAnswer: correctAnswer});
+    res.render('dogTrivia', { result: result, correctAnswer: correctAnswer });
 });
 
 app.get('/dogTriviaStart', (req, res) => {
@@ -650,7 +659,7 @@ app.get('/dogTriviaStart', (req, res) => {
 
 app.get('/dogTriviaLost', (req, res) => {
     const correctAnswer = '';
-    res.render('dogTriviaLost', {correctAnswer: req.session.correctAnswer});
+    res.render('dogTriviaLost', { correctAnswer: req.session.correctAnswer });
 })
 
 
