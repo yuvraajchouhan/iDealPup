@@ -1,18 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Dog Trivia</title>
+</head>
+
+<body>
 <%- include("templates/header") %>
 
-<main style="font-size:40px">
+<main style="font-size:24px">
     <div class="text-center py-5">
         <h1 class="display-3 fw-bold mb-5">Dog Trivia</h1>
     </div>
 
     <div class="mx-5 text-center" 
-    style="height: 80vh; display:flex; flex-direction: column; justify-content: center;">
+    style="height: 25vh; display:flex; flex-direction: column; justify-content: center;">
         <p> How confident are you with your dog knowledge? </p>
         <p> Identify the name of upcoming 10 dog breeds! </p>
         <p> Are you ready? </p>
         <br>
 
-        <button class="btn btn-success" style="font-size:40px"
+        <button class="btn btn-success" style="font-size:24px"
             onclick="window.location.href='/dogTrivia'">
             Bring it on!
         </button>
