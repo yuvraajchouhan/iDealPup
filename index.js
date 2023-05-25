@@ -58,8 +58,9 @@ database.connect().then(() => {
 // creating a transporter
 const transporter = nodemailer.createTransport({
     service: 'hotmail',
-    host: 'smtp.live.com',
+    host: 'smtp.office365.com',
     port: 587,
+    pool: true,maxConnections: 30,
     auth: {
         user: nodemailer_email,
         pass: nodemailer_password
