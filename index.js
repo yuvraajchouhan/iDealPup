@@ -639,27 +639,85 @@ app.get('/compare', async (req, res) => {
     }
 });
 
+app.get('/dogTrivia' , async (req, res) => {
+    let rounds = req.session.dogTriviaRounds;
+    req.session.dogTriviaRounds++;
+    console.log('Round ', rounds);
 
-app.get('/dogTrivia', async (req, res) => {
-    const randomDogs = await breedsCollection.aggregate([
-        { $sample: { size: 4 } },
-        { $project: { _id: 0, Breed: 1 } }
-    ]).toArray();
+    if (rounds > 1 && !req.session.rightAnswers.includes(req.session.correctAnswer)
+    && !req.session.wrongAnswers.includes(req.session.correctAnswer)) {
+        console.log('I see you are cheeting :)');
+        req.session.answerFeedback = 'Please do not refresh the page '
+        + 'during a game, as it will skip the question. :(';
+        req.session.answerStatus = false;
+        req.session.wrongAnswers.push(req.session.correctAnswer);
+    }
 
-    let result = [];
-    await randomDogs.map(dog => { result.push(dog.Breed) });
+    if (rounds < 11) {
+        let result = [];
+        let correctAnswer = '';
+        do {
+            const randomDogs = await breedsCollection.aggregate([
+                { $sample: { size: 4 } },
+                { $project: { _id: 0, Breed: 1 } }
+            ]).toArray();
 
-    const correctAnswer = result[Math.floor(Math.random() * result.length)];
-    res.render('dogTrivia', { result: result, correctAnswer: correctAnswer });
+            await randomDogs.map(dog => {result.push(dog.Breed)});
+            console.log(result);
+
+            let testing = result;
+            while (testing.length > 0) {
+                correctAnswer = testing[Math.floor(Math.random() * testing.length)];
+                console.log('Correct answer: ', correctAnswer);
+                if (req.session.wrongAnswers.includes(correctAnswer)
+                || req.session.rightAnswers.includes(correctAnswer)) {
+                    console.log('Answer already exist! Repicking');
+                    const correctAnswerIndex = testing.indexOf(correctAnswer);
+                    testing.splice(correctAnswerIndex, 1);
+                } else {
+                    break;
+                }
+            } 
+        } while (req.session.wrongAnswers.includes(correctAnswer)
+        || req.session.wrongAnswers.includes(correctAnswer))
+
+        req.session.correctAnswer = correctAnswer;
+
+        res.render('dogTrivia', {result: result, correctAnswer: correctAnswer,
+        answerFeedback: req.session.answerFeedback, round: rounds, 
+        answerStatus: req.session.answerStatus});
+    } else {
+        res.redirect('/dogTriviaEnd');
+    }
 });
 
+app.get('/dogTriviaConfigureAnswer', (req, res) => {
+    const answer = req.query.answer;
+    console.log('Selected answer: ', answer);
+    if (answer == req.session.correctAnswer) { 
+        req.session.rightAnswers.push(req.session.correctAnswer);
+        req.session.answerFeedback = 'Correct! Keep it going champ!';
+        req.session.answerStatus = true;
+    } else {
+        req.session.wrongAnswers.push(req.session.correctAnswer);
+        req.session.answerFeedback = `Oops! ${req.session.correctAnswer} was the right one.`;
+        req.session.answerStatus = false;
+    }
+    res.redirect('/dogTrivia');
+})
+
 app.get('/dogTriviaStart', (req, res) => {
+    req.session.dogTriviaRounds = 1;
+    req.session.rightAnswers = [];
+    req.session.wrongAnswers = [];
     res.render('dogTriviaStart');
 })
 
-app.get('/dogTriviaLost', (req, res) => {
-    const correctAnswer = '';
-    res.render('dogTriviaLost', { correctAnswer: req.session.correctAnswer });
+app.get('/dogTriviaEnd', (req, res) => {
+    console.log('Breeds that you got wrong: ', req.session.wrongAnswers, 
+    'Your score: ', req.session.rightAnswers.length);
+    res.render('dogTriviaEnd', {score: req.session.rightAnswers.length, 
+    wrongAnswers: req.session.wrongAnswers});
 })
 
 
