@@ -23,13 +23,13 @@
       </div>      
     </div>
 
-    <div class="mx-5" style="font-size:40px">
+    <div class="mx-5" style="font-size:24px">
 
       <br>
       <div class="row">
         <div class="col-12">
           <ul>
-            <li><strong>Country of Origin:</strong> <%= dog.CountryOfOrigin %></li>
+            <li><strong>Country of Origin:</strong><%= dog.CountryOfOrigin %></li>
             <li><strong>Fur Color:</strong> <%= dog.FurColor %></li>
             <li><strong>Height:</strong> <%= dog.HeightLowInches %>"-<%= dog.HeightHighInches %>"</li>
           </ul>
@@ -50,17 +50,20 @@
         </div>
       </div>
       <br>
-      <button style="display: block; margin: 0 auto;" 
-        onclick="window.location.href='/addOrRemoveBookmark?item=<%= dog.Breed %>'"> Bookmark 
+
+      <button class="btn btn-success" style="display: block; margin: 0 auto;
+      font-size:40px;" onclick="window.location.href='/addOrRemoveBookmark?item=<%= dog.Breed %>'"> 
+          Bookmark 
       </button>
 
       <% if (bookmarkFeedback !== "") { %>
         <div class="bookmarkFeedback my-5" style="background-color: rgb(94, 202, 103); 
-        text-align: center;"> 
+        text-align: center; border-radius: 10px"> 
           <%= bookmarkFeedback %> 
         </div>
       <% } %>
 
+      <br>
     </div> 
   </main>
 
