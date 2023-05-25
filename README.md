@@ -51,9 +51,9 @@ Back end:
 5.2: Submitting your work
 - At the end of each sprint, merge your repo into the 'dev' branch (not 'main').
 
-From the command terminal, enetr the following prompts;
+From the command terminal, enter the following prompts;
 - git add .
-- git commit -m "<Commit_message_goes_here>."
+- git commit -m "Commit_message_goes_here."
 - git push
 - git checkout dev
 - git pull                    (get the latest gitHub dev branch files)
@@ -62,7 +62,8 @@ From the command terminal, enetr the following prompts;
 Note: As a courtesy, inform your teammates you are going to merge BEFORE you do it. This prevents any accidental conflicts that ay occur.
 
 5.3: Mandatory developer tools
-- You will need the following node modules
+
+You will need the following node modules
 - express
 - express-session
 - connect-mongo
@@ -78,6 +79,7 @@ You will also need to obtain the session secrets needed to access the database t
 Note: To install node modules, use the command [npm i <module_name>] e.g. [npm i express]. Some install multiple nodules in a single command e.g. [npm i express express-session dotenv ...]
 
 5.4: Recommended tool
+
 We suggest you install the following to make your work easier;
 - SourceTree (an alternative to dealing woth the repo from the terminal)
 - Studio3T (to work with the datbase outside a browser)
@@ -85,8 +87,9 @@ We suggest you install the following to make your work easier;
 
 
 
-1. Product Features:
-- The core features of the app include the following;
+6. Product Features:
+
+The core features of the app include the following;
 
 6.1: Search breeds
 - The user may select from a list of breeds to view their details.
@@ -95,18 +98,21 @@ We suggest you install the following to make your work easier;
 - Click "Learn More" to view details.
 
 6.2: Filter Breeds
-- The user may also find suggested breeds based on their traits
+
+The user may also find suggested breeds based on their traits
 - Select "Filter Breeds" at the top of the page.
 - In the page that appears, click the check boxes with the features you want to base on and press "Search With These Filters".
 - From the dogs that appear, click "Learn More" on one that catches your ee to view details.
 
 6.3: Compare Breeds
-- The user may compare breed details side by side to make their choice
+
+The user may compare breed details side by side to make their choice
 - Click the "Compare" icon at the bottom of the page (center left).
 - From the dropdown menus' select the breeds you want to compare with.
 
 6.4: Other features
-- Bookmarks:
+
+Bookmarks:
 - The user may save a dog to view their details later.
 
 Easter eggs:
@@ -123,7 +129,8 @@ Dog Trivia:
 
 
 7. Our use of AI:
-- Our goal with this project was to implement AI during its development. Contrary to what you might think, we did not end up AI actively used in the application itself.
+
+Our goal with this project was to implement AI during its development. Contrary to what you might think, we did not end up AI actively used in the application itself.
 
 It was still used in development though. ChatGPT had a large role to play in our code structure, especially in the development for the logic of the filter and compare pages.
 
@@ -134,14 +141,15 @@ The main reason we ended upi not actively using AI in the app itself, is because
 
 
 8. List of File Contents of Folder:
-2800-202310-BBY18                  [root folder (repo name)]
-|   .env                           [not in the repo]
+
+2800-202310-BBY18
+|   .env
 |   .gitignore
 |   databaseConnection.js
 |   Directory.txt
 |   filters
 |   index.js
-|   package-lock.json              [not in the repo]
+|   package-lock.json
 |   package.json
 |   Procfile
 |   README.md
@@ -154,7 +162,7 @@ The main reason we ended upi not actively using AI in the app itself, is because
 +---js
 |       filters.js
 |       
-+---node_modules                   [not in the repo]
++---node_modules
 |   |   .package-lock.json
 |   |   
 |   +---.bin
