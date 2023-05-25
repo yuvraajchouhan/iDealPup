@@ -19,7 +19,8 @@ Table of Contents
 
 
 2. Project Description:
-- We are team BBY-18 and we are developing an app called iDealPup, designed to help prospective dog owners find the perfect pet by selecting preferable dog traits and getting matched with the ideal breeds for them through the use of AI’s assistance, and Kaggle’s datasets.
+
+We are team BBY-18 and we are developing an app called iDealPup, designed to help prospective dog owners find the perfect pet by selecting preferable dog traits and getting matched with the ideal breeds for them through the use of AI’s assistance, and Kaggle’s datasets.
 
 
 
@@ -32,7 +33,8 @@ Table of Contents
 
 
 
-1. Technologies used
+4. Technologies used
+
 Front end:                            
 - Boostrap
 
@@ -41,7 +43,8 @@ Back end:
 
 
 
-1. How to Install and Run the Project:
+5. How to Install and Run the Project:
+
 5.1: Setting up your local repo
 - Assumming you have already accepted your invitation to the repo, clone it and navigate to the project location in your command line.
 - Move to the 'dev' branch using the command [git checkout dev]
@@ -49,7 +52,8 @@ Back end:
 - To confirm if you are on the correct branch, use the commands [git branch -a] or [git status].
 
 5.2: Submitting your work
-- At the end of each sprint, merge your repo into the 'dev' branch (not 'main').
+
+At the end of each sprint, merge your repo into the 'dev' branch (not 'main').
 
 From the command terminal, enter the following prompts;
 - git add .
