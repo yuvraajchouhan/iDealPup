@@ -9,6 +9,12 @@
             rel="stylesheet"
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous">
+        
+        <style>
+            .mandatory {
+                color:red;
+            }
+        </style>
     </head>
 
     <body class="d-flex flex-column h-100">
@@ -21,6 +27,9 @@
         <br><br>
         <br><br>
 
+        <p class="validationError text-center" style="color:red"> <%= error %> </p>
+        <br>
+        
         <div class="container my-auto">
             <main class="form-signin">
                 <form method="POST" action="/submitUser">
@@ -29,20 +38,20 @@
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="name"
                             name="name" placeholder="First Last">
-                        <label for="floatingInput">Name</label>
+                        <label for="floatingInput">Name <span class="mandatory">*</span></label>
                     </div>
                     <br>
 
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="email"
                             name="email" placeholder="name@example.com">
-                        <label for="email">Email address</label>
+                        <label for="email">Email address <span class="mandatory">*</span></label>
                     </div>
                     <br>
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control"
                             id="password" name="password" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
+                        <label for="floatingPassword">Password <span class="mandatory">*</span></label>
                     </div>
                     <br>
                     <button class="w-100 btn btn-lg btn-success" type="submit">Sign
