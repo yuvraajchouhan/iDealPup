@@ -117,7 +117,7 @@ async function getDogByBreed(breed) {
 }
 
 app.get('/signup', (req, res) => {
-    res.render('signup');
+    res.render('signup', {error: null});
 });
 
 // // // repurposed demo 2 code 
@@ -137,7 +137,7 @@ app.post('/submitUser', async (req, res) => {
     const validationResult = schema.validate({ email, name, password });
     if (validationResult.error != null) {
         console.log(validationResult.error);
-        res.redirect("/signup");
+        res.render("signup", {error: "Error: "+validationResult.error.message});
         return;
     }
 
@@ -153,7 +153,7 @@ app.post('/submitUser', async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {error: null});
 });
 
 app.post('/loginSubmit', async (req, res) => {
@@ -169,21 +169,21 @@ app.post('/loginSubmit', async (req, res) => {
     const validationResult = schema.validate({ email, password });
     if (validationResult.error != null) {
         console.log(validationResult.error);
-        res.redirect("/login");
+        res.render("login", {error: "Error: "+validationResult.error.message});
         return;
     }
 
     const user = await userCollection.findOne({ email: email });
     if (user === null) {
         console.log("User not found");
-        res.redirect("/login");
+        res.render("login", {error: "Error: User not found"});
         return;
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
         console.log("Invalid password");
-        res.redirect("/login");
+        res.render("login", {error: "Error: Invalid password"});
         return;
     }
 
