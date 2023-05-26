@@ -48,7 +48,7 @@
             padding-right: 10px;
             white-space: nowrap;
             content: attr(data-label);
-            font-weight: bold;r
+            font-weight: bold;
         }
     }
 
